@@ -161,7 +161,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h1><h2 id="1-1-格式化输出函数"><a href="#1-1-格式化输出函数" class="headerlink" title="1.1 格式化输出函数"></a>1.1 格式化输出函数</h2><h3 id="1-1-1变参函数和格式转换"><a href="#1-1-1变参函数和格式转换" class="headerlink" title="1.1.1变参函数和格式转换"></a>1.1.1变参函数和格式转换</h3><p> 1.C语言中printf()就是一个变参函数，它有一个强制参数，即格式化字符串。</p>
-<p><img src="file:///C:/Users/28698/AppData/Roaming/Typora/typora-user-images/image-20210110105831720.png" alt="image-20210110105831720"></p>
+<p><img src="/images/1.png"></p>
 <p> 2.一些常见的转换指示符如下</p>
 <p> ％d整型输出，％ld长整型输出，</p>
 <p> %p指针变量地址，如果数处数据不够8位数，则左边补零</p>
@@ -211,7 +211,7 @@
 <p> 首先checksec文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lijianbo@ubuntu:~&#x2F;Desktop$ checksec buupwn9</span><br><span class="line">[*] &#39;&#x2F;home&#x2F;lijianbo&#x2F;Desktop&#x2F;buupwn9&#39;</span><br><span class="line">    Arch:     i386-32-little</span><br><span class="line">    RELRO:    Partial RELRO</span><br><span class="line">    Stack:    Canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      No PIE (0x8048000)</span><br></pre></td></tr></table></figure>
 <p> 拖入32位ida，F5观察代码逻辑。</p>
-<p><img src="file:///C:/Users/28698/AppData/Roaming/Typora/typora-user-images/image-20210111122733908.png" alt="image-20210111122733908"></p>
+<p><img src="/images/2.png"></p>
 <p> 通过观察可以得知，其中printf（&amp;buf）处存在格式化字符串漏洞。</p>
 <p> 利用思路：可以通过格式化字符串漏洞篡改unk_804c044的值为4触发if。为什么篡改的值为4呢？这里有必要了解一下atoi，他是将参数所指向的字符串转换为一个整数（类型为 int 型）。</p>
 <p> 运行程序输入AAAA.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x.%x</p>
