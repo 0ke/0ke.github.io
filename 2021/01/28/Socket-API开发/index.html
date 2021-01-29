@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://0ke.github.io/images/9.png">
 <meta property="og:image" content="http://0ke.github.io/images/10.png">
 <meta property="article:published_time" content="2021-01-28T12:20:44.000Z">
-<meta property="article:modified_time" content="2021-01-28T14:26:28.437Z">
+<meta property="article:modified_time" content="2021-01-29T11:55:11.555Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/7.png">
@@ -200,7 +200,11 @@
 <p>​        af：指定应用程序使用的通信协议的协议族。对于TCP/IP协议族，该参数设置为FF_INET。</p>
 <p>​        type：指定要创建套接字类型。</p>
 <p>​        protocol：指定应用程序所使用的通信协议。</p>
-<p>未完。</p>
+<p>​        在Windows Sockets 2中，Socket支持一下3种类型的协议。</p>
+<p>​        1.IPPROTO_UDP：UDP协议，用于无连接数据报套接字。</p>
+<p>​        2.IPPROTO_TCP：TCP协议，用于流套接字。</p>
+<p>​        3.IPPROTO_ICMP：ICMP协议，用于原始套接字。</p>
+<p>​        句柄是Windows用来标志被应用程序所建立或使用的对象的唯一整数，Windows使用各种各样的句柄标志。一个Windows应用程序可以用不同的方法获得一个特定项的句柄。通常Windows通过应用程序的引出函数将一个句柄作为参数传送给应用程序，应用程序一旦获得了一个确定的句柄，就可以在Windows环境下的任何地方对这个句柄进行操作。</p>
 
       
 
