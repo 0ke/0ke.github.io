@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://0ke.github.io/images/9.png">
 <meta property="og:image" content="http://0ke.github.io/images/10.png">
 <meta property="article:published_time" content="2021-01-28T12:20:44.000Z">
-<meta property="article:modified_time" content="2021-01-29T11:55:11.555Z">
+<meta property="article:modified_time" content="2021-01-31T13:15:21.209Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/7.png">
@@ -205,6 +205,22 @@
 <p>​        2.IPPROTO_TCP：TCP协议，用于流套接字。</p>
 <p>​        3.IPPROTO_ICMP：ICMP协议，用于原始套接字。</p>
 <p>​        句柄是Windows用来标志被应用程序所建立或使用的对象的唯一整数，Windows使用各种各样的句柄标志。一个Windows应用程序可以用不同的方法获得一个特定项的句柄。通常Windows通过应用程序的引出函数将一个句柄作为参数传送给应用程序，应用程序一旦获得了一个确定的句柄，就可以在Windows环境下的任何地方对这个句柄进行操作。</p>
+<h4 id="指定本地地址函数——bind"><a href="#指定本地地址函数——bind" class="headerlink" title="指定本地地址函数——bind()"></a>指定本地地址函数——bind()</h4><p>功能：将套接字地址与所创建的套接字号联系起来。</p>
+<p>格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> PASCAL FAR <span class="title">bind</span><span class="params">(SOCKET s,<span class="keyword">const</span> struct sockaddr FAR * name,<span class="keyword">int</span> namelen)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="解释参数"><a href="#解释参数" class="headerlink" title="解释参数"></a>解释参数</h4><p>s：是由socket()调用返回的并且未做连接的套接字描述符（套接字号）。</p>
+<p>其他：没有错误bind()返回0。</p>
+<p>地址结构说明如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span>&#123;</span></span><br><span class="line">	<span class="keyword">short</span> sin_family;<span class="comment">//AF_INET</span></span><br><span class="line">    u_short sin_port;<span class="comment">//16位端口号，网络字节顺序</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span><span class="comment">//32位IP地址，网络字节顺序</span></span><br><span class="line">    <span class="keyword">char</span> sin_zero[<span class="number">8</span>];<span class="comment">//保留</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="建立套接字连接函数——connect-和accept"><a href="#建立套接字连接函数——connect-和accept" class="headerlink" title="建立套接字连接函数——connect()和accept()"></a>建立套接字连接函数——connect()和accept()</h4><p>功能：共同完成连接工作。</p>
+<p>格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> PASCAL FAR <span class="title">connect</span><span class="params">(SOCKET s,<span class="keyword">const</span> struct sockaddr FAR * name,<span class="keyword">int</span> namelen)</span></span>;</span><br><span class="line"><span class="function">SOCKET PASCAL FAR <span class="title">accept</span><span class="params">(SOCKET s,struct sockaddr FAR * FAR * name,<span class="keyword">int</span> FAR * addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="监听连接函数——listen"><a href="#监听连接函数——listen" class="headerlink" title="监听连接函数——listen()"></a>监听连接函数——listen()</h4><p>功能：用于面向连接服务器，表明它愿意接收连接。</p>
+<p>格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> PASCAL FAR <span class="title">listen</span><span class="params">(SOCKET S, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure>
+<h4 id="数据传输函数——send-与recv"><a href="#数据传输函数——send-与recv" class="headerlink" title="数据传输函数——send()与recv()"></a>数据传输函数——send()与recv()</h4><p>功能：数据的发送与接收。</p>
+<p>格式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> PASCAL FAR <span class="title">send</span><span class="params">(SOCKET s,<span class="keyword">const</span> <span class="keyword">char</span> FAR * FAR * buf,<span class="keyword">int</span> len,<span class="keyword">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
 
       
 
