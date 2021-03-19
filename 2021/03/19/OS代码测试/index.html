@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://0ke.github.io">
-  <title>Archives: 2021 | 0ke</title>
+  <title>OS代码测试 | 0ke</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="0ke">
-<meta property="og:url" content="http://0ke.github.io/archives/2021/index.html">
+  <meta name="description" content="​">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS代码测试">
+<meta property="og:url" content="http://0ke.github.io/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="0ke">
+<meta property="og:description" content="​">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-19T05:23:11.000Z">
+<meta property="article:modified_time" content="2021-03-19T05:41:12.078Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
   
@@ -140,195 +144,146 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-OS代码测试" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      OS代码测试
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/" class="archive-article-date">
+
+        
+        <a href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/" class="archive-article-date">
   	<time datetime="2021-03-19T05:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/">OS代码测试</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    <a id="more"></a></p>
+<p>​    最近OS留了一个英文教材阅读的作业，我负责代码测试任务，现将教材代码以及编译指令和运行结果相关结论示下。</p>
+<h4 id="Text1"><a href="#Text1" class="headerlink" title="Text1"></a>Text1</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">	<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;usage: cpu &lt;string&gt;\n&quot;</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> *str = argv[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str);</span><br><span class="line">	Spin(<span class="number">1</span>);			<span class="comment">//Spin()函数:位于common.h，使程序输出间隔一段时间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        由于导入了common.h头文件，Spin(1)函数也是common.h头文件内容，编译时新建文件放在同一路径下，不然会产生连接报错。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __common_h__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __common_h__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">GetTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="keyword">int</span> rc = gettimeofday(&amp;t, <span class="literal">NULL</span>);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">double</span>)t.tv_sec + (<span class="keyword">double</span>)t.tv_usec/<span class="number">1e6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Spin</span><span class="params">(<span class="keyword">int</span> howlong)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> t = GetTime();</span><br><span class="line">    <span class="keyword">while</span> ((GetTime() - t) &lt; (<span class="keyword">double</span>)howlong)</span><br><span class="line">	; <span class="comment">// do nothing in loop</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// __common_h__</span></span></span><br></pre></td></tr></table></figure>
+<p>​        编译执行后，程序会无止境重复输出我们执行的字符串，知道手动强制结束。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ gcc -o cpu cpu.c -Wall     &#x2F;&#x2F;-Wall作用是显示更多的报错信息。</span><br><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ .&#x2F;cpu &#39;CCUT&#39;</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+<p>​        多输入几条命令，程序就会同时输出多条的命令数量，从而 使我们产生多个CPU同时执行命令的错觉。这就是CPU虚拟化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ .&#x2F;cpu CCUT &amp; .&#x2F;cpu &#39;lijianbo&#39; &amp; .&#x2F;cpu &#39;190409&#39;</span><br><span class="line">[1] 18209</span><br><span class="line">[2] 18210</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">lijianbo</span><br><span class="line">190409</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+<p>​        操作系统软件的本质是无限循环的程序，开机以后便不断接受用户指令，直到强制关机才结束程序运行。</p>
+<h4 id="Text2"><a href="#Text2" class="headerlink" title="Text2"></a>Text2</h4><p>​        未完待续，本贴截至4月9日。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://0ke.github.io//2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/15/%E6%8D%89%E8%99%AB%E6%97%A5%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-02-15T07:54:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/15/%E6%8D%89%E8%99%AB%E6%97%A5%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">捉虫日记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/15/%E6%8D%89%E8%99%AB%E6%97%A5%E8%AE%B0/">捉虫日记</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/02/06/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2021-02-06T01:02:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/02/06/%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">做题记录</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/28/Socket-API%E5%BC%80%E5%8F%91/" class="archive-article-date">
-  	<time datetime="2021-01-28T12:20:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/28/Socket-API%E5%BC%80%E5%8F%91/">Socket API开发</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/27/Liunx%E7%B3%BB%E7%BB%9F%E4%BF%9D%E6%8A%A4/" class="archive-article-date">
-  	<time datetime="2021-01-27T02:15:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/27/Liunx%E7%B3%BB%E7%BB%9F%E4%BF%9D%E6%8A%A4/">Liunx系统保护</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/01/26/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="archive-article-date">
-  	<time datetime="2021-01-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/01/26/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2/">格式化字符串漏洞</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -355,8 +310,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -20,7 +20,7 @@
 <meta property="og:image" content="http://0ke.github.io/images/9.png">
 <meta property="og:image" content="http://0ke.github.io/images/10.png">
 <meta property="article:published_time" content="2021-01-28T12:20:44.000Z">
-<meta property="article:modified_time" content="2021-01-31T13:15:21.209Z">
+<meta property="article:modified_time" content="2021-02-22T13:49:21.466Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/7.png">
@@ -171,7 +171,6 @@
       
         <h2 id="Socket-API开发基础"><a href="#Socket-API开发基础" class="headerlink" title="Socket API开发基础"></a>Socket API开发基础</h2><a id="more"></a>
 
-<p>​        最近准备开个新坑，为了承接下个学期的“网络编程”这门课，顺便也想提升一下开发能力。主要记录读书过程中的源码和部分内容。仅供学习使用。（其实主要是CTF题目太费脑子，我脑洞太小，做不出来。）</p>
 <h3 id="Socket通信流程"><a href="#Socket通信流程" class="headerlink" title="Socket通信流程"></a>Socket通信流程</h3><p>​        传统的网络通信模式是C/S模式，也就是客户端/服务器端模式。该模式中至少需要一台服务器端和一台客户端。服务器端先启动，建立一个Socket，并对相应的IP和端口进行绑定、监听；客户端后启动，启动后也建立一个Socket，直接链接服务器端监听的端口，双方建立链接后，服务器端和客户端就可以相互传输数据。</p>
 <p>​        服务器端Socket程序流程：socket()–blind()–listen–accept()–recv()/send()–closesocket()</p>
 <p>​        客户端Socket程序流程：socket()–connect()–send()/recv()–closesocket()</p>
