@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://0ke.github.io">
-  <title>Archives: 2021/3 | 0ke</title>
+  <title>C程序设计 | 0ke</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="0ke">
-<meta property="og:url" content="http://0ke.github.io/archives/2021/03/index.html">
+  <meta name="description" content="前言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C程序设计">
+<meta property="og:url" content="http://0ke.github.io/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="0ke">
+<meta property="og:description" content="前言">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://0ke.github.io/images/11.png">
+<meta property="og:image" content="http://0ke.github.io/images/12.png">
+<meta property="article:published_time" content="2021-03-28T07:17:45.000Z">
+<meta property="article:modified_time" content="2021-03-28T08:01:23.150Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://0ke.github.io/images/11.png">
   
     <link rel="alternative" href="/atom.xml" title="0ke" type="application/atom+xml">
   
@@ -140,76 +147,154 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-C程序设计基础" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      C程序设计
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+
+        
+        <a href="/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="archive-article-date">
   	<time datetime="2021-03-28T07:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/">C程序设计</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
-          
+<p>​        我这学期的第九周会开‘网络编程’课，假期的时候稍微了解了一下Socket的部分内容，但是苦于C语言的基础不牢固，学习过程出现了很多问题，第八周OS的实验课也都开了。所以在此之前我觉得有必要重新回顾一下C语言的内容。</p>
+<p>​        前期快速过一下C语言的基础内容包括数据类型关键字，循环，数组，指针，结构体。后期可能会加入内存管理，系统编程和驱动编程，看我学习的进度吧。</p>
+<p>​        PS：之前和OS老师交流，我很喜欢老师慢悠悠的性格，不知道这么形容准不准确。我之前就显得过于浮躁了，希望能沉淀下来。好好学习。嘻嘻。</p>
+<h4 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h4><p>示例代码如下。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	num = <span class="number">0100</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在VS 2019中查看反汇编代码。（在int main()和return 0处下断点。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() &#123;</span><br><span class="line">00F51860  push        ebp  </span><br><span class="line">00F51861  mov         ebp,esp  </span><br><span class="line">00F51863  sub         esp,0CCh  </span><br><span class="line">00F51869  push        ebx  </span><br><span class="line">00F5186A  push        esi  </span><br><span class="line">00F5186B  push        edi  </span><br><span class="line">00F5186C  lea         edi,[ebp-0CCh]  </span><br><span class="line">00F51872  mov         ecx,33h  </span><br><span class="line">00F51877  mov         eax,0CCCCCCCCh  </span><br><span class="line">00F5187C  rep stos    dword ptr es:[edi]  </span><br><span class="line">00F5187E  mov         ecx,offset _7153A55C_指针测试@c (0F5C003h)  </span><br><span class="line">00F51883  call        @__CheckForDebuggerJustMyCode@4 (0F51316h)  </span><br><span class="line">	int num;</span><br><span class="line">	num &#x3D; 64;</span><br><span class="line">00F51888  mov         dword ptr [num],40h  </span><br><span class="line">	printf(&quot;%d&quot;, num);</span><br><span class="line">00F5188F  mov         eax,dword ptr [num]  &#x2F;&#x2F;寄存器穿参。</span><br><span class="line">00F51892  push        eax  						</span><br><span class="line">00F51893  push        offset string &quot;%d&quot; (0F57B30h)  </span><br><span class="line">00F51898  call        _printf (0F510CDh)  </span><br><span class="line">00F5189D  add         esp,8  </span><br><span class="line">	return 0;</span><br><span class="line">00F518A0  xor         eax,eax  </span><br><span class="line">&#125;</span><br><span class="line">00F518A2  pop         edi  </span><br><span class="line">00F518A3  pop         esi  </span><br><span class="line">00F518A4  pop         ebx  </span><br><span class="line">00F518A5  add         esp,0CCh  </span><br><span class="line">00F518AB  cmp         ebp,esp  </span><br><span class="line">00F518AD  call        __RTC_CheckEsp (0F5123Fh)  </span><br><span class="line">00F518B2  mov         esp,ebp  </span><br><span class="line">00F518B4  pop         ebp  </span><br><span class="line">00F518B5  ret</span><br></pre></td></tr></table></figure>
+<p>​        printf()的调用过程很清晰，先push参数，然后call  _printf(内存中的地址)。看不懂没关系，再来回顾一下假期学过的函数调用栈的过程。基础栈结构</p>
+<h4 id="C函数调用"><a href="#C函数调用" class="headerlink" title="C函数调用"></a>C函数调用</h4><p>​        每进入一个函数之后程序会给函数开辟一个栈帧。用于保存函数调用信息和局部变量。</p>
+<p>​        32位程序：栈传参</p>
+<p>​        64位程序：优先寄存器传参RDI RSI RDX RCX R8 R9，多于寄存器的参数用栈传参。</p>
+<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>​        进入函数时，首先传入参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CALL xxx</span><br><span class="line">	push retaddr（call的下一条指令）			</span><br><span class="line">	jmp xxx</span><br><span class="line">	</span><br><span class="line">xxx</span><br><span class="line">	push ebp（保存栈）							</span><br><span class="line">	mov ebp,esp（弹栈）</span><br><span class="line">	sub esp,XXh（抬高栈顶给局部函数预留栈空间）</span><br></pre></td></tr></table></figure>
+<p><img src="/images/11.png"></p>
+<p>​        退出函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">leave</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">ret</span><br><span class="line">	pop eip</span><br></pre></td></tr></table></figure>
+<h4 id="延迟绑定"><a href="#延迟绑定" class="headerlink" title="延迟绑定"></a>延迟绑定</h4><p>​        <img src="/images/12.png"></p>
 
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://0ke.github.io//2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/" class="archive-article-date">
-  	<time datetime="2021-03-19T05:23:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-19</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OS代码测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/19/OS%E4%BB%A3%E7%A0%81%E6%B5%8B%E8%AF%95/">OS代码测试</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -236,8 +321,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
