@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://0ke.github.io">
-  <title>C程序设计 | 0ke</title>
+  <title>Liunx系统编程读书笔记 | 0ke</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言">
+  <meta name="description" content="前言  ​        Liunx提供的系统调用、库函数以及其他底层接口。运行于Liunx之上的每一个程序都会直接或间接地使用这些接口。这些接口允许应用程序去执行诸多任务：文件I&#x2F;O、创建&#x2F;删除文件和目录、创建新进程、执行程序、设置定时器、在用一台计算机上发起进程或线程间通信，以及为联网计算机间的进程建立通信等等。这一系列的底层接口称为系统编程接口。 系统调用​        系统调用将处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C程序设计">
-<meta property="og:url" content="http://0ke.github.io/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:title" content="Liunx系统编程读书笔记">
+<meta property="og:url" content="http://0ke.github.io/2021/03/31/Liunx%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="0ke">
-<meta property="og:description" content="前言">
+<meta property="og:description" content="前言  ​        Liunx提供的系统调用、库函数以及其他底层接口。运行于Liunx之上的每一个程序都会直接或间接地使用这些接口。这些接口允许应用程序去执行诸多任务：文件I&#x2F;O、创建&#x2F;删除文件和目录、创建新进程、执行程序、设置定时器、在用一台计算机上发起进程或线程间通信，以及为联网计算机间的进程建立通信等等。这一系列的底层接口称为系统编程接口。 系统调用​        系统调用将处理">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://0ke.github.io/images/11.png">
-<meta property="og:image" content="http://0ke.github.io/images/12.png">
-<meta property="article:published_time" content="2021-03-28T07:17:45.000Z">
-<meta property="article:modified_time" content="2021-03-28T08:01:23.150Z">
+<meta property="og:image" content="http://0ke.github.io/images/13.png">
+<meta property="article:published_time" content="2021-03-31T01:03:47.000Z">
+<meta property="article:modified_time" content="2021-04-01T00:44:11.526Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://0ke.github.io/images/11.png">
+<meta name="twitter:image" content="http://0ke.github.io/images/13.png">
   
     <link rel="alternative" href="/atom.xml" title="0ke" type="application/atom+xml">
   
@@ -147,45 +146,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C程序设计基础" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Liunx系统编程读书笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C程序设计
+      Liunx系统编程读书笔记
     </h1>
   
 
         
-        <a href="/2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-03-28T07:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-28</time>
+        <a href="/2021/03/31/Liunx%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-03-31T01:03:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><a id="more"></a>
+        <a id="more"></a>
 
-<p>​        我这学期的第九周会开‘网络编程’课，假期的时候稍微了解了一下Socket的部分内容，但是苦于C语言的基础不牢固，学习过程出现了很多问题，第八周OS的实验课也都开了。所以在此之前我觉得有必要重新回顾一下C语言的内容。</p>
-<p>​        前期快速过一下C语言的基础内容包括数据类型关键字，循环，数组，指针，结构体。后期可能会加入内存管理，系统编程和驱动编程，看我学习的进度吧。</p>
-<p>​        PS：之前和OS老师交流，我很喜欢老师慢悠悠的性格，不知道这么形容准不准确。我之前就显得过于浮躁了，希望能沉淀下来。好好学习。嘻嘻。</p>
-<h4 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h4><p>示例代码如下。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num;</span><br><span class="line">	num = <span class="number">0100</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在VS 2019中查看反汇编代码。（在int main()和return 0处下断点。）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main() &#123;</span><br><span class="line">00F51860  push        ebp  </span><br><span class="line">00F51861  mov         ebp,esp  </span><br><span class="line">00F51863  sub         esp,0CCh  </span><br><span class="line">00F51869  push        ebx  </span><br><span class="line">00F5186A  push        esi  </span><br><span class="line">00F5186B  push        edi  </span><br><span class="line">00F5186C  lea         edi,[ebp-0CCh]  </span><br><span class="line">00F51872  mov         ecx,33h  </span><br><span class="line">00F51877  mov         eax,0CCCCCCCCh  </span><br><span class="line">00F5187C  rep stos    dword ptr es:[edi]  </span><br><span class="line">00F5187E  mov         ecx,offset _7153A55C_指针测试@c (0F5C003h)  </span><br><span class="line">00F51883  call        @__CheckForDebuggerJustMyCode@4 (0F51316h)  </span><br><span class="line">	int num;</span><br><span class="line">	num &#x3D; 64;</span><br><span class="line">00F51888  mov         dword ptr [num],40h  </span><br><span class="line">	printf(&quot;%d&quot;, num);</span><br><span class="line">00F5188F  mov         eax,dword ptr [num]  &#x2F;&#x2F;寄存器穿参。</span><br><span class="line">00F51892  push        eax  						</span><br><span class="line">00F51893  push        offset string &quot;%d&quot; (0F57B30h)  </span><br><span class="line">00F51898  call        _printf (0F510CDh)  </span><br><span class="line">00F5189D  add         esp,8  </span><br><span class="line">	return 0;</span><br><span class="line">00F518A0  xor         eax,eax  </span><br><span class="line">&#125;</span><br><span class="line">00F518A2  pop         edi  </span><br><span class="line">00F518A3  pop         esi  </span><br><span class="line">00F518A4  pop         ebx  </span><br><span class="line">00F518A5  add         esp,0CCh  </span><br><span class="line">00F518AB  cmp         ebp,esp  </span><br><span class="line">00F518AD  call        __RTC_CheckEsp (0F5123Fh)  </span><br><span class="line">00F518B2  mov         esp,ebp  </span><br><span class="line">00F518B4  pop         ebp  </span><br><span class="line">00F518B5  ret</span><br></pre></td></tr></table></figure>
-<p>​        printf()的调用过程很清晰，先push参数，然后call  _printf(内存中的地址)。看不懂没关系，再来回顾一下假期学过的函数调用栈的过程。基础栈结构</p>
-<h4 id="C函数调用"><a href="#C函数调用" class="headerlink" title="C函数调用"></a>C函数调用</h4><p>​        每进入一个函数之后程序会给函数开辟一个栈帧。用于保存函数调用信息和局部变量。</p>
-<p>​        32位程序：栈传参</p>
-<p>​        64位程序：优先寄存器传参RDI RSI RDX RCX R8 R9，多于寄存器的参数用栈传参。</p>
-<h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>​        进入函数时，首先传入参数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CALL xxx</span><br><span class="line">	push retaddr（call的下一条指令）			</span><br><span class="line">	jmp xxx</span><br><span class="line">	</span><br><span class="line">xxx</span><br><span class="line">	push ebp（保存栈）							</span><br><span class="line">	mov ebp,esp（弹栈）</span><br><span class="line">	sub esp,XXh（抬高栈顶给局部函数预留栈空间）</span><br></pre></td></tr></table></figure>
-<p><img src="/images/11.png"></p>
-<p>​        退出函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">leave</span><br><span class="line">	mov esp,ebp</span><br><span class="line">	pop ebp</span><br><span class="line">ret</span><br><span class="line">	pop eip</span><br></pre></td></tr></table></figure>
-<h4 id="延迟绑定"><a href="#延迟绑定" class="headerlink" title="延迟绑定"></a>延迟绑定</h4><p>​        <img src="/images/12.png"></p>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><!--more-->
+
+<p>​        Liunx提供的系统调用、库函数以及其他底层接口。运行于Liunx之上的每一个程序都会直接或间接地使用这些接口。这些接口允许应用程序去执行诸多任务：<strong>文件I/O</strong>、<strong>创建/删除文件和目录</strong>、<strong>创建新进程</strong>、执行<strong>程序、设置定时器</strong>、<strong>在用一台计算机上发起进程或线程间通信，以及为联网计算机间的进程建立通信</strong>等等。这一系列的底层接口称为<strong>系统编程接口</strong>。</p>
+<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>​        系统调用将处理器从用户态切换到核心态，以便CPU访问受到保护的内核内存。</p>
+<p>​        系统调用的组成是固定的，每个系统调用都由一个唯一的数字来标识。</p>
+<p>​        每个系统调用可辅之以一套参数，对用户空间（虚拟地址空间）与内核空间之间传递信息加以规范。</p>
+<h5 id="调用发生顺序"><a href="#调用发生顺序" class="headerlink" title="调用发生顺序"></a>调用发生顺序</h5><p>1.应用调用C语言函数库中的外壳（wrapper）函数，来发起系统调用。</p>
+<p>2.外壳函数为保证所有的系统调用参数可用。通过堆栈，这些参数传入外壳函数，因此，外壳函数会将上述参数复制到寄存器。</p>
+<p>3.由于所有系统调用进入内核的方式相同，内核需要设法区分每个系统调用。<strong>为此，外壳函数会将系统调用编号复制到eax寄存器中。</strong></p>
+<p>4.外壳函数执行一条中断指令（int 0x80），引发处理器从用户态切换到核心态，并执行系统中断0x80（十进制数128）的中断矢量所指向的代码。</p>
+<p>5.为相应0x80，内核会调用system_call()例程来处理中断。具体步骤入下。</p>
+<p>​                （1）在内核中保存寄存器值。</p>
+<p>​                （2）审核系统调用编号的有效性。</p>
+<p>​                （3）索引所有调用服务例程的列表（内核变量sys_call_table）,发现并调用相应的系统调用服务例程，若系统调用服务例程带有参数，那么将首先检查参数的有效性。例如，会检查地址指向用户空间的内存位置是否有效。随后，该服务例程会执行必要的任务，这可能会涉及对特定参数中指定地址处的值进行修改，以及在用户内存和内核内存间传递数据（I/O操作中。）。最后，该服务例程会将结果状态返回给system_call()例程。</p>
+<p>​                （4）从内核中恢复各寄存器值，并将系统调用返回值置于栈中。</p>
+<p>​                （5）返回至外壳函数，同时将处理器切换回用户态。</p>
+<p>6.若系统调用服务例程的返回值表明调用有误，外壳函数会使用该值来设置全局变量errno。然后，外壳函数会返回到调用程序，并同时返回一个整型值，以表明系统调用是否成功。</p>
+<h4 id="图示"><a href="#图示" class="headerlink" title="图示"></a>图示</h4><p><img src="/images/13.png"></p>
 
       
 
@@ -244,7 +244,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://0ke.github.io//2021/03/28/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://0ke.github.io//2021/03/31/Liunx%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
     </div>
 </div>
 
