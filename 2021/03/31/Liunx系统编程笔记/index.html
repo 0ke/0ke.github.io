@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://0ke.github.io/images/13.png">
 <meta property="article:published_time" content="2021-03-31T01:03:47.000Z">
-<meta property="article:modified_time" content="2021-04-05T03:46:25.379Z">
+<meta property="article:modified_time" content="2021-04-05T04:10:24.563Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/13.png">
@@ -212,6 +212,8 @@
 <p>​        进程号为0的进程通常是调度进程，常被称为交换进程（swapper）。</p>
 <p>​        进程号为1的进程通常是init进程，init进程是所有进程的祖先。</p>
 <p>​        除调度进程外，在liunx下面所有的进程都由init进程直接或者间接创建。</p>
+<p>Liunx操作系统提供了三个获得进程号的函数getpid()、getppid()、getpgid()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys&#x2F;types.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">pid_t getpid(void);</span><br><span class="line">功能：获取当前进程的进程号。</span><br><span class="line">pid_t getppid(void);</span><br><span class="line">功能：获取当前进程的父进程的进程号。</span><br><span class="line">pid_t getpgid(pid_t pid);</span><br><span class="line">功能：获取当前进程所在进程组的id。</span><br></pre></td></tr></table></figure>
 
       
 
