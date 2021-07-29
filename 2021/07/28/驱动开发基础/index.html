@@ -15,16 +15,15 @@
 <meta property="og:site_name" content="0ke">
 <meta property="og:description" content="前言">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://0ke.github.io/images/36.png">
-<meta property="og:image" content="http://0ke.github.io/images/37.png">
-<meta property="og:image" content="http://0ke.github.io/images/38.png">
-<meta property="og:image" content="http://0ke.github.io/images/39.png">
-<meta property="og:image" content="http://0ke.github.io/images/40.png">
+<meta property="og:image" content="http://0ke.github.io/images/36.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/37.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/38.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/39.PNG">
 <meta property="article:published_time" content="2021-07-28T04:35:49.000Z">
-<meta property="article:modified_time" content="2021-07-29T01:00:52.468Z">
+<meta property="article:modified_time" content="2021-07-29T01:05:41.089Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://0ke.github.io/images/36.png">
+<meta name="twitter:image" content="http://0ke.github.io/images/36.PNG">
   
     <link rel="alternative" href="/atom.xml" title="0ke" type="application/atom+xml">
   
@@ -185,11 +184,10 @@
 <p>​        下面我们丰富主函数的内容：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ntddk.h&gt;		//驱动头文件。</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">VOID <span class="title">DriverUnload</span><span class="params">(PDRIVER_OBJECT pDriver)</span>		<span class="comment">//卸载函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	UNREFERENCED_PARAMETER(pDriver);</span><br><span class="line">	DbgPrint(<span class="string">&quot;Unload success\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">NTSTATUS <span class="title">DriverEntry</span><span class="params">(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegPath)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    UNREFERENCED_PARAMETER(pRegPath);		<span class="comment">//将没使用的形参放在这里，不然会报错</span></span><br><span class="line">	pDriverObject-&gt;DriverUnload = DriverUnload;			<span class="comment">//指向卸载函数</span></span><br><span class="line">    DbgPrint(<span class="string">&quot;Hello 0ke!\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> STATUS_SUCCESS;			<span class="comment">//#define STATUS_SUCCESS                   ((NTSTATUS)0x00000000L)注意驱动返回该状态码表示成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​        重新生成程序，在所在文件夹中取出.sys文件。打开Windows7x86进行测试。这里我们启动调试模式，挂起Windbg进行。</p>
-<p><img src="/images/36.png"></p>
-<p><img src="/images/37.png"></p>
-<p><img src="/images/38.png"></p>
-<p><img src="/images/39.png"></p>
-<p><img src="/images/40.png"></p>
+<p><img src="/images/36.PNG"></p>
+<p><img src="/images/37.PNG"></p>
+<p><img src="/images/38.PNG"></p>
+<p><img src="/images/39.PNG"></p>
 <p>​        好，成功完成了第一个驱动程序。这里注意InstDrv和Dbgview都要以管理员模式运行。不然会创建句柄错误。</p>
 
       
