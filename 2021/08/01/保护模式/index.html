@@ -22,13 +22,13 @@
 <meta property="og:image" content="http://0ke.github.io/images/47.PNG">
 <meta property="og:image" content="http://0ke.github.io/images/46.PNG">
 <meta property="og:image" content="http://0ke.github.io/images/48.png">
-<meta property="og:image" content="http://0ke.github.io/images/50.PNG">
-<meta property="og:image" content="http://0ke.github.io/images/51.PNG">
-<meta property="og:image" content="http://0ke.github.io/images/52.PNG">
-<meta property="og:image" content="http://0ke.github.io/images/50.PNG">
-<meta property="og:image" content="http://0ke.github.io/images/53.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/50.png">
+<meta property="og:image" content="http://0ke.github.io/images/51.png">
+<meta property="og:image" content="http://0ke.github.io/images/52.png">
+<meta property="og:image" content="http://0ke.github.io/images/50.png">
+<meta property="og:image" content="http://0ke.github.io/images/53.png">
 <meta property="article:published_time" content="2021-08-01T03:14:38.000Z">
-<meta property="article:modified_time" content="2021-09-10T11:39:20.270Z">
+<meta property="article:modified_time" content="2021-09-10T11:43:22.821Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/42.PNG">
@@ -219,29 +219,29 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val = <span class="number">0x10</span>;</span><br><span class="line"><span class="keyword">int</span> val2 = <span class="number">0x10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		mov eax, dword ptr ds:[<span class="number">0</span>];</span><br><span class="line">		mov dword ptr ds : [val2], eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里涉及到一个段.base的概念。</p>
 <p>CS、SS、ES、DS段的base都是0，而FS的base是7FFDE000</p>
-<p><img src="/images/50.PNG"></p>
+<p><img src="/images/50.png"></p>
 <p>FS.base里存的是一个结构的地址，实质上是取到了一个结构的地址。FS：[0]</p>
 <p>在windbg中dt nt!_TEB查看。</p>
-<p><img src="/images/51.PNG"></p>
+<p><img src="/images/51.png"></p>
 <p>可以看到，0地址是NtTib，也就是说FS：[0]取到了NtTib后面的结构内容。跟进一下结构内容。</p>
-<p><img src="/images/52.PNG"></p>
+<p><img src="/images/52.png"></p>
 <p>0x18处存储了FS的base。也就是说可以通过0x18找到FS的base。</p>
 <p><strong>在保护模式当中：段.base + offset(逻辑地址)</strong></p>
 <p> <strong>= 线性地址。</strong></p>
-<p><img src="/images/50.PNG"></p>
+<p><img src="/images/50.png"></p>
 <p>再来看一下这个，除了0意外每个段还有一个limit，也就是0后（）内的值。</p>
 <p>这个值是限制长度。</p>
 <p>4GB</p>
 <p>0x0-0xFFFFFFFF</p>
 <p>但是FS的Limit只有0x0-0xFFF。</p>
-<h2 id="段选择子获取段描述符"><a href="#段选择子获取段描述符" class="headerlink" title="段选择子获取段描述符"></a>段选择子获取段描述符</h2><p>Segment Selector结构是16位，它是一个段的标识符，结构如下。</p>
-<p><img src="/images/53.PNG"></p>
+<h2 id="段选择子拆解获取段描述符"><a href="#段选择子拆解获取段描述符" class="headerlink" title="段选择子拆解获取段描述符"></a>段选择子拆解获取段描述符</h2><p>Segment Selector结构是16位，它是一个段的标识符，结构如下。</p>
+<p><img src="/images/53.png"></p>
 <p>RPL（Requested Privilege Level）：请求访问者所使用的权限级别，从0到3级。</p>
 <p>TI（Table Indicator）：描述符表索引位。当TI=0时，从GDT（全局描述符表）查找；当TI=1时，从LDT（本地描述符表）查找。</p>
 <p>Index（Descriptor Index）：这是Descriptor在GDT/LDT中的序号，根据TI的值在相应的描述表中查找descriptor(描述符号，，我英文不太好，不好意思)。</p>
 <p>将所选择段的段选择子，换算成二进制，在根据他的结构。和相应的windbg指令，就可以找到段描述符。</p>
 <p>具体lab内容后期补，懒。</p>
-
+<h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2>
       
 
       
@@ -352,7 +352,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">寄存器基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">2.1.</span> <span class="toc-text">通用寄存器的构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">浮点寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8E%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">段寄存器与指令指针寄存器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EFLAGS%E5%AF%84%E5%AD%98%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">3.</span> <span class="toc-text">EFLAGS寄存器基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A0%87%E5%BF%97%E4%BD%8D%E3%80%81%E6%8E%A7%E5%88%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E3%80%81%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">3.1.</span> <span class="toc-text">状态标志位、控制标志位、系统标志位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">3.2.</span> <span class="toc-text">状态标志位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">4.</span> <span class="toc-text">页的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E6%9D%83%E9%99%90Lab"><span class="toc-number">5.</span> <span class="toc-text">段权限Lab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base%E4%B8%8ELimit-Lab"><span class="toc-number">6.</span> <span class="toc-text">base与Limit Lab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E9%80%89%E6%8B%A9%E5%AD%90%E8%8E%B7%E5%8F%96%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">7.</span> <span class="toc-text">段选择子获取段描述符</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">寄存器基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90"><span class="toc-number">2.1.</span> <span class="toc-text">通用寄存器的构成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text">浮点寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%8E%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.3.</span> <span class="toc-text">段寄存器与指令指针寄存器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EFLAGS%E5%AF%84%E5%AD%98%E5%99%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">3.</span> <span class="toc-text">EFLAGS寄存器基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A0%87%E5%BF%97%E4%BD%8D%E3%80%81%E6%8E%A7%E5%88%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E3%80%81%E7%B3%BB%E7%BB%9F%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">3.1.</span> <span class="toc-text">状态标志位、控制标志位、系统标志位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%A0%87%E5%BF%97%E4%BD%8D"><span class="toc-number">3.2.</span> <span class="toc-text">状态标志位</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">4.</span> <span class="toc-text">页的基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E6%9D%83%E9%99%90Lab"><span class="toc-number">5.</span> <span class="toc-text">段权限Lab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base%E4%B8%8ELimit-Lab"><span class="toc-number">6.</span> <span class="toc-text">base与Limit Lab</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E9%80%89%E6%8B%A9%E5%AD%90%E6%8B%86%E8%A7%A3%E8%8E%B7%E5%8F%96%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-number">7.</span> <span class="toc-text">段选择子拆解获取段描述符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E6%8F%8F%E8%BF%B0%E7%AC%A6%E6%8B%86%E8%A7%A3"><span class="toc-number">8.</span> <span class="toc-text">段描述符拆解</span></a></li></ol>
                     </div>
                 </span>
             </div>
