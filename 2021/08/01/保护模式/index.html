@@ -22,8 +22,12 @@
 <meta property="og:image" content="http://0ke.github.io/images/47.PNG">
 <meta property="og:image" content="http://0ke.github.io/images/46.PNG">
 <meta property="og:image" content="http://0ke.github.io/images/48.png">
+<meta property="og:image" content="http://0ke.github.io/images/50.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/51.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/52.PNG">
+<meta property="og:image" content="http://0ke.github.io/images/50.PNG">
 <meta property="article:published_time" content="2021-08-01T03:14:38.000Z">
-<meta property="article:modified_time" content="2021-08-02T14:39:28.393Z">
+<meta property="article:modified_time" content="2021-09-10T11:12:22.995Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/42.PNG">
@@ -207,7 +211,29 @@
 <p>应用层2G是独立的，虚拟的，并且具备隔离的。页限制，页保护。</p>
 <p><img src="/images/48.png"></p>
 <h2 id="段权限Lab"><a href="#段权限Lab" class="headerlink" title="段权限Lab"></a>段权限Lab</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> val = <span class="number">0x10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		<span class="comment">//mov ax, cs;</span></span><br><span class="line">		<span class="comment">//ds=cs</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//mov ds, ax;</span></span><br><span class="line">		<span class="comment">//cs:[val]</span></span><br><span class="line">		mov ebx, <span class="number">0x10</span>;</span><br><span class="line">		mov dword ptr[val], ebx;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="base与Limit-Lab"><a href="#base与Limit-Lab" class="headerlink" title="base与Limit Lab"></a>base与Limit Lab</h2>
+<h2 id="base与Limit-Lab"><a href="#base与Limit-Lab" class="headerlink" title="base与Limit Lab"></a>base与Limit Lab</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val = <span class="number">0x10</span>;</span><br><span class="line"><span class="keyword">int</span> val2 = <span class="number">0x10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		mov eax, dword ptr ds:[val];</span><br><span class="line">		mov dword ptr ds : [val2], eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以上代码时，可以成功编译。但是当执行以下代码时，编译器会报错：0x00FB13CE 处有未经处理的异常(在 ConsoleApplication1.exe 中):  0xC0000005:  读取位置 0x00000000 时发生访问冲突。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val = <span class="number">0x10</span>;</span><br><span class="line"><span class="keyword">int</span> val2 = <span class="number">0x10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		mov eax, dword ptr ds:[<span class="number">0</span>];</span><br><span class="line">		mov dword ptr ds : [val2], eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但当将段改为fs时，编译器仍然能编译通过。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> val = <span class="number">0x10</span>;</span><br><span class="line"><span class="keyword">int</span> val2 = <span class="number">0x10</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	_asm&#123;</span><br><span class="line">		mov eax, dword ptr ds:[<span class="number">0</span>];</span><br><span class="line">		mov dword ptr ds : [val2], eax;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里涉及到一个段.base的概念。</p>
+<p>CS、SS、ES、DS段的base都是0，而FS的base是7FFDE000</p>
+<p><img src="/images/50.PNG"></p>
+<p>FS.base里存的是一个结构的地址，实质上是取到了一个结构的地址。FS：[0]</p>
+<p>在windbg中dt nt!_TEB查看。</p>
+<p><img src="/images/51.PNG"></p>
+<p>可以看到，0地址是NtTib，也就是说FS：[0]取到了NtTib后面的结构内容。跟进一下结构内容。</p>
+<p><img src="/images/52.PNG"></p>
+<p>0x18处存储了FS的base。也就是说可以通过0x18找到FS的base。</p>
+<p><strong>在保护模式当中：段.base + offset(逻辑地址)</strong></p>
+<p> <strong>= 线性地址。</strong></p>
+<p><img src="/images/50.PNG"></p>
+<p>再来看一下这个，除了0意外每个段还有一个limit，也就是0后（）内的值。</p>
+<p>这个值是限制长度。</p>
+<p>4GB</p>
+<p>0x0-0xFFFFFFFF</p>
+<p>但是FS的Limit只有0x0-0xFFF。</p>
+
       
 
       
