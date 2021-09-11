@@ -27,8 +27,11 @@
 <meta property="og:image" content="http://0ke.github.io/images/52.png">
 <meta property="og:image" content="http://0ke.github.io/images/50.png">
 <meta property="og:image" content="http://0ke.github.io/images/53.png">
+<meta property="og:image" content="http://0ke.github.io/images/55.png">
+<meta property="og:image" content="http://0ke.github.io/images/56.png">
+<meta property="og:image" content="http://0ke.github.io/images/54.png">
 <meta property="article:published_time" content="2021-08-01T03:14:38.000Z">
-<meta property="article:modified_time" content="2021-09-10T11:43:22.821Z">
+<meta property="article:modified_time" content="2021-09-11T09:27:12.176Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/42.PNG">
@@ -240,8 +243,18 @@
 <p>TI（Table Indicator）：描述符表索引位。当TI=0时，从GDT（全局描述符表）查找；当TI=1时，从LDT（本地描述符表）查找。</p>
 <p>Index（Descriptor Index）：这是Descriptor在GDT/LDT中的序号，根据TI的值在相应的描述表中查找descriptor(描述符号，，我英文不太好，不好意思)。</p>
 <p>将所选择段的段选择子，换算成二进制，在根据他的结构。和相应的windbg指令，就可以找到段描述符。</p>
-<p>具体lab内容后期补，懒。</p>
-<h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2>
+<p>下面进行lab。</p>
+<p>首先将VS中的寄存器窗口打开，并且显示CPU段。</p>
+<p><img src="/images/55.png"></p>
+<p>拆解DS为例子，DS = 0023，将其转换成2进制。100011，<strong>这里注意：0023是十六进制</strong>，并且100011要补全成。也就是。00100 0 11</p>
+<p>GDT全局描述符表8位一项。</p>
+<p>0000 0000 0000 0100        0100换算成十进制是4，也就是数组的第四项。</p>
+<p>在windbg中，r是查看寄存器指令。</p>
+<p><img src="/images/56.png"></p>
+<p>和GDTR和GDTL是两个和GDT有关的伪寄存器。通过r gdtr查询GDT表位置。r gdtl查询GDT表的长度。</p>
+<h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2><p>首先，看一下段描述符的结构。</p>
+<p><img src="/images/54.png"></p>
+
       
 
       
