@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -232,75 +232,12 @@
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -466,19 +403,229 @@
             <div id="articleContent">
                 <p>​    <a id="more"></a></p>
 <p>​    最近OS留了一个英文教材阅读的作业，我负责代码测试任务，现将教材代码以及编译指令和运行结果相关结论示下。</p>
-<h4 id="Code1"><a href="#Code1" class="headerlink" title="Code1"></a>Code1</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123;</span><br><span class="line">	<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;usage: cpu &lt;string&gt;\n&quot;</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">char</span> *str = argv[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str);</span><br><span class="line">	Spin(<span class="number">1</span>);			<span class="comment">//Spin()函数:位于common.h，使程序输出间隔一段时间</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Code1"><a href="#Code1" class="headerlink" title="Code1"></a>Code1</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/time.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;assert.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"common.h"</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">!=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"usage: cpu &lt;string>\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>str <span class="token operator">=</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">Spin</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token comment" spellcheck="true">//Spin()函数:位于common.h，使程序输出间隔一段时间</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>​        由于导入了common.h头文件，Spin(1)函数也是common.h头文件内容，编译时新建文件放在同一路径下，不然会产生连接报错。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __common_h__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __common_h__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">GetTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">t</span>;</span></span><br><span class="line">    <span class="keyword">int</span> rc = gettimeofday(&amp;t, <span class="literal">NULL</span>);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">double</span>)t.tv_sec + (<span class="keyword">double</span>)t.tv_usec/<span class="number">1e6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Spin</span><span class="params">(<span class="keyword">int</span> howlong)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> t = GetTime();</span><br><span class="line">    <span class="keyword">while</span> ((GetTime() - t) &lt; (<span class="keyword">double</span>)howlong)</span><br><span class="line">	; <span class="comment">// do nothing in loop</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// __common_h__</span></span></span><br></pre></td></tr></table></figure>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> __common_h__</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> __common_h__</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/time.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;assert.h></span></span>
+
+<span class="token keyword">double</span> <span class="token function">GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> timeval t<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">gettimeofday</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>t<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>t<span class="token punctuation">.</span>tv_sec <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>t<span class="token punctuation">.</span>tv_usec<span class="token operator">/</span><span class="token number">1e6</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Spin</span><span class="token punctuation">(</span><span class="token keyword">int</span> howlong<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> t <span class="token operator">=</span> <span class="token function">GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">GetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> t<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>howlong<span class="token punctuation">)</span>
+    <span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// do nothing in loop</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+
+
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">// __common_h__</span></code></pre>
 <p>​        编译执行后，程序会无止境重复输出我们执行的字符串，直到手动强制结束。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ gcc -o cpu cpu.c -Wall     &#x2F;&#x2F;-Wall作用是显示更多的报错信息。</span><br><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ .&#x2F;cpu &#39;CCUT&#39;</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">CCUT</span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+<pre><code>lijianbo@ubuntu:~/Desktop/OS$ gcc -o cpu cpu.c -Wall     //-Wall作用是显示更多的报错信息。
+lijianbo@ubuntu:~/Desktop/OS$ ./cpu &#39;CCUT&#39;
+CCUT
+CCUT
+CCUT
+CCUT
+CCUT
+CCUT
+CCUT
+^C</code></pre>
 <p>​        多输入几条命令，程序就会同时输出多条的命令数量，从而 使我们产生多个CPU同时执行命令的错觉。这就是CPU虚拟化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">lijianbo@ubuntu:~&#x2F;Desktop&#x2F;OS$ .&#x2F;cpu CCUT &amp; .&#x2F;cpu &#39;lijianbo&#39; &amp; .&#x2F;cpu &#39;190409&#39;</span><br><span class="line">[1] 18209</span><br><span class="line">[2] 18210</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">CCUT</span><br><span class="line">lijianbo</span><br><span class="line">190409</span><br><span class="line">CCUT</span><br><span class="line">190409</span><br><span class="line">lijianbo</span><br><span class="line">^C</span><br></pre></td></tr></table></figure>
+<pre><code>lijianbo@ubuntu:~/Desktop/OS$ ./cpu CCUT &amp; ./cpu &#39;lijianbo&#39; &amp; ./cpu &#39;190409&#39;
+[1] 18209
+[2] 18210
+CCUT
+190409
+lijianbo
+CCUT
+190409
+lijianbo
+CCUT
+190409
+lijianbo
+CCUT
+lijianbo
+190409
+CCUT
+190409
+lijianbo
+^C</code></pre>
 <p>​        操作系统软件的本质是无限循环的程序，开机以后便不断接受用户指令，直到强制关机才结束程序运行。</p>
-<h4 id="Code2虚拟化"><a href="#Code2虚拟化" class="headerlink" title="Code2虚拟化"></a>Code2虚拟化</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;common.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span></span><br><span class="line">main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[])</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">int</span> * p = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)); <span class="comment">// a1</span></span><br><span class="line">assert(p != <span class="literal">NULL</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;(%d) address pointed to by p: %p\n&quot;</span>,</span><br><span class="line">getpid(), p); <span class="comment">// a2</span></span><br><span class="line">* p = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// a3</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">Spin(<span class="number">1</span>);</span><br><span class="line">* p = * p + <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;(%d) p: %d\n&quot;</span>, getpid(), * p); <span class="comment">// a4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ gcc -o mem mem.c -Wall</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ ./mem</span><br><span class="line">(<span class="number">3951</span>) address pointed to by p: <span class="number">0x13aa010</span></span><br><span class="line">(<span class="number">3951</span>) p: <span class="number">1</span></span><br><span class="line">(<span class="number">3951</span>) p: <span class="number">2</span></span><br><span class="line">(<span class="number">3951</span>) p: <span class="number">3</span></span><br><span class="line">(<span class="number">3951</span>) p: <span class="number">4</span></span><br><span class="line">(<span class="number">3951</span>) p: <span class="number">5</span></span><br><span class="line">^C</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ ./mem &amp; ./mem &amp;</span><br><span class="line">[<span class="number">1</span>] <span class="number">3981</span></span><br><span class="line">[<span class="number">2</span>] <span class="number">3982</span></span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ (<span class="number">3982</span>) address pointed to by p: <span class="number">0x18e2010</span></span><br><span class="line">(<span class="number">3981</span>) address pointed to by p: <span class="number">0x1210010</span></span><br><span class="line">(<span class="number">3982</span>) p: <span class="number">1</span></span><br><span class="line">(<span class="number">3981</span>) p: <span class="number">1</span></span><br><span class="line">(<span class="number">3982</span>) p: <span class="number">2</span></span><br><span class="line">(<span class="number">3981</span>) p: <span class="number">2</span></span><br><span class="line">(<span class="number">3982</span>) p: <span class="number">3</span></span><br><span class="line">(<span class="number">3981</span>) p: <span class="number">3</span></span><br><span class="line">(<span class="number">3982</span>) p: <span class="number">4</span></span><br><span class="line">(<span class="number">3981</span>) p: <span class="number">4</span></span><br></pre></td></tr></table></figure>
-<h4 id="Code3并发性"><a href="#Code3并发性" class="headerlink" title="Code3并发性"></a>Code3并发性</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;common_threads.h&quot;</span></span></span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> counter = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">int</span> loops;</span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">worker</span><span class="params">(<span class="keyword">void</span> *arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; loops; i++) &#123;</span><br><span class="line">	counter = counter + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (argc != <span class="number">2</span>) &#123; </span><br><span class="line">	<span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;usage: threads &lt;loops&gt;\n&quot;</span>); </span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">    loops = atoi(argv[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">pthread_t</span> p1, p2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Initial value : %d\n&quot;</span>, counter);</span><br><span class="line">    Pthread_create(&amp;p1, <span class="literal">NULL</span>, worker, <span class="literal">NULL</span>); </span><br><span class="line">    Pthread_create(&amp;p2, <span class="literal">NULL</span>, worker, <span class="literal">NULL</span>);</span><br><span class="line">    Pthread_join(p1, <span class="literal">NULL</span>);</span><br><span class="line">    Pthread_join(p2, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Final value   : %d\n&quot;</span>, counter);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ gcc -o thread thread.c -Wall -pthread</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ ./thread <span class="number">1000</span></span><br><span class="line">Initial value : <span class="number">0</span></span><br><span class="line">Final value   : <span class="number">2000</span></span><br><span class="line">...</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ ./thread <span class="number">100000</span></span><br><span class="line">Initial value : <span class="number">0</span></span><br><span class="line">Final value   : <span class="number">114048</span></span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$  ./thread <span class="number">10000</span></span><br><span class="line">Initial value : <span class="number">0</span></span><br><span class="line">Final value   : <span class="number">20000</span></span><br></pre></td></tr></table></figure>
+<h4 id="Code2虚拟化"><a href="#Code2虚拟化" class="headerlink" title="Code2虚拟化"></a>Code2虚拟化</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;assert.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"common.h"</span></span>
+
+<span class="token keyword">int</span>
+<span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span> argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span> p <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a1</span>
+<span class="token function">assert</span><span class="token punctuation">(</span>p <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"(%d) address pointed to by p: %p\n"</span><span class="token punctuation">,</span>
+<span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a2</span>
+<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// a3</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token function">Spin</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">*</span> p <span class="token operator">=</span> <span class="token operator">*</span> p <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"(%d) p: %d\n"</span><span class="token punctuation">,</span> <span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">*</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// a4</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ gcc <span class="token operator">-</span>o mem mem<span class="token punctuation">.</span>c <span class="token operator">-</span>Wall
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ <span class="token punctuation">.</span><span class="token operator">/</span><span class="token function">mem</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> address pointed to by p<span class="token punctuation">:</span> <span class="token function">0x13aa010</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">1</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">2</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">3</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">4</span>
+<span class="token punctuation">(</span><span class="token number">3951</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token number">5</span>
+<span class="token operator">^</span>C
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ <span class="token punctuation">.</span><span class="token operator">/</span>mem <span class="token operator">&amp;</span> <span class="token punctuation">.</span><span class="token operator">/</span>mem <span class="token operator">&amp;</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">3981</span>
+<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token number">3982</span>
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ <span class="token punctuation">(</span><span class="token number">3982</span><span class="token punctuation">)</span> address pointed to by p<span class="token punctuation">:</span> <span class="token function">0x18e2010</span>
+<span class="token punctuation">(</span><span class="token number">3981</span><span class="token punctuation">)</span> address pointed to by p<span class="token punctuation">:</span> <span class="token function">0x1210010</span>
+<span class="token punctuation">(</span><span class="token number">3982</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">1</span>
+<span class="token punctuation">(</span><span class="token number">3981</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">1</span>
+<span class="token punctuation">(</span><span class="token number">3982</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">2</span>
+<span class="token punctuation">(</span><span class="token number">3981</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">2</span>
+<span class="token punctuation">(</span><span class="token number">3982</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">3</span>
+<span class="token punctuation">(</span><span class="token number">3981</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">3</span>
+<span class="token punctuation">(</span><span class="token number">3982</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token function">4</span>
+<span class="token punctuation">(</span><span class="token number">3981</span><span class="token punctuation">)</span> p<span class="token punctuation">:</span> <span class="token number">4</span></code></pre>
+<h4 id="Code3并发性"><a href="#Code3并发性" class="headerlink" title="Code3并发性"></a>Code3并发性</h4><pre class=" language-C"><code class="language-C">#include <stdio.h>
+#include <stdlib.h>
+#include "common_threads.h"
+volatile int counter = 0; 
+int loops;
+void *worker(void *arg) &#123;
+    int i;
+    for (i = 0; i < loops; i++) &#123;
+    counter = counter + 1;
+    &#125;
+    pthread_exit(NULL);
+&#125;
+int main(int argc, char *argv[]) &#123;
+    if (argc != 2) &#123; 
+    fprintf(stderr, "usage: threads <loops>\n"); 
+    exit(1); 
+    &#125; 
+    loops = atoi(argv[1]);
+    pthread_t p1, p2;
+    printf("Initial value : %d\n", counter);
+    Pthread_create(&p1, NULL, worker, NULL); 
+    Pthread_create(&p2, NULL, worker, NULL);
+    Pthread_join(p1, NULL);
+    Pthread_join(p2, NULL);
+    printf("Final value   : %d\n", counter);
+    return 0;
+&#125;
+...
+lijianbo@ubuntu:~/Desktop/OS$ gcc -o thread thread.c -Wall -pthread
+lijianbo@ubuntu:~/Desktop/OS$ ./thread 1000
+Initial value : 0
+Final value   : 2000
+...
+lijianbo@ubuntu:~/Desktop/OS$ ./thread 100000
+Initial value : 0
+Final value   : 114048
+lijianbo@ubuntu:~/Desktop/OS$  ./thread 10000
+Initial value : 0
+Final value   : 20000</code></pre>
 <p>#include “common_threads.h”内容如下。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __common_threads_h__</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __common_threads_h__</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *t, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,  </span></span></span><br><span class="line"><span class="function"><span class="params">		    <span class="keyword">void</span> *(*start_routine)(<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rc = pthread_create(t, attr, start_routine, arg);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **value_ptr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rc = pthread_join(thread, value_ptr);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rc = pthread_mutex_lock(mutex);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rc = pthread_mutex_unlock(mutex);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span> *mutex, <span class="keyword">pthread_mutexattr_t</span> *attr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rc = pthread_mutex_init(mutex, attr);</span><br><span class="line">    assert(rc == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// __common_threads_h__</span></span></span><br></pre></td></tr></table></figure>
-<h4 id="Code4持久性"><a href="#Code4持久性" class="headerlink" title="Code4持久性"></a>Code4持久性</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dowork</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> fd = open(<span class="string">&quot;/tmp/file&quot;</span>, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);</span><br><span class="line">  assert(fd &gt;= <span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">char</span> buffer[<span class="number">20</span>];</span><br><span class="line">  <span class="built_in">sprintf</span>(buffer, <span class="string">&quot;hello world\n&quot;</span>);</span><br><span class="line">  <span class="keyword">int</span> rc = write(fd, buffer, <span class="built_in">strlen</span>(buffer));</span><br><span class="line">  assert(rc == (<span class="built_in">strlen</span>(buffer)));</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;wrote %d bytes\n&quot;</span>, rc);</span><br><span class="line">  </span><br><span class="line">  fsync(fd);</span><br><span class="line">  close(fd);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">  dowork();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ gcc -o io io.c -Wall</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ ./io</span><br><span class="line">wrote <span class="number">12</span> bytes</span><br><span class="line">lijianbo@ubuntu:~/Desktop/OS$ cat /tmp/file</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">ifndef</span> __common_threads_h__</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> __common_threads_h__</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;assert.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;pthread.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">Pthread_create</span><span class="token punctuation">(</span>pthread_t <span class="token operator">*</span>t<span class="token punctuation">,</span> <span class="token keyword">const</span> pthread_attr_t <span class="token operator">*</span>attr<span class="token punctuation">,</span>  
+            <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">*</span>start_routine<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span>arg<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">pthread_create</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span> attr<span class="token punctuation">,</span> start_routine<span class="token punctuation">,</span> arg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Pthread_join</span><span class="token punctuation">(</span>pthread_t thread<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span><span class="token operator">*</span>value_ptr<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">pthread_join</span><span class="token punctuation">(</span>thread<span class="token punctuation">,</span> value_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Pthread_mutex_lock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">pthread_mutex_lock</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Pthread_mutex_unlock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">pthread_mutex_unlock</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">Pthread_mutex_init</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">,</span> pthread_mutexattr_t <span class="token operator">*</span>attr<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">pthread_mutex_init</span><span class="token punctuation">(</span>mutex<span class="token punctuation">,</span> attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">// __common_threads_h__</span></code></pre>
+<h4 id="Code4持久性"><a href="#Code4持久性" class="headerlink" title="Code4持久性"></a>Code4持久性</h4><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;assert.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
+
+<span class="token keyword">void</span> <span class="token function">dowork</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> fd <span class="token operator">=</span> <span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"/tmp/file"</span><span class="token punctuation">,</span> O_WRONLY <span class="token operator">|</span> O_CREAT <span class="token operator">|</span> O_TRUNC<span class="token punctuation">,</span> S_IRWXU<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">assert</span><span class="token punctuation">(</span>fd <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">char</span> buffer<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token function">sprintf</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token string">"hello world\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> rc <span class="token operator">=</span> <span class="token function">write</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">assert</span><span class="token punctuation">(</span>rc <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"wrote %d bytes\n"</span><span class="token punctuation">,</span> rc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">fsync</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">dowork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ gcc <span class="token operator">-</span>o io io<span class="token punctuation">.</span>c <span class="token operator">-</span>Wall
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ <span class="token punctuation">.</span><span class="token operator">/</span>io
+wrote <span class="token number">12</span> bytes
+lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>OS$ cat <span class="token operator">/</span>tmp<span class="token operator">/</span>file
+hello world</code></pre>
 
                 
             </div>
@@ -551,9 +698,6 @@
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
 
     
 
@@ -561,132 +705,6 @@
 
                 </div>
             </div>
-            
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-
             
         </div>
     </div>
@@ -990,8 +1008,6 @@
             
             
             
-                
-            
             
                 <span id="busuanzi_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
@@ -1011,7 +1027,7 @@
             <br>
             
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <div class="col s12 m4 l4 social-link ">
 
 
     <a href="mailto:2869864088@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
@@ -1024,7 +1040,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2869864088" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2869864088" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1185,8 +1201,6 @@ $(function () {
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     

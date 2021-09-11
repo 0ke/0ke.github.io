@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -232,75 +232,12 @@
         </li>
         
         
-        <li><div class="divider"></div></li>
-        <li>
-            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
-                <i class="fab fa-github-square fa-fw"></i>Fork Me
-            </a>
-        </li>
-        
     </ul>
 </div>
 
 
         </div>
 
-        
-            <style>
-    .nav-transparent .github-corner {
-        display: none !important;
-    }
-
-    .github-corner {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        border: 0;
-        transform: scale(1.1);
-    }
-
-    .github-corner svg {
-        color: #0f9d58;
-        fill: #fff;
-        height: 64px;
-        width: 64px;
-    }
-
-    .github-corner:hover .octo-arm {
-        animation: a 0.56s ease-in-out;
-    }
-
-    .github-corner .octo-arm {
-        animation: none;
-    }
-
-    @keyframes a {
-        0%,
-        to {
-            transform: rotate(0);
-        }
-        20%,
-        60% {
-            transform: rotate(-25deg);
-        }
-        40%,
-        80% {
-            transform: rotate(10deg);
-        }
-    }
-</style>
-
-<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
-   data-tooltip="Fork Me" data-position="left" data-delay="50">
-    <svg viewBox="0 0 250 250" aria-hidden="true">
-        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
-        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
-        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-              fill="currentColor" class="octo-body"></path>
-    </svg>
-</a>
         
     </nav>
 
@@ -470,7 +407,38 @@
 <p>​        服务器端Socket程序流程：socket()–blind()–listen–accept()–recv()/send()–closesocket()</p>
 <p>​        客户端Socket程序流程：socket()–connect()–send()/recv()–closesocket()</p>
 <h4 id="基于TCP-Socket例子"><a href="#基于TCP-Socket例子" class="headerlink" title="基于TCP Socket例子"></a>基于TCP Socket例子</h4><p>​        先来看一个例子，然后再介绍其中各个部分的含义。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;ws2_32.lib&quot;</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	SOCKET mysock, tsock;       <span class="comment">//定义套接字</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">my_addr</span>;</span>	<span class="comment">//本地地址信息</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">their_addr</span>;</span>	<span class="comment">//连接者地址信息 </span></span><br><span class="line">	<span class="keyword">int</span> sin_size;</span><br><span class="line">	WSADATA wsa;</span><br><span class="line">	WSAStartup(MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsa);		<span class="comment">//初始化windows Socket</span></span><br><span class="line">	<span class="comment">//建立socket</span></span><br><span class="line">	mysock = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">	<span class="comment">//bind本机端口</span></span><br><span class="line">	my_addr.sin_family = AF_INET;		<span class="comment">//协议类型是INET</span></span><br><span class="line">	my_addr.sin_port = htons(<span class="number">1234</span>);    <span class="comment">//绑定端口为1234</span></span><br><span class="line">	my_addr.sin_addr.s_addr = INADDR_ANY;  <span class="comment">//本机IP</span></span><br><span class="line">	bind(mysock, (struct sockaddr*) &amp; my_addr, <span class="keyword">sizeof</span>(struct sockaddr));</span><br><span class="line">	<span class="comment">//listen，监听端口</span></span><br><span class="line">	listen(mysock, <span class="number">10</span>);					<span class="comment">//等待连接数目</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;listen......&quot;</span>);</span><br><span class="line">	<span class="comment">//等待客户端连接</span></span><br><span class="line">	sin_size = <span class="keyword">sizeof</span>(struct sockaddr_in);</span><br><span class="line">	tsock = accept(mysock, (struct sockaddr*) &amp; their_addr, &amp;sin_size);</span><br><span class="line">	<span class="comment">//有连接就发送lijianboyyds字符串过去</span></span><br><span class="line">	send(tsock, <span class="string">&quot;lijianboyyds\n&quot;</span>, <span class="keyword">sizeof</span>(<span class="string">&quot;lijianboyyds\n&quot;</span>), <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;send OK!\n&quot;</span>);</span><br><span class="line">	<span class="comment">//成功，关闭套接字</span></span><br><span class="line">	closesocket(mysock);</span><br><span class="line">	closesocket(tsock);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">pragma</span> comment(lib, "ws2_32.lib")</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;WinSock2.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    SOCKET mysock<span class="token punctuation">,</span> tsock<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//定义套接字</span>
+    <span class="token keyword">struct</span> sockaddr_in my_addr<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//本地地址信息</span>
+    <span class="token keyword">struct</span> sockaddr_in their_addr<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//连接者地址信息 </span>
+    <span class="token keyword">int</span> sin_size<span class="token punctuation">;</span>
+    WSADATA wsa<span class="token punctuation">;</span>
+    <span class="token function">WSAStartup</span><span class="token punctuation">(</span><span class="token function">MAKEWORD</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>wsa<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//初始化windows Socket</span>
+    <span class="token comment" spellcheck="true">//建立socket</span>
+    mysock <span class="token operator">=</span> <span class="token function">socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_STREAM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//bind本机端口</span>
+    my_addr<span class="token punctuation">.</span>sin_family <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//协议类型是INET</span>
+    my_addr<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span><span class="token number">1234</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//绑定端口为1234</span>
+    my_addr<span class="token punctuation">.</span>sin_addr<span class="token punctuation">.</span>s_addr <span class="token operator">=</span> INADDR_ANY<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//本机IP</span>
+    <span class="token function">bind</span><span class="token punctuation">(</span>mysock<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> sockaddr<span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> my_addr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> sockaddr<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//listen，监听端口</span>
+    <span class="token function">listen</span><span class="token punctuation">(</span>mysock<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                    <span class="token comment" spellcheck="true">//等待连接数目</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"listen......"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//等待客户端连接</span>
+    sin_size <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> sockaddr_in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    tsock <span class="token operator">=</span> <span class="token function">accept</span><span class="token punctuation">(</span>mysock<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> sockaddr<span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> their_addr<span class="token punctuation">,</span> <span class="token operator">&amp;</span>sin_size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//有连接就发送lijianboyyds字符串过去</span>
+    <span class="token function">send</span><span class="token punctuation">(</span>tsock<span class="token punctuation">,</span> <span class="token string">"lijianboyyds\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token string">"lijianboyyds\n"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"send OK!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//成功，关闭套接字</span>
+    <span class="token function">closesocket</span><span class="token punctuation">(</span>mysock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">closesocket</span><span class="token punctuation">(</span>tsock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
 <p>​        运行程序，服务端显示“listen……”。</p>
 <p><img src="/images/7.png"></p>
 <p>​        在windows终端通过netstat查看1234端口的LISTENING状态。</p>
@@ -481,15 +449,64 @@
 <p>​        下面开始介绍各个组件内容。</p>
 <h3 id="在初始化阶段调用WSAStartup"><a href="#在初始化阶段调用WSAStartup" class="headerlink" title="在初始化阶段调用WSAStartup"></a>在初始化阶段调用WSAStartup</h3><p>​        在使用Socket之前就必须调用WSAStartup函数，此程序在应用程序中是用来初始化Windows Socket DLL，只有此函数被调用成功，程序才可以调用Windows Socket DLL中的其他API函数。</p>
 <p>​        </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">WSAStartup</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	WORD wVersionRequested,</span></span></span><br><span class="line"><span class="function"><span class="params">    LPWSADATA lpWSAData</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+<pre class=" language-C"><code class="language-C">int WSAStartup(
+    WORD wVersionRequested,
+    LPWSADATA lpWSAData
+);</code></pre>
 <p>​        <strong>解释参数</strong></p>
 <p>​        wVersionRequested：应用程序要使用的Windows Socket版本号。</p>
 <p>​        lpWSAData：指向WSADATA的指针。</p>
 <p>​        函数调用后返回一个int值，执行成功返回0。在程序中调用此函数的形式如下。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WSAStartup (MAKEWORD(<span class="number">2</span>,<span class="number">2</span>),(LPWSADATA)&amp;WSAData)</span><br></pre></td></tr></table></figure>
+<pre class=" language-c"><code class="language-c"><span class="token function">WSAStartup</span> <span class="token punctuation">(</span><span class="token function">MAKEWORD</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>LPWSADATA<span class="token punctuation">)</span><span class="token operator">&amp;</span>WSAData<span class="token punctuation">)</span></code></pre>
 <p>​        其中MAKEWORD(2,2) 表示程序使用的是Windows Socket 2版本，WSAData用来存储系统传回的有关Winsock的结构。</p>
 <h3 id="基于UDP的socket通信"><a href="#基于UDP的socket通信" class="headerlink" title="基于UDP的socket通信"></a>基于UDP的socket通信</h3><p>客户端</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//client</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">&quot;ws2_32.lib&quot;</span>)			<span class="comment">//记得导入不然报错</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _WINSOCK_DEPRECATED_NO_WARNINGS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function">BOOL <span class="title">InitWinsock</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	SOCKET socket1;</span><br><span class="line">	InitWinsock();</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">server</span>;</span></span><br><span class="line">	<span class="keyword">int</span> len = <span class="keyword">sizeof</span>(server);</span><br><span class="line">	server.sin_family = AF_INET;</span><br><span class="line">	server.sin_port = htons(<span class="number">1000</span>);<span class="comment">//Server的监听端口为1000</span></span><br><span class="line">	server.sin_addr.s_addr = inet_addr(<span class="string">&quot;192.168.0.110&quot;</span>);<span class="comment">//server的地址</span></span><br><span class="line">	socket1 = socket(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">char</span> buffer[<span class="number">1024</span>] = <span class="string">&quot;\0&quot;</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;input message\n&quot;</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, buffer);</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">strcmp</span>(buffer, <span class="string">&quot;bye&quot;</span>) == <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">if</span> (sendto(socket1, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>, (struct sockaddr*)&amp;server, len) != SOCKET_ERROR) &#123;</span><br><span class="line">			<span class="keyword">if</span> (recvfrom(socket1, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>, (struct sockaddr*)&amp;server, &amp;len) != SOCKET_ERROR)</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">&quot;rece from server:%s\n&quot;</span>, buffer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(socket1);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function">BOOL <span class="title">InitWinsock</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> Error;</span><br><span class="line">	WORD VersionRequested;</span><br><span class="line">	WSADATA WsaData;</span><br><span class="line">	VersionRequested = MAKEWORD(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">	Error = WSAStartup(VersionRequested, &amp;WsaData);  <span class="comment">//启动Winsock2</span></span><br><span class="line">	<span class="keyword">if</span> (Error != <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> FALSE;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (LOBYTE(WsaData.wVersion) != <span class="number">2</span> || HIBYTE(WsaData.wHighVersion) != <span class="number">2</span>) &#123;</span><br><span class="line">			WSACleanup();</span><br><span class="line">			<span class="keyword">return</span> FALSE;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class=" language-C"><code class="language-C">//client
+#pragma comment(lib, "ws2_32.lib")            //记得导入不然报错
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#pragma warning(disable:4996);
+#include <winsock2.h>
+#include <stdio.h>
+BOOL InitWinsock();
+void main() &#123;
+    SOCKET socket1;
+    InitWinsock();
+    struct sockaddr_in server;
+    int len = sizeof(server);
+    server.sin_family = AF_INET;
+    server.sin_port = htons(1000);//Server的监听端口为1000
+    server.sin_addr.s_addr = inet_addr("192.168.0.110");//server的地址
+    socket1 = socket(AF_INET, SOCK_DGRAM, 0);
+    while (1) &#123;
+        char buffer[1024] = "\0";
+        printf("input message\n");
+        scanf("%s", buffer);
+        if (strcmp(buffer, "bye") == 0)
+            break;
+        if (sendto(socket1, buffer, sizeof buffer, 0, (struct sockaddr*)&server, len) != SOCKET_ERROR) &#123;
+            if (recvfrom(socket1, buffer, sizeof buffer, 0, (struct sockaddr*)&server, &len) != SOCKET_ERROR)
+                printf("rece from server:%s\n", buffer);
+        &#125;
+    &#125;
+    closesocket(socket1);
+
+&#125;
+BOOL InitWinsock() &#123;
+    int Error;
+    WORD VersionRequested;
+    WSADATA WsaData;
+    VersionRequested = MAKEWORD(2, 2);
+    Error = WSAStartup(VersionRequested, &WsaData);  //启动Winsock2
+    if (Error != 0) &#123;
+        return FALSE;
+    &#125;
+    else &#123;
+        if (LOBYTE(WsaData.wVersion) != 2 || HIBYTE(WsaData.wHighVersion) != 2) &#123;
+            WSACleanup();
+            return FALSE;
+        &#125;
+    &#125;
+    return TRUE;
+&#125;</code></pre>
 
                 
             </div>
@@ -562,9 +579,6 @@
 <div id="article-share">
 
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
-    
 
     
 
@@ -572,132 +586,6 @@
 
                 </div>
             </div>
-            
-                <style>
-    #reward {
-        margin: 40px 0;
-        text-align: center;
-    }
-
-    #reward .reward-link {
-        font-size: 1.4rem;
-        line-height: 38px;
-    }
-
-    #reward .btn-floating:hover {
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    #rewardModal {
-        width: 320px;
-        height: 350px;
-    }
-
-    #rewardModal .reward-title {
-        margin: 15px auto;
-        padding-bottom: 5px;
-    }
-
-    #rewardModal .modal-content {
-        padding: 10px;
-    }
-
-    #rewardModal .close {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 1.3rem;
-        line-height: 20px;
-        cursor: pointer;
-    }
-
-    #rewardModal .close:hover {
-        color: #ef5350;
-        transform: scale(1.3);
-        -moz-transform:scale(1.3);
-        -webkit-transform:scale(1.3);
-        -o-transform:scale(1.3);
-    }
-
-    #rewardModal .reward-tabs {
-        margin: 0 auto;
-        width: 210px;
-    }
-
-    .reward-tabs .tabs {
-        height: 38px;
-        margin: 10px auto;
-        padding-left: 0;
-    }
-
-    .reward-content ul {
-        padding-left: 0 !important;
-    }
-
-    .reward-tabs .tabs .tab {
-        height: 38px;
-        line-height: 38px;
-    }
-
-    .reward-tabs .tab a {
-        color: #fff;
-        background-color: #ccc;
-    }
-
-    .reward-tabs .tab a:hover {
-        background-color: #ccc;
-        color: #fff;
-    }
-
-    .reward-tabs .wechat-tab .active {
-        color: #fff !important;
-        background-color: #22AB38 !important;
-    }
-
-    .reward-tabs .alipay-tab .active {
-        color: #fff !important;
-        background-color: #019FE8 !important;
-    }
-
-    .reward-tabs .reward-img {
-        width: 210px;
-        height: 210px;
-    }
-</style>
-
-<div id="reward">
-    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
-
-    <!-- Modal Structure -->
-    <div id="rewardModal" class="modal">
-        <div class="modal-content">
-            <a class="close modal-close"><i class="fas fa-times"></i></a>
-            <h4 class="reward-title">你的赏识是我前进的动力</h4>
-            <div class="reward-content">
-                <div class="reward-tabs">
-                    <ul class="tabs row">
-                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
-                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
-                    </ul>
-                    <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
-                    </div>
-                    <div id="wechat">
-                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    $(function () {
-        $('.tabs').tabs();
-    });
-</script>
-
             
         </div>
     </div>
@@ -993,8 +881,6 @@
             
             
             
-                
-            
             
                 <span id="busuanzi_container_site_pv">
                 &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
@@ -1014,7 +900,7 @@
             <br>
             
         </div>
-        <div class="col s12 m4 l4 social-link social-statis">
+        <div class="col s12 m4 l4 social-link ">
 
 
     <a href="mailto:2869864088@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
@@ -1027,7 +913,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2869864088" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2869864088" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1188,8 +1074,6 @@ $(function () {
     
     <script src="/libs/others/clicklove.js" async="async"></script>
     
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
