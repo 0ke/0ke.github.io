@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -413,7 +413,7 @@
 <p>​        开启了NX保护，（肯定得开，ROP，别问我怎么知道的哈哈，因为好像和之前的题差不多。）拖入64位IDA。</p>
 <pre class=" language-c"><code class="language-c"><span class="token punctuation">[</span>main函数<span class="token punctuation">]</span>
 <span class="token keyword">int</span> __cdecl <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>envp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   <span class="token keyword">int</span> v4<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+Ch] [rbp-4h]</span>
 
   <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -426,9 +426,9 @@
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Welcome to this Encryption machine\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       v4 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
       <span class="token function">__isoc99_scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>v4<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -437,23 +437,23 @@
         <span class="token keyword">break</span><span class="token punctuation">;</span>
       <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"I think you can do it by yourself"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> v4 <span class="token operator">==</span> <span class="token number">3</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Bye!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> v4 <span class="token operator">!=</span> <span class="token number">1</span> <span class="token punctuation">)</span>
       <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token function">encrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Something Wrong!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        再看一眼encrypt函数。</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">encrypt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   size_t v0<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// rbx</span>
   <span class="token keyword">char</span> s<span class="token punctuation">[</span><span class="token number">48</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+0h] [rbp-50h]</span>
   __int16 v3<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+30h] [rbp-20h]</span>
@@ -463,31 +463,31 @@
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Input your Plaintext to be encrypted"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">gets</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     v0 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span>x<span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> v0 <span class="token operator">>=</span> <span class="token function">strlen</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">)</span>
       <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">96</span> <span class="token operator">||</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">122</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token keyword">if</span> <span class="token punctuation">(</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">64</span> <span class="token operator">||</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">90</span> <span class="token punctuation">)</span>
-      <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">></span> <span class="token number">47</span> <span class="token operator">&amp;&amp;</span> s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">57</span> <span class="token punctuation">)</span>
           s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">^</span><span class="token operator">=</span> <span class="token number">0xCu</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
       <span class="token keyword">else</span>
-      <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token punctuation">{</span>
         s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">^</span><span class="token operator">=</span> <span class="token number">0xDu</span><span class="token punctuation">;</span>
-      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       s<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">^</span><span class="token operator">=</span> <span class="token number">0xEu</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token operator">++</span>x<span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Ciphertext"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token function">puts</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        if中含有strlen可以用\0截断，并且s存在溢出，思路有了布置ROP链即可。通过ROPgadget寻找一下pop rdi和ret。</p>
 <pre><code>lijianbo@ubuntu:~/Desktop$ ROPgadget --binary buupwn12 --only &#39;pop|ret&#39;
 Gadgets information
@@ -617,7 +617,7 @@ p.interactive()</code></pre>
 What&#39;s your name? $ cd home
 $ cd babyrop
 $ cat flag
-flag&#123;&#125;</code></pre>
+flag{}</code></pre>
 <h4 id="BJDCTF-2nd-one-gadget"><a href="#BJDCTF-2nd-one-gadget" class="headerlink" title="[BJDCTF 2nd]one_gadget"></a>[BJDCTF 2nd]one_gadget</h4><p>​        checksec并且拖入64位IDA</p>
 <pre><code>lijianbo@ubuntu:~/Desktop$ checksec buupwn17
 [*] &#39;/home/lijianbo/Desktop/buupwn17&#39;
@@ -629,7 +629,7 @@ flag&#123;&#125;</code></pre>
 <p>​        main如下，让我们输入一个gadget，然后输入的gadget会被打印。</p>
 <pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// local variable allocation has failed, the output may be wrong!</span>
 <span class="token keyword">int</span> __cdecl <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>envp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>v4<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+8h] [rbp-18h]</span>
   <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>v5<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+10h] [rbp-10h]</span>
   <span class="token keyword">unsigned</span> __int64 v6<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+18h] [rbp-8h]</span>
@@ -641,14 +641,14 @@ flag&#123;&#125;</code></pre>
   v5 <span class="token operator">=</span> v4<span class="token punctuation">;</span>c
   <span class="token function">v4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        init函数如下，这个函数会把printf的地址发送给们。</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   <span class="token function">setvbuf</span><span class="token punctuation">(</span>_bss_start<span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">setvbuf</span><span class="token punctuation">(</span><span class="token constant">stdin</span><span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0LL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"here is the gift for u:%p\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>printf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        这道题需要one_gadget，通过命令先下载一下，因为ubuntu16.04的Ruby版本略低，所以先下载2.4以上版本的Ruby再下载one_gadget，这里还需要下载这道题的libc-2.29.so。题目已经给了。</p>
 <pre><code>sudo gem install one_gadget
 ...

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -426,71 +426,71 @@
 #include&lt;fcntl.h&gt;
 #include&lt;unistd.h&gt;
 int main()
-&#123;
+{
     char *path=&quot;test.c&quot;;            /*进行操作的文件路径*/
     int fd;
     char buf[40],buf2[]=&quot;hello mrcff&quot;;            /*自定义读写用的缓冲区*/
     int n,i;
     if((fd=open(path,O_RDWR))&lt;0)                /*打开文件*/
-    &#123;
+    {
         perror(&quot;open file failed!&quot;);
         return 1;
-    &#125;
+    }
     else
         printf(&quot;open file successful!\n&quot;);
     if((n=read(fd,buf,20))&lt;0)                /*读取文件中的数据*/
-    &#123;
+    {
         perror(&quot;read failed!&quot;);
         return 1;
-    &#125;
+    }
     else
-    &#123;    printf(&quot;output read data:\n&quot;);
+    {    printf(&quot;output read data:\n&quot;);
         printf(&quot;%s\n&quot;,buf);                /*将读取的数据输出到终端控制台*/
-    &#125;
+    }
     if((i=lseek(fd,11,SEEK_SET))&lt;0)                /*定位到从文件开头处到第11个字节处*/
-    &#123;
+    {
         perror(&quot;lseek  error!&quot;);
         return 1;
-    &#125;
+    }
     else
-    &#123;
+    {
         if(write(fd,buf2,11)&lt;0)                /*向文件中写入数据*/
-        &#123;
+        {
             perror(&quot;write error!&quot;);
             return 1;
-        &#125;
+        }
         else
-        &#123;
+        {
             printf(&quot;write successful!\n&quot;);            
 
-        &#125;
-    &#125;
+        }
+    }
     close(fd);                        /*关闭文件的同时保存了对文件的改动*/
 
     if((fd=open(path,O_RDWR))&lt;0)                /*打开文件*/
-    &#123;
+    {
         perror(&quot;open file failed!&quot;);
         return 1;
-    &#125;    
+    }    
     if((n=read(fd,buf,40))&lt;0)                /*读取数据*/
-    &#123;
+    {
         perror(&quot;read 2 failed!&quot;);
         return 1;
-    &#125;
+    }
     else
-    &#123;    
+    {    
         printf(&quot;read the changed data:\n&quot;);        
         printf(&quot;%s\n&quot;,buf);                /*将数据输出到终端*/
-    &#125;
+    }
     if(close(fd)&lt;0)                        /*关闭文件*/
-    &#123;
+    {
         perror(&quot;close failed!&quot;);
         return 1;
-    &#125;
+    }
     else
         printf(&quot;good bye!\n&quot;);
 return 0;
-&#125;
+}
 ...
 lijianbo@ubuntu:~/Desktop$ ./IO
 open file successful!
@@ -572,13 +572,13 @@ pid_t getpgid(pid_t pid);
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;stdlib.h&gt;
-int main()&#123;
+int main(){
     //通过fork函数创建一个子进程。
     fork();
     printf(&quot;hello CCUT\n&quot;);
     while(1);
     return 0;
-&#125;
+}
 ...
 lijianbo@ubuntu:~/Desktop$ gcc -o creatpid creatpid.c
 lijianbo@ubuntu:~/Desktop$ ./creatpid
@@ -588,28 +588,28 @@ hello CCUT</code></pre>
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;stdlib.h&gt;
-int main()&#123;
+int main(){
     pid_t pid;
     pid = fork();
     if(pid&lt;0)
-    &#123;
+    {
         printf(&quot;fail to fork&quot;);
         return -1;
-    &#125;
+    }
     else if(pid&gt;0)        //父进程代码区
-    &#123;
+    {
         printf(&quot;parent：pid=%d,ppid = %d\n&quot;,getpid(),getppid());        //获取父进程进程号和父进程父进程的进程号。
         printf(&quot;hello CCUT&quot;);
         sleep(1);
-    &#125;
+    }
     else  //子进程代码区
-    &#123;
+    {
         printf(&quot;parent：pid=%d,ppid = %d\n&quot;,getpid(),getppid());       //获取子进程进程号和父进程进程号。            
         printf(&quot;hello lijianbo&quot;);
         sleep(1);
-    &#125;
+    }
 
-&#125;
+}
 ...
 lijianbo@ubuntu:~/Desktop$ gcc -o creatpid2 creatpid2.c
 lijianbo@ubuntu:~/Desktop$ ./creatpid2
@@ -623,27 +623,27 @@ hello lijianbo</code></pre>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h></span></span>
 <span class="token keyword">int</span> gvar <span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     pid_t pid<span class="token punctuation">;</span>
     <span class="token keyword">int</span> var<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"process id:%ld\n"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"gvar=%d var=%d\n"</span><span class="token punctuation">,</span>gvar<span class="token punctuation">,</span>var<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span>pid<span class="token operator">=</span><span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"error!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>pid<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>pid<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     gvar<span class="token operator">--</span><span class="token punctuation">;</span>
     var<span class="token operator">++</span><span class="token punctuation">;</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the child process id:%ld\n gvar=%d var=%d\n"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>gvar<span class="token punctuation">,</span>var<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">_exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+    <span class="token keyword">else</span><span class="token punctuation">{</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"the parent id:%ld\n gvar=%d var=%d\n"</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">long</span><span class="token punctuation">)</span><span class="token function">getpid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>gvar<span class="token punctuation">,</span>var<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
 <p>​        vfork()函数与fork()函数相同，两者的区别是在创建子进程时fork()函数会复制所有父进程的资源，包括进程环境、内存资源等，而vfork()函数在创建子进程时不会复制父进程的所有资源，父子进程共享地址空间。这样在子进程中对虚拟内存空间中变量的修改，实际上是修改父进程虚拟内存空间的值。以下是执行结果。</p>
 <pre><code>shiyanlou:~/ $ ./text             //vfork函数结果。
 process id:518
@@ -666,18 +666,18 @@ the child process id:508
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
 extern char **environ;
-int main(int argc,char *argv[])&#123;
+int main(int argc,char *argv[]){
     execve(&quot;new&quot;,argv,environ);
     puts(&quot;NO&quot;);
-&#125;
+}
 ...
 #include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
-int main()&#123;
+int main(){
     puts(&quot;welcome to CCUT&quot;);
     return 0;
-&#125;
+}
 ...
 ./execve
 welcome to CCUT
@@ -691,15 +691,15 @@ welcome to CCUT
 <pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">/*测试结果*/</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span><span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span><span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"argc=%d\n"</span><span class="token punctuation">,</span>argc<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span><span class="token punctuation">(</span>argc<span class="token operator">--</span><span class="token punctuation">)</span>
-           <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+           <span class="token punctuation">{</span>
                    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s "</span><span class="token punctuation">,</span><span class="token operator">*</span>argv<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+           <span class="token punctuation">}</span>
 
            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>    
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 shiyanlou<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span> $ gcc <span class="token operator">-</span>o main main<span class="token punctuation">.</span>c                    <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token number">54</span><span class="token punctuation">:</span><span class="token number">40</span><span class="token punctuation">]</span>
 shiyanlou<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span> $ <span class="token punctuation">.</span><span class="token operator">/</span>main                                <span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">:</span><span class="token number">54</span><span class="token punctuation">:</span><span class="token number">46</span><span class="token punctuation">]</span>

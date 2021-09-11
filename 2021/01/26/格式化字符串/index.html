@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 4.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -432,9 +432,9 @@ printf(&quot;%2$s %1$s&quot;,&quot;Format&quot;, &quot;Strings&quot;); //&quot;S
 printf(&quot;%42c%1$n&quot;,&amp;n);                 //</code></pre>
 <h2 id="1-2-格式化字符串漏洞"><a href="#1-2-格式化字符串漏洞" class="headerlink" title="1.2 格式化字符串漏洞"></a>1.2 格式化字符串漏洞</h2><h3 id="1-2-1-基本原理"><a href="#1-2-1-基本原理" class="headerlink" title="1.2.1 基本原理"></a>1.2.1 基本原理</h3><p> 在x86架构下，格式字符串的参数是通过栈传递的，下面对一个简单的C代码进行试验。</p>
 <pre><code>#include &lt;stdio.h&gt;
-void main()&#123;
+void main(){
     printf(&quot;%s %d %s&quot;,&quot;Hello World!&quot;,233,&quot;\n&quot;);
-&#125;</code></pre>
+}</code></pre>
 <p> 将其编译程32位程序，并且观察参数的传递情况。</p>
 <pre><code>lijianbo@ubuntu:~/Desktop$ gcc -m32 fmtdemo.c -o fmtdemo -g
 lijianbo@ubuntu:~/Desktop$ ./fmtdemo
@@ -453,9 +453,9 @@ pwndbg&gt; r
 <p> 在进入printf()函数之前，程序将参数从右到左依次压栈。进入printf()之后，函数首先获取第一个参数，一次读取一个字符。如果字符不是“%”，那么字符被直接复制到输出。否则读取下一个非空字符，获取相应的参数并解析输出。</p>
 <p> 在原来程序的格式化字符串位置加上“%x %x %x %3$x”，使它出现格式化字符串漏洞。</p>
 <pre><code>#include &lt;stdio.h&gt;
-void main()&#123;
+void main(){
     printf(&quot;%s %d %s %x %x %x %3$s&quot;,&quot;Hello World!&quot;,233,&quot;\n&quot;);
-&#125;
+}
 ...
 lijianbo@ubuntu:~/Desktop$ gcc -m32 fmtdemo.c -o fmtdemo -g
 fmtdemo.c: In function ‘main’:
@@ -484,12 +484,12 @@ Hello World! 233
 <p> 程序打印了七个值（包括换行），实际上参数只有三个，所以后面的三个“%x”打印的是0xffffcf30-0xffffcf38的数据，而最后一个参数“%3$s”是表示第三个参数的重用，也就是“\n”。</p>
 <p> 下面对一个省去格式化字符串的程序进行试验。</p>
 <pre><code>#include &lt;stdio.h&gt;
-void main()&#123;
+void main(){
     char buf[50];
     if(fgets(buf,sizeof buf,stdin)==NULL)
         return;
     printf(buf);
-&#125;
+}
 ...
 ───────────────────────────────────[ STACK ]────────────────────────────────────
 00:0000│ esp    0xffffcedc —▸ 0x80484fe (main+67) ◂— add    esp, 0x10
@@ -509,14 +509,14 @@ Hello 32 f7fb55a0 9017</code></pre>
 <h4 id="栈数据泄露"><a href="#栈数据泄露" class="headerlink" title="栈数据泄露"></a>栈数据泄露</h4><p> 程序崩溃只是检验漏洞的第一步，还可以使用格式化函数获得内存数据，为漏洞利用做准备。格式化函数会根据格式字符串从栈上取值，x86程序的栈是由高地址向低地址增长。同时printf()函数的参数是以逆序被压入栈的，所以参数在内存中的出现顺序与在printf()调用时出现的顺序是一样的。</p>
 <p> 利用如下代码进行演示。</p>
 <pre><code>#include &lt;stdio.h&gt;
-void main()&#123;
+void main(){
     char format[128];
     int arg1 = 1, arg2 = 0x8888888, arg3 = -1;
     char arg4[10]=&quot;ABCD&quot;;
     scanf(&quot;%s&quot;,format);
     printf(format, arg1, arg2, arg3, arg4);
     printf(&quot;\n&quot;);
-&#125;
+}
 ...
 lijianbo@ubuntu:~/Desktop$ gcc -m32 -fno-stack-protector -no-pie fmtdemo.c -o fmtdemo
 lijianbo@ubuntu:~/Desktop$ gdb fmtdemo
