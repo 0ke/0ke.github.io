@@ -29,9 +29,11 @@
 <meta property="og:image" content="http://0ke.github.io/images/53.png">
 <meta property="og:image" content="http://0ke.github.io/images/55.png">
 <meta property="og:image" content="http://0ke.github.io/images/56.png">
+<meta property="og:image" content="http://0ke.github.io/images/57.png">
+<meta property="og:image" content="http://0ke.github.io/images/58.png">
 <meta property="og:image" content="http://0ke.github.io/images/54.png">
 <meta property="article:published_time" content="2021-08-01T03:14:38.000Z">
-<meta property="article:modified_time" content="2021-09-11T09:27:12.176Z">
+<meta property="article:modified_time" content="2021-09-11T09:41:19.074Z">
 <meta property="article:author" content="lijianbo">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://0ke.github.io/images/42.PNG">
@@ -252,7 +254,11 @@
 <p>在windbg中，r是查看寄存器指令。</p>
 <p><img src="/images/56.png"></p>
 <p>和GDTR和GDTL是两个和GDT有关的伪寄存器。通过r gdtr查询GDT表位置。r gdtl查询GDT表的长度。</p>
-<h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2><p>首先，看一下段描述符的结构。</p>
+<p><img src="/images/57.png"></p>
+<p>dq 查询GDT的内容。</p>
+<p><img src="/images/58.png"></p>
+<p>第四项00cff300`0000ffff就是段描述符。</p>
+<h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2><p>下面对段描述符进行拆解，首先，看一下段描述符的结构。</p>
 <p><img src="/images/54.png"></p>
 
       
