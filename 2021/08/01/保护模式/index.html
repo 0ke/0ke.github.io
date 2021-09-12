@@ -517,6 +517,27 @@
 <p>第四项00cff300`0000ffff就是段描述符。</p>
 <h2 id="段描述符拆解"><a href="#段描述符拆解" class="headerlink" title="段描述符拆解"></a>段描述符拆解</h2><p>下面对段描述符进行拆解，首先，看一下段描述符的结构。</p>
 <p><img src="/images/54.png"></p>
+<p>上次实验得到的00cff300`0000ffff根据结构进行拆解。</p>
+<p>转换成二进制</p>
+<p>0000 0000 1100 1111 1111 0011 0000 0000 </p>
+<p>0000 0000 0000 0000 1111 1111 1111 1111</p>
+<p>上面是高32位，下面是低32位。</p>
+<p>Base:0000 0000 0000 0000 0000 0000 0000 0000——-000000</p>
+<p>Limit:1111 1111 1111 1111 1111——-FFFFF</p>
+<p>Type:0011</p>
+<p>S:1</p>
+<p>DPL:11</p>
+<p>P:1</p>
+<p>AVL:0​</p>
+<p>DEF:0</p>
+<p>D/B:1</p>
+<p>G:1</p>
+<h2 id="Type位与G位"><a href="#Type位与G位" class="headerlink" title="Type位与G位"></a>Type位与G位</h2><p>Type生效的前提，是S位=1。用于描述执行权限和所在段。</p>
+<p>G位决定单位。</p>
+<p>当G = 1，Limit单位是页。需要*页的大小，0x1000，4096个字节。</p>
+<p>当G = 0，Limit单位是字节。</p>
+<h2 id="进一步验证base的存在"><a href="#进一步验证base的存在" class="headerlink" title="进一步验证base的存在"></a>进一步验证base的存在</h2><p>篡改ds.base。</p>
+<pre><code></code></pre>
 
                 
             </div>
