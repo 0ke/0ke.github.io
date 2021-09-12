@@ -536,8 +536,16 @@
 <p>G位决定单位。</p>
 <p>当G = 1，Limit单位是页。需要*页的大小，0x1000，4096个字节。</p>
 <p>当G = 0，Limit单位是字节。</p>
-<h2 id="进一步验证base的存在"><a href="#进一步验证base的存在" class="headerlink" title="进一步验证base的存在"></a>进一步验证base的存在</h2><p>篡改ds.base。</p>
-<pre><code></code></pre>
+<h2 id="进一步验证base的存在"><a href="#进一步验证base的存在" class="headerlink" title="进一步验证base的存在"></a>进一步验证base的存在</h2><p>篡改ds.base，段描述符。利用新造段选择子，来改变ds.base</p>
+<p><img src="/images/59.png"></p>
+<p>GDT表中的第9项是0，可以篡改。</p>
+<p>9的bin是1001 补全之后是01001 011后三位按照常规格式填写。十六进制也就是4B.</p>
+<p>在windbg中修改内存使用e指令。将第九项改成f0cff300`0000ffff</p>
+<p><img src="/images/60.png"></p>
+<p><img src="/images/61.png"></p>
+<p><img src="/images/62.png"></p>
+<p>0xF0DB8000 =  0xF00000000 + 0x00DB8000</p>
+<p>进一步证实了base的存在。</p>
 
                 
             </div>
