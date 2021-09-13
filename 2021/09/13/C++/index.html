@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="驱动通信框架——默认处理, 0ke">
+    <meta name="keywords" content="C++, 0ke">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>驱动通信框架——默认处理 | 0ke</title>
+    <title>C++ | 0ke</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">驱动通信框架——默认处理</h1>
+                    <h1 class="description center-align post-title">C++</h1>
                 </div>
             </div>
         </div>
@@ -380,7 +380,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-09-05
+                    2021-09-13
                 </div>
                 
 
@@ -401,91 +401,74 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="应用与驱动的通信框架"><a href="#应用与驱动的通信框架" class="headerlink" title="应用与驱动的通信框架"></a>应用与驱动的通信框架</h2><a id="more"></a>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><a id="more"></a>
 
-<p>首先从应用层（ring3）进行API调用，通常情况下从动态链接库导出（kernel 32.dll）。kernel 32.dll并没有进入内核，而去寻找ntdll.dll。之后调用相应的版本。</p>
-<p>例如：在调用OpenProcess时，ntdll.dll会去寻找NtOpenProcess或者ZwOpenProcess。</p>
-<p>以上成为IRP结构，我们要做的就是IPR结构与驱动进行通信。即用户空间与内核空间的通信。</p>
-<h2 id="科普"><a href="#科普" class="headerlink" title="科普"></a>科普</h2><p>设备：软件设备，硬件设备。</p>
-<p>驱动：软件驱动，硬件驱动。</p>
-<p>软件驱动：主动防御，火绒，360。</p>
-<p>硬件驱动：键盘驱动，鼠标驱动。网卡，显卡等。</p>
-<p>与设备进行通信的API：CreatFile（获取设备句柄 IRP_MJ_CREATE）   ReadFile（去设备上取回数据  IRP_MJ_READ）   WriteFile（向设备发送数据  IRP_MJ_WRITE）  CloseHandle（清理工作  IRP_MJ_CLOSE）。</p>
-<p>控制IRP：DeviceIoControl (IRP_MJ_DEVICE_CONTROL)</p>
-<p><em>控制码：消息码，可以在R3和R0访问同一组控制码，例如可以在R0访问R3的控制码，来了解R3的请求。？？好像是这么回事儿，不对我看完书再改。</em></p>
-<h2 id="R0程序"><a href="#R0程序" class="headerlink" title="R0程序"></a>R0程序</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
-<span class="token comment" spellcheck="true">//设备对象名称</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> DEVICE_NAME L"\\device\\MyDriver5"</span>
-<span class="token comment" spellcheck="true">//符号连接名称</span>
-<span class="token macro property">#<span class="token directive keyword">define</span> LINK_NAME L"\\dosdevices\\0ke"</span>
+<p>没啥说的，逆向遇到困难了，this指针等具有C++特性的汇编逻辑分析不了。</p>
+<h2 id="内存分区模型"><a href="#内存分区模型" class="headerlink" title="内存分区模型"></a>内存分区模型</h2><p>C++程序在执行时，将内存方向划分为4个区域。</p>
+<p>代码区：存放函数体的二进制代码，由操作系统进行管理。</p>
+<p>全局区：存放全局变量和静态变量以及常量。</p>
+<p>栈区：由编译器自动分配释放，存放函数的参数值，局部变量等。</p>
+<p>堆区：由程序员分配和释放，若程序员不释放，程序结束时操作系统回收。</p>
+<h3 id="内存分区意义"><a href="#内存分区意义" class="headerlink" title="内存分区意义"></a>内存分区意义</h3><p>不同区域存放的数据，赋予不同的生命周期，给我们更大的编程空间。</p>
+<h2 id="程序运行前"><a href="#程序运行前" class="headerlink" title="程序运行前"></a>程序运行前</h2><p>在程序编译后，生成了exe可执行程序，<strong>未执行该程序前</strong>分为两个区域：</p>
+<p><strong>代码区</strong>：</p>
+<p>​            存放CPU执行的机器指令</p>
+<p>​            代码区是<strong>共享</strong>的，共享的目的是对于频繁被执行的程序，只需要在内存中有 一份代码即可。</p>
+<p>​            代码区是<strong>只读</strong>的，原因是防止程序意外地修改了它的指令。</p>
+<p><strong>全局区</strong>：</p>
+<p>​            全局变量和静态变量</p>
+<p>​            全局区还包含了常量区，字符串常量和其他常量。</p>
+<p>​            该区域的数据在程序结束后由操作系统释放。</p>
+<p><img src="/images/63.png"></p>
+<p>总结：</p>
+<p>​        代码区特点是共享和只读。</p>
+<p>​        全局区中存放全局变量、静态变量、常量。</p>
+<p>​        常量区中存放const修饰的全局变量和字符串常量。</p>
+<h2 id="程序运行后"><a href="#程序运行后" class="headerlink" title="程序运行后"></a>程序运行后</h2><p><strong>栈区</strong></p>
+<p>​        由编译器自动分配和释放，存放函数的参数值，局部变量等。</p>
+<p>​        注意：不要返回局部变量的地址，栈区开辟的数据由编译器自动释放。</p>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+using namespace std;
 
-<span class="token comment" spellcheck="true">//IRP派遣函数--默认处理</span>
+int * func() {
+    int a = 10;//局部变量 存放在栈区，栈区的数据在函数执行完后自动释放
+    return &a;
+}
 
-NTSTATUS <span class="token function">DispatchCommdn</span><span class="token punctuation">(</span>PDEVICE_OBJECT pDriverObject<span class="token punctuation">,</span> PIRP pIrp<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pDriverObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    NTSTATUS ntStatus<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"common!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//设置IRP处理成功</span>
-    pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//设置返回的字节数</span>
-    pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//结束处理IRP处理流程</span>
-    <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//返回成功</span>
-    <span class="token keyword">return</span> ntStatus<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+int main()
+{
+    //接受func函数的返回值
+    int *p = func();
+    cout << *p << endl;//第一次可以打印正确的数字，是因为编译器做了保留
+    cout << *p << endl;//第二次不再保留
+    system("pause");
 
-VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//指明该参数未被使用。避免被编译器警告。</span>
-    <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pDriverObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//打印调试信息，可以使用dbgview或者Windbg来查看输出的调试信息。</span>
-    <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload sucess!/n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    return 0;
+}</code></pre>
+<p><img src="/images/64.png"></p>
+<h3 id="堆区"><a href="#堆区" class="headerlink" title="堆区"></a>堆区</h3><p>​        由程序员分配释放，若程序员不释放，程序结束时由操作系统回收。</p>
+<p>​        在C++中主要利用new在堆区开辟内存。</p>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+using namespace std;
 
-NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//指明该参数未被使用。避免被编译器警告。</span>
-    <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pRegPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//注册卸载函数，作用是指定用哪个函数来完成卸载。</span>
-    pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//设备对象</span>
-    UNICODE_STRING uDeviceName <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//符号连接名称</span>
-    UNICODE_STRING uLinkName <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//初始化设备对象</span>
-    <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>uDeviceName<span class="token punctuation">,</span> DEVICE_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//初始化符号连接</span>
-    <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>uLinkName<span class="token punctuation">,</span> LINK_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//返回状态</span>
-    NTSTATUS ntStatus <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+int * func() {
+    //利用new关键字可以将数据开辟到堆区。
+    int *p = new int(10);
+    return p;
 
-    <span class="token comment" spellcheck="true">//设备对象</span>
-    PDEVICE_OBJECT pDeciceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//创建设备对象</span>
-    ntStatus <span class="token operator">=</span> <span class="token function">IoCreateDevice</span><span class="token punctuation">(</span>pDriverObject<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>uDeviceName<span class="token punctuation">,</span> FILE_DEVICE_UNKNOWN<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> TRUE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pDeciceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//判断设备对象是否创建成功</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>ntStatus<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//删除设备对象</span>
-        <span class="token function">IoDeleteDevice</span><span class="token punctuation">(</span>pDeciceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"IoCreateDevice failed:%x"</span><span class="token punctuation">,</span> ntStatus<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> ntStatus<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//将所有IRP派遣处理函数，设置为默认处理函数。</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> IRP_MJ_MAXIMUM_FUNCTION <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//派遣函数内容</span>
-        pDriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span> DispatchCommdn<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//1.DO_BUFFERED_IO 基于缓存的IO方式</span>
-    <span class="token comment" spellcheck="true">//2.DO_DIRECT_IO 直接读写的IO方式</span>
-    <span class="token comment" spellcheck="true">//3.DO_FORCE_NEITHER_IO 两者皆不得IO方式</span>
+}
 
-    <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<h1 id="ps-和R3对接的时候蓝屏了。还没处理好，先咕了。"><a href="#ps-和R3对接的时候蓝屏了。还没处理好，先咕了。" class="headerlink" title="ps:和R3对接的时候蓝屏了。还没处理好，先咕了。"></a>ps:和R3对接的时候蓝屏了。还没处理好，先咕了。</h1>
+int main()
+{
+    //堆区开辟数据
+    int *p = func();
+    cout << *p << endl;
+    system("pause");
+    return 0;
+}</code></pre>
+<p><img src="/images/65.png"></p>
+<p><img src="/images/66.png"></p>
+
                 
             </div>
             <hr/>
@@ -511,7 +494,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://0ke.github.io/2021/09/05/%E9%A9%B1%E5%8A%A8%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94%E9%BB%98%E8%AE%A4%E5%A4%84%E7%90%86/">http://0ke.github.io/2021/09/05/%E9%A9%B1%E5%8A%A8%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94%E9%BB%98%E8%AE%A4%E5%A4%84%E7%90%86/</a>
+                    <a href="http://0ke.github.io/2021/09/13/C++/">http://0ke.github.io/2021/09/13/C++/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -589,9 +572,10 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/09/13/C++/">
                     <div class="card-image">
@@ -609,9 +593,9 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-13
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -620,6 +604,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -630,24 +615,24 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/08/01/%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/">
+                <a href="/2021/09/05/%E9%A9%B1%E5%8A%A8%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E2%80%94%E2%80%94%E9%BB%98%E8%AE%A4%E5%A4%84%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="保护模式">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="驱动通信框架——默认处理">
                         
-                        <span class="card-title">保护模式</span>
+                        <span class="card-title">驱动通信框架——默认处理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言
+                            应用与驱动的通信框架
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-05
                             </span>
                         <span class="publish-author">
                             
