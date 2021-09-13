@@ -516,6 +516,25 @@ int main()
 }</code></pre>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用的基本使用"><a href="#引用的基本使用" class="headerlink" title="引用的基本使用"></a>引用的基本使用</h3><p>作用：起别名</p>
 <p>语法：数据类型 &amp;别名 = 原名</p>
+<pre class=" language-C++"><code class="language-C++">#include <iostream>
+using namespace std;
+
+int main()
+{
+    //引用基本语法
+    //数据类型 &别名 = 原名
+    int a = 10;
+    //创建引用
+    int &b = a;
+    cout << b << endl;
+    cout << a << endl;
+    b = 130;
+    cout << b << endl;
+    cout << a << endl;
+    system("pause");
+    return 0;
+}</code></pre>
+<p><img src="/images/67.png"></p>
 
                 
             </div>
