@@ -468,6 +468,54 @@ int main()
 }</code></pre>
 <p><img src="/images/65.png"></p>
 <p><img src="/images/66.png"></p>
+<h3 id="new操作符"><a href="#new操作符" class="headerlink" title="new操作符"></a>new操作符</h3><p>C++利用new操作符在堆区开辟数据。</p>
+<p>堆区开辟的数据，由程序员手动开辟，手动释放，释放利用操作符delete</p>
+<p>语法：new 数据类型</p>
+<p>利用new创建的数据，会返回该数据类型的指针。</p>
+<pre class=" language-C++"><code class="language-C++">#include <iostream>
+using namespace std;
+
+//1、new的基本语法
+int * func()
+{
+    //在堆区创建整型数据
+    int *p = new int(10);
+    return p;
+}
+
+void test02() 
+{
+    //创建10整型数据的数组，在堆区
+    int * arr = new int[10];
+    for (int i = 0; i < 10; i++) {
+        arr[i] = i + 100;//给10个元素赋值 100-109
+
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        cout << arr[i] << endl;
+    }
+    delete[] arr;
+}
+void test01()
+{
+    int *p = func();
+    cout << *p << endl;
+    //释放堆区数据利用delete
+    delete p;
+    cout << *p << endl;
+}
+
+int main()
+{
+    test02();
+    test01();
+
+    system("pause");
+    return 0;
+}</code></pre>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><h3 id="引用的基本使用"><a href="#引用的基本使用" class="headerlink" title="引用的基本使用"></a>引用的基本使用</h3><p>作用：起别名</p>
+<p>语法：数据类型 &amp;别名 = 原名</p>
 
                 
             </div>
