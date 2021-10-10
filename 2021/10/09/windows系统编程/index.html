@@ -653,8 +653,10 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 <span class="token punctuation">{</span>
     pDriver0bject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Hello\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">ShowProcess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
+<p>ed nt!kd_fusion_mask 0  windbg关闭日志，我一跑驱动咔咔刷屏真是醉了，谢谢马主任。</p>
 
                 
             </div>
