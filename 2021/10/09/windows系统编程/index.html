@@ -657,6 +657,15 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <p>ed nt!kd_fusion_mask 0  windbg关闭日志，我一跑驱动咔咔刷屏真是醉了，谢谢马主任。</p>
+<p>断链隐藏进程==没啥用，玩玩。</p>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>ulProcessid <span class="token operator">==</span> ulPid<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            NextList<span class="token operator">-></span>Blink<span class="token operator">-></span>Flink <span class="token operator">=</span> NextList<span class="token operator">-></span>Flink<span class="token punctuation">;</span>
+            NextList<span class="token operator">-></span>Flink<span class="token operator">-></span>Blink <span class="token operator">=</span> NextList<span class="token operator">-></span>Blink<span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>                            就是双向链表断链操作。</code></pre>
+<p>虚假的进程保护</p>
 
                 
             </div>
