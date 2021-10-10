@@ -665,7 +665,38 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 
             <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>                            就是双向链表断链操作。</code></pre>
-<p>虚假的进程保护</p>
+<p>虚假的进程保护====不保护了，直接杀死进程。</p>
+<p>杀死进程。</p>
+<pre class=" language-C"><code class="language-C">NTSTATUS KillProcess(ULONG ulPid)
+{
+    NTSTATUS ntStatus = STATUS_UNSUCCESSFUL;
+    PEPROCESS pEprocess = NULL;
+    ntStatus = PsLookupProcessByProcessId(ulPid, &pEprocess);
+    if (NT_SUCCESS(ntStatus))
+    {
+        KeAttachProcess(pEprocess);                        //附加进程，例如调试器
+        for (int i = 0; i <= 0x10000000; i += 0x1000)
+        {
+            if (MmIsAddressValid((PVOID)i))
+            {
+                __try
+                {
+                    ProbeForWrite((PVOID)i, 0x1000, sizeof(ULONG));
+                    memset(((PVOID)i),0xcc,0x1000);
+                }
+                __except(1)
+                {
+                    continue; 
+                }
+                //异常处理
+            }
+        }
+        KeDetachProcess();                        //解除附加
+        return TRUE;
+    }
+    return ntStatus;
+}
+</code></pre>
 
                 
             </div>
