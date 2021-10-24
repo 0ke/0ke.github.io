@@ -489,12 +489,12 @@ NTSTATUS <span class="token function">DispatchIoCtrl</span><span class="token pu
     <span class="token keyword">case</span> CTL_PRINT<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//</span>
     <span class="token punctuation">{</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%s\r\n"</span><span class="token punctuation">,</span> pSystemBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打印R3来的数据。存储在pSystemBuffer，宽字符就是%ws,普通字符是%s</span>
-        ULONG uRetLength <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span><span class="token string">"io success!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//</span>
-        <span class="token function">RtlZeroMemory</span><span class="token punctuation">(</span>pSystemBuffer<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">RtlCopyMemory</span><span class="token punctuation">(</span>pSystemBuffer<span class="token punctuation">,</span> <span class="token string">"io success!"</span><span class="token punctuation">,</span> uRetLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ULONG uRetLength <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span><span class="token string">"io success 0ke!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取字符串长度</span>
+        <span class="token function">RtlZeroMemory</span><span class="token punctuation">(</span>pSystemBuffer<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//初始化R3的内存.</span>
+        <span class="token function">RtlCopyMemory</span><span class="token punctuation">(</span>pSystemBuffer<span class="token punctuation">,</span> <span class="token string">"io success 0ke!"</span><span class="token punctuation">,</span> uRetLength<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//内存拷贝。</span>
         pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//底下这堆和以前一样。</span>
-        pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> uRetLength<span class="token punctuation">;</span>
-        <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> uRetLength<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回多少个字节</span>
+        <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束IRP处理流程</span>
         <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回成功</span>
     <span class="token punctuation">}</span>
     <span class="token keyword">default</span><span class="token punctuation">:</span>
@@ -579,15 +579,15 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
             szBuuferOutput<span class="token punctuation">,</span>
             <span class="token keyword">sizeof</span><span class="token punctuation">(</span>szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token operator">&amp;</span>dwRet<span class="token punctuation">,</span>
-            <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取创建IoControl的返回值</span>
+            <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取创建句柄de</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet<span class="token punctuation">)</span>
         <span class="token punctuation">{</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Output = %s\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"nRet = %d\r\n"</span><span class="token punctuation">,</span> dwRet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Output = %s\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回什么内容</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"nRet = %d\r\n"</span><span class="token punctuation">,</span> dwRet<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回多少个字节</span>
         <span class="token punctuation">}</span>
         <span class="token keyword">else</span>
         <span class="token punctuation">{</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"io failed\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"io failed\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//判断返回失败</span>
         <span class="token punctuation">}</span>
 
     <span class="token punctuation">}</span>
@@ -607,7 +607,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h1 id="终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。"><a href="#终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。" class="headerlink" title="终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。"></a>终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。</h1><p><img src="/images/75.png"></p>
-
+<h2 id="借壳通信"><a href="#借壳通信" class="headerlink" title="借壳通信"></a>借壳通信</h2>
                 
             </div>
             <hr/>
