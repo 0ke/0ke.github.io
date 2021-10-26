@@ -607,7 +607,20 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
 <h1 id="终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。"><a href="#终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。" class="headerlink" title="终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。"></a>终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。</h1><p><img src="/images/75.png"></p>
-<h2 id="借壳通信"><a href="#借壳通信" class="headerlink" title="借壳通信"></a>借壳通信</h2>
+<h2 id="借壳通信"><a href="#借壳通信" class="headerlink" title="借壳通信"></a>借壳通信</h2><p>​        从上述通信框架上衍生出的一种通信手段。</p>
+<p>​        用到以下函数，由于微软没有对其文档化，所以在使用之前，需要提前声明，作用是通过驱动名称得到驱动对象名。</p>
+<pre><code>extern POBJECT_TYPE *IoDriverObjectType;
+NTSTATUS ObReferenceObjectByName(
+    __in PUNICODE_STRING ObjectName,
+    __in ULONG Attributes,
+    __in_opt PACCESS_STATE AccessState,
+    __in_opt ACCESS_MASK DesiredAccess,
+    __in POBJECT_TYPE ObjectType,
+    __in KPROCESSOR_MODE AccessMode,
+    __inout_opt PVOID ParseContext,
+    __out PVOID *Object
+);</code></pre>
+
                 
             </div>
             <hr/>
