@@ -419,103 +419,101 @@ EXTERN_C NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pReg
 }</code></pre>
 <p>就是个简单的输出测试，别问，问就是测别的怕蓝屏。</p>
 <h2 id="初识注册表和服务管理器"><a href="#初识注册表和服务管理器" class="headerlink" title="初识注册表和服务管理器"></a>初识注册表和服务管理器</h2><p>加载驱动和注册表有很大关系，注册表像是全局配置文件，打开某个文件打开到最后，会看到名称，类型，数据。这种关系和数据库很相似。操作系统上的关键信息，或者某些流氓软件自主弹开。也是需要在注册表中配置。服务也是在注册表中的。服务的概念百度即可。打开服务管理器。可以看到很多服务。-&gt;{我懒得截图，文字说明以下吧。}例如管理服务，IP配置转换服务等等，服务也有描述。不是所有服务都是操作系统服务，也有些第三方服务，比如腾讯服务。为什么要介绍服务呢？驱动加载的本质就是在注册表中注册成服务。安装和卸载是注册表的功能，启动和停止是服务的功能。例如InstDrv.exe的四个按键。安装和卸载是将驱动注册到注册表中和从注册表中删除，启动和停止是在服务管理器中的正在运行和停止。</p>
-<h2 id="驱动加载工具代码"><a href="#驱动加载工具代码" class="headerlink" title="驱动加载工具代码"></a>驱动加载工具代码</h2><pre class=" language-C++"><code class="language-C++">
-// DriverloadDlg.h : 头文件
+<h2 id="驱动加载工具代码"><a href="#驱动加载工具代码" class="headerlink" title="驱动加载工具代码"></a>驱动加载工具代码</h2><pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// DriverloadDlg.h : 头文件</span>
+<span class="token macro property">#<span class="token directive keyword">pragma</span> once</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;winsvc.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;time.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">"Resource.h"</span>    </span><span class="token comment" spellcheck="true">//资源</span>
 
-#pragma once
-#include <Windows.h>
-#include <winsvc.h>
-#include <time.h>
-#include "Resource.h"    //资源
+<span class="token macro property">#<span class="token directive keyword">define</span> Random(x) (rand() %d);    </span><span class="token comment" spellcheck="true">//随机驱动名，伪随机数</span>
 
-#define Random(x) (rand() %d);    //随机驱动名，伪随机数
+<span class="token comment" spellcheck="true">// CDriverloadDlg 对话框</span>
+class CDriverloadDlg <span class="token punctuation">:</span> public CDialogEx
+<span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">// 构造</span>
+public<span class="token punctuation">:</span>
+    <span class="token function">CDriverloadDlg</span><span class="token punctuation">(</span>CWnd<span class="token operator">*</span> pParent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 标准构造函数</span>
 
-// CDriverloadDlg 对话框
-class CDriverloadDlg : public CDialogEx
-{
-// 构造
-public:
-    CDriverloadDlg(CWnd* pParent = NULL);    // 标准构造函数
+<span class="token comment" spellcheck="true">// 对话框数据</span>
+<span class="token macro property">#<span class="token directive keyword">ifdef</span> AFX_DESIGN_TIME</span>
+    <span class="token keyword">enum</span> <span class="token punctuation">{</span> IDD <span class="token operator">=</span> IDD_DRIVERLOAD_DIALOG <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
 
-// 对话框数据
-#ifdef AFX_DESIGN_TIME
-    enum { IDD = IDD_DRIVERLOAD_DIALOG };
-#endif
-
-    protected:
-    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+    protected<span class="token punctuation">:</span>
+    virtual <span class="token keyword">void</span> <span class="token function">DoDataExchange</span><span class="token punctuation">(</span>CDataExchange<span class="token operator">*</span> pDX<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// DDX/DDV 支持</span>
 
 
-// 实现
-protected:
-    HICON m_hIcon;
+<span class="token comment" spellcheck="true">// 实现</span>
+protected<span class="token punctuation">:</span>
+    HICON m_hIcon<span class="token punctuation">;</span>
 
-    // 生成的消息映射函数
-    virtual BOOL OnInitDialog();
-    afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
-    afx_msg void OnPaint();
-    afx_msg HCURSOR OnQueryDragIcon();
+    <span class="token comment" spellcheck="true">// 生成的消息映射函数</span>
+    virtual BOOL <span class="token function">OnInitDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    afx_msg <span class="token keyword">void</span> <span class="token function">OnSysCommand</span><span class="token punctuation">(</span>UINT nID<span class="token punctuation">,</span> LPARAM lParam<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    afx_msg <span class="token keyword">void</span> <span class="token function">OnPaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    afx_msg HCURSOR <span class="token function">OnQueryDragIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
 
 
-    DECLARE_MESSAGE_MAP()
-public:
-    SC_HANDLE hScm = NULL;    //管理注册表
-    SC_HANDLE hSer = NULL;    //管理服务
+    <span class="token function">DECLARE_MESSAGE_MAP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+public<span class="token punctuation">:</span>
+    SC_HANDLE hScm <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//管理注册表</span>
+    SC_HANDLE hSer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//管理服务</span>
 
-    void InstallDriver(LPCWSTR lpServiceName,WCHAR lpDisplayName,WCHAR lpDriverPath);                //安装驱动函数，需要名称和驱动路径
-    void UnInstallDriver();    //卸载驱动函数
-    void StartDriver();        //启动驱动函数
-    void StopDriver();        //停止驱动函数
-    //afx_msg void OnBnClickedButton1();
-};</code></pre>
-<pre class=" language-c++"><code class="language-c++">//DriverloadDlg.cpp：文件
+    <span class="token keyword">void</span> <span class="token function">InstallDriver</span><span class="token punctuation">(</span>LPCWSTR lpServiceName<span class="token punctuation">,</span>WCHAR lpDisplayName<span class="token punctuation">,</span>WCHAR lpDriverPath<span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment" spellcheck="true">//安装驱动函数，需要名称和驱动路径</span>
+    <span class="token keyword">void</span> <span class="token function">UnInstallDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">//卸载驱动函数</span>
+    <span class="token keyword">void</span> <span class="token function">StartDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//启动驱动函数</span>
+    <span class="token keyword">void</span> <span class="token function">StopDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment" spellcheck="true">//停止驱动函数</span>
+    <span class="token comment" spellcheck="true">//afx_msg void OnBnClickedButton1();</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">//DriverloadDlg.cpp：文件</span>
 
 
-void CDriverloadDlg::InstallDriver(LPCWSTR lpServiceName, WCHAR lpDisplayName, WCHAR lpDriverPath)
-{
-    hScm = OpenSCManager(NULL, NULL, SC_MANAGER_CREATE_SERVICE);//创建连接
-    hSer = CreateServiceA(hScm, (LPCWSTR)lpServiceName, (LPCWSTR)lpDisplayName, SERVICE_ALL_ACCESS, SERVICE_KERNEL_DRIVER, SERVICE_DEMAND_START, SERVICE_ERROR_IGNORE, (LPCWSTR) lpDriverPath,NULL, NULL, NULL, NULL, NULL);
-    if (hSer == NULL)
-    {
-        MessageBox(L"驱动安装失败",L"ERROR",MB_OK);
+<span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">InstallDriver</span><span class="token punctuation">(</span>LPCWSTR lpServiceName<span class="token punctuation">,</span> WCHAR lpDisplayName<span class="token punctuation">,</span> WCHAR lpDriverPath<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    hScm <span class="token operator">=</span> <span class="token function">OpenSCManager</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> SC_MANAGER_CREATE_SERVICE<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//创建连接</span>
+    hSer <span class="token operator">=</span> <span class="token function">CreateServiceA</span><span class="token punctuation">(</span>hScm<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span>lpServiceName<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span>lpDisplayName<span class="token punctuation">,</span> SERVICE_ALL_ACCESS<span class="token punctuation">,</span> SERVICE_KERNEL_DRIVER<span class="token punctuation">,</span> SERVICE_DEMAND_START<span class="token punctuation">,</span> SERVICE_ERROR_IGNORE<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span> lpDriverPath<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>hSer <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动安装失败"</span><span class="token punctuation">,</span>L<span class="token string">"ERROR"</span><span class="token punctuation">,</span>MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    }
-    else
-    {
-        MessageBox(L"驱动安装成功", L"SUCCESS", MB_OK);
-    }
-}
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动安装成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-void CDriverloadDlg::UnInstallDriver()
-{
-    BOOL bRet = DeleteService(hSer);
-    if (bRet == NULL)
-    {
-        MessageBox(L"驱动卸载失败", L"ERROR", MB_OK);
+<span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">UnInstallDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    BOOL bRet <span class="token operator">=</span> <span class="token function">DeleteService</span><span class="token punctuation">(</span>hSer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动卸载失败"</span><span class="token punctuation">,</span> L<span class="token string">"ERROR"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    }
-    else
-    {
-        MessageBox(L"驱动卸载成功", L"SUCCESS", MB_OK);
-    }
-}
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动卸载成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-void CDriverloadDlg::StartDriver()
-{
+<span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">StartDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
 
-}
+<span class="token punctuation">}</span>
 
-void CDriverloadDlg::StopDriver()
-{
+<span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">StopDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
 
-}
+<span class="token punctuation">}</span>
 
-void CDriverloadDlg::OnBnClickedButton1()
-{
-    // TODO: 在此添加控件通知处理程序代码
-}</code></pre>
+<span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnBnClickedButton1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// TODO: 在此添加控件通知处理程序代码</span>
+<span class="token punctuation">}</span></code></pre>
 <h1 id="没写完"><a href="#没写完" class="headerlink" title="没写完"></a>没写完</h1>
                 
             </div>
