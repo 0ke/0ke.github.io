@@ -697,7 +697,19 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     return ntStatus;
 }
 </code></pre>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//线程R3 TEB R0 ETHREAD</span>
+    <span class="token comment" spellcheck="true">//FS：[0] = TEB</span>
+    <span class="token comment" spellcheck="true">//TEB 0x30 = PEB</span>
+    <span class="token comment" spellcheck="true">//FS:[30]</span>
+    <span class="token keyword">return</span> <span class="token number">0</span>；
+<span class="token punctuation">}</span></code></pre>
+<h3 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h3><p>进程创建的时候，主线程随之创建，main函数就是主函数的回调函数，主进程销毁，主线程销毁。</p>
+<h3 id="线程遍历"><a href="#线程遍历" class="headerlink" title="线程遍历"></a>线程遍历</h3>
                 
             </div>
             <hr/>
