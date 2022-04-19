@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="主动防御系统说明, 0ke">
+    <meta name="keywords" content="驱动过滤--串口过滤, 0ke">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>主动防御系统说明 | 0ke</title>
+    <title>驱动过滤--串口过滤 | 0ke</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">主动防御系统说明</h1>
+                    <h1 class="description center-align post-title">驱动过滤--串口过滤</h1>
                 </div>
             </div>
         </div>
@@ -380,7 +380,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-10
+                    2022-04-19
                 </div>
                 
 
@@ -401,23 +401,136 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><a id="more"></a>
+                <h2 id="过滤的概念"><a href="#过滤的概念" class="headerlink" title="过滤的概念"></a>过滤的概念</h2><p>过滤是在不影响上层和下层接口的情况下，在Windows系统内核中加入新的层，从而不需要修改上层的软件或者下层的驱动程序，加入新的功能。</p>
+<p>过滤的主要方法是对一个设备对象（Device Object）进行绑定。设备对象与实际的硬件绑定，从而完成实际硬件的功能。</p>
+<h2 id="串口过滤"><a href="#串口过滤" class="headerlink" title="串口过滤"></a>串口过滤</h2><p>首先认为：一个真实的设备对应一个设备对象（实际情况不是这样），通过编程生成一个虚拟的设备对象，并”绑定“ 在一个真实的设备上。绑定之后，本来操作系统发送给真实设备的请求，就会先发送到被绑定的虚拟设备上。</p>
+<h3 id="设备绑定的内核API"><a href="#设备绑定的内核API" class="headerlink" title="设备绑定的内核API"></a>设备绑定的内核API</h3><p>下面介绍一个实现绑定功能的函数。</p>
+<pre class=" language-c"><code class="language-c">NTSTATUS
+<span class="token function">IoAttachDevice</span><span class="token punctuation">(</span>
+    _In_ <span class="token function">_When_</span><span class="token punctuation">(</span><span class="token keyword">return</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">,</span> __drv_aliasesMem<span class="token punctuation">)</span>
+    PDEVICE_OBJECT SourceDevice<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//调用者生成的用来过滤的虚拟设备</span>
+    _In_  PUNICODE_STRING TargetDevice<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//要被绑定的目标设备</span>
+    _Out_ PDEVICE_OBJECT <span class="token operator">*</span>AttachedDevice<span class="token comment" spellcheck="true">//用来返回的二级指针，绑定完成后，被绑定的设备指针被返回的地址。</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>第二个参数TargetDevice并不是PDEVICE_OBJECT，而是一个字符串（UNICODE_STRING），实际上这个字符串是要被绑定的设备的名字。</p>
+<p>Windows中许多设备对象是有名字的，但<strong>并不是所有的设备对象都有名字</strong>。只有有名字的设备，才能用这个内核API进行绑定。</p>
+<p>如果一个设备被其他的设备绑定了，它们在一起的一组设备，被称为设备栈（之所以称为栈，是由于和请求的传递方式有关）。实际上，IoAttachDevice总是会绑定设备栈上最顶层的那个设备。</p>
+<p>在windows2000下应该使用IoAttachDeviceToDeviceStack。在windows2000以上系统使用IoAttachDeviceToDeviceStacksafe</p>
+<pre><code>PDEVICE_OBJECT  //返回类型导致这个函数不能返回一个明确的错误码，但是返回值如果为NULL，则表示绑定失败了。
+IoAttachDeviceToDeviceStack(
+    _In_ _When_(return!=0, __drv_aliasesMem)
+    PDEVICE_OBJECT SourceDevice,
+    _In_ PDEVICE_OBJECT TargetDevice
+    );
+NTSTATUS 
+IoAttachDeviceToDeviceStackSafe(
+    _In_  PDEVICE_OBJECT SourceDevice,//过滤设备
+    _In_  PDEVICE_OBJECT TargetDevice,//要绑定的设备栈中的设备
+    _Outptr_ PDEVICE_OBJECT *AttachedToDeviceObject//多出的这个参数用以返回最终被绑定的设备
+    );</code></pre>
+<h3 id="生成过滤设备并绑定"><a href="#生成过滤设备并绑定" class="headerlink" title="生成过滤设备并绑定"></a>生成过滤设备并绑定</h3><p>在绑定设备之前，需要生成一个用于过滤的设备。</p>
+<pre class=" language-c"><code class="language-c">NTSTATUS
+<span class="token function">IoCreateDevice</span><span class="token punctuation">(</span>
+    _In_  PDRIVER_OBJECT DriverObject<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//这个驱动本身的驱动对象.系统提供，从DriverEntry中传入。</span>
+    _In_  ULONG DeviceExtensionSize<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//扩展设备，先传入0</span>
+    _In_opt_ PUNICODE_STRING DeviceName<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//设备名字。传入NULL即可</span>
+    _In_  DEVICE_TYPE DeviceType<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//设备类型，保持和被绑定的设备类型一致即可。</span>
+    _In_  ULONG DeviceCharacteristics<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//设备特征，0或者FALSE</span>
+    _In_  BOOLEAN Exclusive<span class="token punctuation">,</span>
+    _Outptr_result_nullonfailure_
+    <span class="token function">_At_</span><span class="token punctuation">(</span><span class="token operator">*</span>DeviceObject<span class="token punctuation">,</span>
+        <span class="token function">__drv_allocatesMem</span><span class="token punctuation">(</span>Mem<span class="token punctuation">)</span>
+        <span class="token function">_When_</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token function">_In_function_class_</span><span class="token punctuation">(</span>DRIVER_INITIALIZE<span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token operator">||</span><span class="token punctuation">(</span><span class="token function">_In_function_class_</span><span class="token punctuation">(</span>DRIVER_DISPATCH<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+             __drv_aliasesMem<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    PDEVICE_OBJECT <span class="token operator">*</span>DeviceObject
+    <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>在绑定一个设备之前，应该把这个设备对象的多个子域设置成和要绑定的目标对象一致，包括标志和特征。</p>
+<p>以下函数生成一个设备，然后绑定在另一个设备上。</p>
+<pre class=" language-c"><code class="language-c">NTSTATUS <span class="token function">ccpAttachDevice</span><span class="token punctuation">(</span>PDRIVER_OBJECT DriverObject<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//和驱动入口点驱动对象相同</span>
+                         PDEVICE_OBJECT oldobj<span class="token punctuation">,</span>
+                         PDEVICE_OBJECT <span class="token operator">*</span>fltobj<span class="token punctuation">,</span>
+                         PDEVICE_OBJECT <span class="token operator">*</span>next<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    NTSTATUS status<span class="token punctuation">;</span>
+    PDEVICE_OBJECT topdev <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
 
-<p>​        本来是想借着主动防御去水一下入侵检测的实验分数的，但是和老师交流的时候我表述出现了问题。再解释就有点尴尬了，正好在github搜开源项目的时候发现了一套‘卓然主动防御系统’是一个非计算机专业的学生在2010年开源的一个项目，目前应该是经历了很多人的开源修改。而最近，亲爱的rkvir老师也要带我们写一个类似的系统。开一篇博客来记录。github上找的开源系统，源码会全部公开。然后跟着rkvir老师写的那个系统，只会以一些思维导图和流程概述的方式上传。。。懂得自然懂。</p>
-<p>​        全部代码来源于rkvir的视频。</p>
-<h2 id="提纲"><a href="#提纲" class="headerlink" title="提纲"></a>提纲</h2><p><img src="/images/78.png"></p>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>首先说两个坑，一开始搭建windows10双机调试的时候，我把虚拟硬盘的属性设置成了NV硬盘，导致我在运行Dbgview时呢，疯狂的刷磁盘信息。所以又调整回了SISC。</p>
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p>首先选择一个进程打开，我选择汇编金手指。程序可以捕获到该进程的创建，之后可以实现指定进程的拦截。对于我们程序中保护的进程，用户无法打开，并且调试器无法工作。</p>
-<p>目前可以进行：进程监控，模块监控，进程保护。</p>
-<p><img src="/images/79.png"></p>
-<p><img src="/images/80.png"></p>
-<p><img src="/images/81.png"></p>
-<p>改了一个bug昨天system和user没有区分，今天区分了，加入注册表监控。</p>
-<p><img src="/images/82.png"></p>
-<p><img src="/images/83.png"></p>
-<h3 id="蓝屏，蓝屏，蓝屏"><a href="#蓝屏，蓝屏，蓝屏" class="headerlink" title="蓝屏，蓝屏，蓝屏"></a>蓝屏，蓝屏，蓝屏</h3><p><img src="/images/84.png"></p>
-<p>目前可以进行：进程监控，模块监控，进程保护，网络监控</p>
-<p><img src="/images/85.png"></p>
+    <span class="token comment" spellcheck="true">//生成设备，然后绑定</span>
+
+    status <span class="token operator">=</span> <span class="token function">IoCreateDevice</span><span class="token punctuation">(</span>DriverObject<span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token constant">NULL</span><span class="token punctuation">,</span>
+        oldobj<span class="token operator">-></span>DeviceType<span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        FALSE<span class="token punctuation">,</span>
+        fltobj
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">!=</span> STATUS_SUCCESS<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//拷贝重要标志位</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>oldobj<span class="token operator">-></span>Flags <span class="token operator">&amp;</span> DO_BUFFERED_IO<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Flags <span class="token operator">|</span><span class="token operator">=</span> DO_BUFFERED_IO<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>oldobj<span class="token operator">-></span>Flags<span class="token operator">|</span><span class="token operator">=</span>DO_DIRECT_IO<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Flags <span class="token operator">|</span><span class="token operator">=</span> DO_DIRECT_IO<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>oldobj<span class="token operator">-></span>Characteristics <span class="token operator">&amp;</span> FILE_DEVICE_SECURE_OPEN<span class="token punctuation">)</span>
+        <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Characteristics <span class="token operator">|</span><span class="token operator">=</span> FILE_DEVICE_SECURE_OPEN<span class="token punctuation">;</span>
+    <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Flags <span class="token operator">|</span><span class="token operator">=</span> DO_POWER_PAGABLE<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//将一个设备绑定到另一个设备上</span>
+    topdev <span class="token operator">=</span> <span class="token function">IoAttachDeviceToDeviceStack</span><span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">,</span> oldobj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>topdev <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//如果绑定失败了，需要摧毁设备，返回错误</span>
+        <span class="token function">IoDeleteDevice</span><span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">*</span>fltobj <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        status <span class="token operator">=</span> STATUS_UNSUCCESSFUL<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">*</span>next <span class="token operator">=</span> topdev<span class="token punctuation">;</span>
+    <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Flags <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>fltobj<span class="token punctuation">)</span><span class="token operator">-></span>Flags <span class="token operator">&amp;</span> <span class="token operator">~</span>DO_DEVICE_INITIALIZING<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="从名字获得设备对象"><a href="#从名字获得设备对象" class="headerlink" title="从名字获得设备对象"></a>从名字获得设备对象</h3><p>通过一个设备名字，使用函数IoGetDeviceObjectPointer可以获得这个设备对象的指针。</p>
+<pre><code>NTSTATUS
+IoGetDeviceObjectPointer(
+    _In_  PUNICODE_STRING ObjectName,//设备名字
+    _In_  ACCESS_MASK DesiredAccess,//期望访问的权限，可以直接填写FILE_ALL_ACCESS
+    _Out_ PFILE_OBJECT *FileObject,//返回参数，获得这个对象的同时会得到一个文件对象。对于串口过滤来说，没没什么作用。
+    _Out_ PDEVICE_OBJECT *DeviceObject
+    );</code></pre>
+<p>注意：再使用上述函数之后必须把这个文件对象“解除引用”，不然会引起内存泄漏，发生危险。</p>
+<p>要得到的设备对象返回在参数DeviceObject中。示例如下</p>
+<pre class=" language-C"><code class="language-C">#include <ntddk.h>
+//RtlStringCchPrintfW
+#include <ntstrsafe.h>
+//为了使用ntstrsafe静态库，这样才能兼容winndows2000
+#define NTSTRASFE_LIB
+//打开一个端口设备
+PDEVICE_OBJECT ccpOpenCom(ULONG id, NTSTATUS *status)
+{
+    //外面输入的是串口id，这里改写成字符串形式
+    UNICODE_STRING name_str;
+    static WCHAR name[32] = { 0 };
+    PFILE_OBJECT fileobj = NULL;
+    PDEVICE_OBJECT devobj = NULL;
+
+    //根据id转换成串口的名字
+    memset(name, 0, sizeof(WCHAR)* 32);
+    RtlStringCchPrintfW(name, 32, L"\\Device\\Serial%d", id);
+    RtlInitUnicodeString(&name_str, name);
+    //打开设备对象
+    *status = IoGetDeviceObjectPointer(&name_str, FILE_ALL_ACCESS, &fileobj, &devobj);
+    //如果打开成功，一定将文件对象解除引用
+    if (*status == STATUS_SUCCESS)
+    {
+        ObDereferenceObject(fileobj);
+    }
+    //返回设备对象
+    return devobj;
+}</code></pre>
 
                 
             </div>
@@ -444,7 +557,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://0ke.github.io/2021/11/10/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F%E8%AF%B4%E6%98%8E/">http://0ke.github.io/2021/11/10/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F%E8%AF%B4%E6%98%8E/</a>
+                    <a href="http://0ke.github.io/2022/04/19/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E4%B8%B2%E5%8F%A3%E8%BF%87%E6%BB%A4/">http://0ke.github.io/2022/04/19/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E4%B8%B2%E5%8F%A3%E8%BF%87%E6%BB%A4/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -522,9 +635,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/04/19/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E4%B8%B2%E5%8F%A3%E8%BF%87%E6%BB%A4/">
                     <div class="card-image">
@@ -542,9 +656,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -553,6 +667,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -563,13 +678,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/26/%E5%9F%BA%E4%BA%8EMFC%E7%9A%84%E9%A9%B1%E5%8A%A8%E5%8A%A0%E8%BD%BD%E5%B7%A5%E5%85%B7/">
+                <a href="/2021/11/10/%E4%B8%BB%E5%8A%A8%E9%98%B2%E5%BE%A1%E7%B3%BB%E7%BB%9F%E8%AF%B4%E6%98%8E/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="基于MFC的驱动加载工具">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="主动防御系统说明">
                         
-                        <span class="card-title">基于MFC的驱动加载工具</span>
+                        <span class="card-title">主动防御系统说明</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -580,7 +695,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-10
                             </span>
                         <span class="publish-author">
                             
