@@ -401,7 +401,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="过滤的概念"><a href="#过滤的概念" class="headerlink" title="过滤的概念"></a>过滤的概念</h2><p>过滤是在不影响上层和下层接口的情况下，在Windows系统内核中加入新的层，从而不需要修改上层的软件或者下层的驱动程序，加入新的功能。</p>
+                <h2 id="过滤的概念"><a href="#过滤的概念" class="headerlink" title="过滤的概念"></a>过滤的概念</h2><a id="more"></a>
+
+<p>过滤是在不影响上层和下层接口的情况下，在Windows系统内核中加入新的层，从而不需要修改上层的软件或者下层的驱动程序，加入新的功能。</p>
 <p>过滤的主要方法是对一个设备对象（Device Object）进行绑定。设备对象与实际的硬件绑定，从而完成实际硬件的功能。</p>
 <h2 id="串口过滤"><a href="#串口过滤" class="headerlink" title="串口过滤"></a>串口过滤</h2><p>首先认为：一个真实的设备对应一个设备对象（实际情况不是这样），通过编程生成一个虚拟的设备对象，并”绑定“ 在一个真实的设备上。绑定之后，本来操作系统发送给真实设备的请求，就会先发送到被绑定的虚拟设备上。</p>
 <h3 id="设备绑定的内核API"><a href="#设备绑定的内核API" class="headerlink" title="设备绑定的内核API"></a>设备绑定的内核API</h3><p>下面介绍一个实现绑定功能的函数。</p>
@@ -652,7 +654,7 @@ PDEVICE_OBJECT ccpOpenCom(ULONG id, NTSTATUS *status)
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            过滤的概念
                         
                     </div>
                     <div class="publish-info">

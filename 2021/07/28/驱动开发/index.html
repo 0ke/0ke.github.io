@@ -467,15 +467,15 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegPath)
     return STATUS_SUCCESS;            //#define STATUS_SUCCESS                   ((NTSTATUS)0x00000000L)注意驱动返回该状态码表示成功
 }</code></pre>
 <p>​        重新生成程序，在所在文件夹中取出.sys文件。打开Windows7x86进行测试。这里我们启动调试模式，挂起Windbg进行。</p>
-<p><img src="/images/36.PNG"></p>
-<p><img src="/images/37.PNG"></p>
-<p><img src="/images/38.PNG"></p>
-<p><img src="/images/39.PNG"></p>
+<p><img src="../images/36.PNG"></p>
+<p><img src="../images/37.PNG"></p>
+<p><img src="../images/38.PNG"></p>
+<p><img src="../images/39.PNG"></p>
 <p>​        好，成功完成了第一个驱动程序。这里注意InstDrv和Dbgview都要以管理员模式运行。不然会创建句柄错误。</p>
 <h2 id="IRQL中断请求级别"><a href="#IRQL中断请求级别" class="headerlink" title="IRQL中断请求级别"></a>IRQL中断请求级别</h2><p>​        <strong>IRQL</strong>是Interrupt ReQuest Level，<a href="https://baike.so.com/doc/1065117-1126844.html" target="_blank" rel="noopener">中断请求</a>级别。一个由windows虚拟出来的概念，划分在windows下中断的优先级，这里中断包括了硬中断和<a href="https://baike.so.com/doc/7715429-7989524.html" target="_blank" rel="noopener">软中断</a>，硬中断是由硬件产生，而软中断则是完全虚拟出来的。</p>
 <p>​        高IRQL的代码，可以中断（抢占）低IRQL的代码的执行过程，得到执行。机会。</p>
 <p>​        不同级别的IRQL对应不同的数值，软件驱动常见的IRQL及其数值如下表。数值越大，级别越高。</p>
-<p>​        <img src="/images/40.png"></p>
+<p>​        <img src="../images/40.png"></p>
 <p>​        上表中只是软件驱动所需要使用到的IRQL，不是说IRQL是有这三个值。</p>
 <p>​        对于PASSIVE_LEVEL，在这个IRQL中可以无限制使用系统提供的API（每个内核API对IRQL有不同的要求），并且可以访问<strong>分页内存</strong>（page）和<strong>非分页内存</strong>（Nonpage）。</p>
 <p>​        对于APC_LEVEL来说，这个中断级别可以中断PASSIVE_LEVEL的代码，主要用于APC（异步方法调用），在使用系统API时有一定的限制，在内存访问方面，处于APC级别的代码可以访问分页以及非分页内存。</p>
@@ -567,7 +567,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p><img src="/images/41.PNG"></p>
+<p><img src="../images/41.PNG"></p>
 <h2 id="驱动中的双向链表"><a href="#驱动中的双向链表" class="headerlink" title="驱动中的双向链表"></a>驱动中的双向链表</h2><p>​        我们直接使用LIST_ENTRY，其原型如下。</p>
 <pre class=" language-C"><code class="language-C">typedef struct _LIST_ENTRY {
    struct _LIST_ENTRY *Flink;    //头节点
@@ -623,7 +623,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p>​        <img src="/images/49.PNG"></p>
+<p>​        <img src="../images/49.PNG"></p>
 <p>​        下面是删除节点操作的一些API。</p>
 <pre class=" language-C"><code class="language-C">    //删除节点
     RemoveHeaderList(&ListHeader);    //删除头节点的后面一个节点

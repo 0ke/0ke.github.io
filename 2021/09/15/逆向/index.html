@@ -405,16 +405,16 @@
 
 <p>​        主要是利用IDA的反汇编功能，在x86/x64dbg中能够找到程序主函数的入口点进行动态调试。将hello world代码编译成VS可以编译的四个版本，这里用VS2015-x86-release做演示。其他版本思路相同。</p>
 <p>​        在IDA中找到main的，并且利用crtl + x逐级回溯。</p>
-<p><img src="/images/68.png"></p>
+<p><img src="../images/68.png"></p>
 <p>​        到这一级，记录好call main 的前后特征-&gt;周围的汇编指令，release相对简单，debug会产生变化。</p>
-<p><img src="/images/69.png"></p>
-<p><img src="/images/70.png"></p>
-<p><img src="/images/71.png"></p>
+<p><img src="../images/69.png"></p>
+<p><img src="../images/70.png"></p>
+<p><img src="../images/71.png"></p>
 <p>​        一直到无法回溯，记录这一过程，打开对应版本的dbg。F9进入程序模块。</p>
-<p><img src="/images/72.png"></p>
+<p><img src="../images/72.png"></p>
 <p>​        进入到jmp内，并且寻找到刚才记录的特征函数，依次进入，找到main。</p>
-<p><img src="/images/73.png"></p>
-<p><img src="/images/74.png"></p>
+<p><img src="../images/73.png"></p>
+<p><img src="../images/74.png"></p>
 <h2 id="分支结构"><a href="#分支结构" class="headerlink" title="分支结构"></a>分支结构</h2>
                 
             </div>
