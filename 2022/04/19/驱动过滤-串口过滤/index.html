@@ -181,7 +181,7 @@ IoGetDeviceObjectPointer(
 </code></pre>
 <p>注意：再使用上述函数之后必须把这个文件对象“解除引用”，不然会引起内存泄漏，发生危险。</p>
 <p>要得到的设备对象返回在参数DeviceObject中。示例如下</p>
-<pre class=" language-C"><code class="language-C">#include <ntddk.h>
+<pre class=" language-C"><code class="language-C">#include <ntifs.h>
 //RtlStringCchPrintfW
 #include <ntstrsafe.h>
 //为了使用ntstrsafe静态库，这样才能兼容winndows2000
