@@ -91,18 +91,18 @@
 <p>Windows中许多设备对象是有名字的，但<strong>并不是所有的设备对象都有名字</strong>。只有有名字的设备，才能用这个内核API进行绑定。</p>
 <p>如果一个设备被其他的设备绑定了，它们在一起的一组设备，被称为设备栈（之所以称为栈，是由于和请求的传递方式有关）。实际上，IoAttachDevice总是会绑定设备栈上最顶层的那个设备。</p>
 <p>在windows2000下应该使用IoAttachDeviceToDeviceStack。在windows2000以上系统使用IoAttachDeviceToDeviceStacksafe</p>
-<pre><code>PDEVICE_OBJECT  //返回类型导致这个函数不能返回一个明确的错误码，但是返回值如果为NULL，则表示绑定失败了。
-IoAttachDeviceToDeviceStack(
-    _In_ _When_(return!=0, __drv_aliasesMem)
-    PDEVICE_OBJECT SourceDevice,
+<pre class=" language-c"><code class="language-c">PDEVICE_OBJECT  <span class="token comment" spellcheck="true">//返回类型导致这个函数不能返回一个明确的错误码，但是返回值如果为NULL，则表示绑定失败了。</span>
+<span class="token function">IoAttachDeviceToDeviceStack</span><span class="token punctuation">(</span>
+    _In_ <span class="token function">_When_</span><span class="token punctuation">(</span><span class="token keyword">return</span><span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">,</span> __drv_aliasesMem<span class="token punctuation">)</span>
+    PDEVICE_OBJECT SourceDevice<span class="token punctuation">,</span>
     _In_ PDEVICE_OBJECT TargetDevice
-    );
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
 NTSTATUS 
-IoAttachDeviceToDeviceStackSafe(
-    _In_  PDEVICE_OBJECT SourceDevice,//过滤设备
-    _In_  PDEVICE_OBJECT TargetDevice,//要绑定的设备栈中的设备
-    _Outptr_ PDEVICE_OBJECT *AttachedToDeviceObject//多出的这个参数用以返回最终被绑定的设备
-    );
+<span class="token function">IoAttachDeviceToDeviceStackSafe</span><span class="token punctuation">(</span>
+    _In_  PDEVICE_OBJECT SourceDevice<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//过滤设备</span>
+    _In_  PDEVICE_OBJECT TargetDevice<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//要绑定的设备栈中的设备</span>
+    _Outptr_ PDEVICE_OBJECT <span class="token operator">*</span>AttachedToDeviceObject<span class="token comment" spellcheck="true">//多出的这个参数用以返回最终被绑定的设备</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 id="生成过滤设备并绑定"><a href="#生成过滤设备并绑定" class="headerlink" title="生成过滤设备并绑定"></a>生成过滤设备并绑定</h3><p>在绑定设备之前，需要生成一个用于过滤的设备。</p>
 <pre class=" language-c"><code class="language-c">NTSTATUS
@@ -171,44 +171,44 @@ IoAttachDeviceToDeviceStackSafe(
 <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <h3 id="从名字获得设备对象"><a href="#从名字获得设备对象" class="headerlink" title="从名字获得设备对象"></a>从名字获得设备对象</h3><p>通过一个设备名字，使用函数IoGetDeviceObjectPointer可以获得这个设备对象的指针。</p>
-<pre><code>NTSTATUS
-IoGetDeviceObjectPointer(
-    _In_  PUNICODE_STRING ObjectName,//设备名字
-    _In_  ACCESS_MASK DesiredAccess,//期望访问的权限，可以直接填写FILE_ALL_ACCESS
-    _Out_ PFILE_OBJECT *FileObject,//返回参数，获得这个对象的同时会得到一个文件对象。对于串口过滤来说，没没什么作用。
-    _Out_ PDEVICE_OBJECT *DeviceObject
-    );
+<pre class=" language-c"><code class="language-c">NTSTATUS
+<span class="token function">IoGetDeviceObjectPointer</span><span class="token punctuation">(</span>
+    _In_  PUNICODE_STRING ObjectName<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//设备名字</span>
+    _In_  ACCESS_MASK DesiredAccess<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//期望访问的权限，可以直接填写FILE_ALL_ACCESS</span>
+    _Out_ PFILE_OBJECT <span class="token operator">*</span>FileObject<span class="token punctuation">,</span><span class="token comment" spellcheck="true">//返回参数，获得这个对象的同时会得到一个文件对象。对于串口过滤来说，没没什么作用。</span>
+    _Out_ PDEVICE_OBJECT <span class="token operator">*</span>DeviceObject
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>注意：再使用上述函数之后必须把这个文件对象“解除引用”，不然会引起内存泄漏，发生危险。</p>
 <p>要得到的设备对象返回在参数DeviceObject中。示例如下</p>
-<pre class=" language-C"><code class="language-C">#include <ntifs.h>
-//RtlStringCchPrintfW
-#include <ntstrsafe.h>
-//为了使用ntstrsafe静态库，这样才能兼容winndows2000
-#define NTSTRASFE_LIB
-//打开一个端口设备
-PDEVICE_OBJECT ccpOpenCom(ULONG id, NTSTATUS *status)
-&#123;
-    //外面输入的是串口id，这里改写成字符串形式
-    UNICODE_STRING name_str;
-    static WCHAR name[32] = &#123; 0 &#125;;
-    PFILE_OBJECT fileobj = NULL;
-    PDEVICE_OBJECT devobj = NULL;
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
+<span class="token comment" spellcheck="true">//RtlStringCchPrintfW</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntstrsafe.h></span></span>
+<span class="token comment" spellcheck="true">//为了使用ntstrsafe静态库，这样才能兼容winndows2000</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> NTSTRASFE_LIB</span>
+<span class="token comment" spellcheck="true">//打开一个端口设备</span>
+PDEVICE_OBJECT <span class="token function">ccpOpenCom</span><span class="token punctuation">(</span>ULONG id<span class="token punctuation">,</span> NTSTATUS <span class="token operator">*</span>status<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//外面输入的是串口id，这里改写成字符串形式</span>
+    UNICODE_STRING name_str<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> WCHAR name<span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    PFILE_OBJECT fileobj <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    PDEVICE_OBJECT devobj <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
 
-    //根据id转换成串口的名字
-    memset(name, 0, sizeof(WCHAR)* 32);
-    RtlStringCchPrintfW(name, 32, L"\\Device\\Serial%d", id);
-    RtlInitUnicodeString(&name_str, name);
-    //打开设备对象
-    *status = IoGetDeviceObjectPointer(&name_str, FILE_ALL_ACCESS, &fileobj, &devobj);
-    //如果打开成功，一定将文件对象解除引用
-    if (*status == STATUS_SUCCESS)
-    &#123;
-        ObDereferenceObject(fileobj);
-    &#125;
-    //返回设备对象
-    return devobj;
-&#125;
+    <span class="token comment" spellcheck="true">//根据id转换成串口的名字</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>WCHAR<span class="token punctuation">)</span><span class="token operator">*</span> <span class="token number">32</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RtlStringCchPrintfW</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> L<span class="token string">"\\Device\\Serial%d"</span><span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name_str<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//打开设备对象</span>
+    <span class="token operator">*</span>status <span class="token operator">=</span> <span class="token function">IoGetDeviceObjectPointer</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>name_str<span class="token punctuation">,</span> FILE_ALL_ACCESS<span class="token punctuation">,</span> <span class="token operator">&amp;</span>fileobj<span class="token punctuation">,</span> <span class="token operator">&amp;</span>devobj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//如果打开成功，一定将文件对象解除引用</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>status <span class="token operator">==</span> STATUS_SUCCESS<span class="token punctuation">)</span>
+    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token function">ObDereferenceObject</span><span class="token punctuation">(</span>fileobj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//返回设备对象</span>
+    <span class="token keyword">return</span> devobj<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 
       
