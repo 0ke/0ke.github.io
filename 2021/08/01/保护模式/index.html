@@ -104,8 +104,8 @@
 <h2 id="段权限Lab"><a href="#段权限Lab" class="headerlink" title="段权限Lab"></a>段权限Lab</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;windows.h></span></span>
 <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    _asm<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+    _asm<span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">//mov ax, cs;</span>
         <span class="token comment" spellcheck="true">//ds=cs</span>
 
@@ -113,47 +113,47 @@
         <span class="token comment" spellcheck="true">//cs:[val]</span>
         mov ebx<span class="token punctuation">,</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
         mov dword ptr<span class="token punctuation">[</span>val<span class="token punctuation">]</span><span class="token punctuation">,</span> ebx<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2 id="base与Limit-Lab"><a href="#base与Limit-Lab" class="headerlink" title="base与Limit Lab"></a>base与Limit Lab</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> val2 <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    _asm<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    _asm<span class="token punctuation">{</span>
         mov eax<span class="token punctuation">,</span> dword ptr ds<span class="token punctuation">:</span><span class="token punctuation">[</span>val<span class="token punctuation">]</span><span class="token punctuation">;</span>
         mov dword ptr ds <span class="token punctuation">:</span> <span class="token punctuation">[</span>val2<span class="token punctuation">]</span><span class="token punctuation">,</span> eax<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>执行以上代码时，可以成功编译。但是当执行以下代码时，编译器会报错：0x00FB13CE 处有未经处理的异常(在 ConsoleApplication1.exe 中):  0xC0000005:  读取位置 0x00000000 时发生访问冲突。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> val2 <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    _asm<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    _asm<span class="token punctuation">{</span>
         mov eax<span class="token punctuation">,</span> dword ptr ds<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         mov dword ptr ds <span class="token punctuation">:</span> <span class="token punctuation">[</span>val2<span class="token punctuation">]</span><span class="token punctuation">,</span> eax<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>但当将段改为fs时，编译器仍然能编译通过。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 
 <span class="token keyword">int</span> val <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> val2 <span class="token operator">=</span> <span class="token number">0x10</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    _asm<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    _asm<span class="token punctuation">{</span>
         mov eax<span class="token punctuation">,</span> dword ptr ds<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
         mov dword ptr ds <span class="token punctuation">:</span> <span class="token punctuation">[</span>val2<span class="token punctuation">]</span><span class="token punctuation">,</span> eax<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>这里涉及到一个段.base的概念。</p>
 <p>CS、SS、ES、DS段的base都是0，而FS的base是7FFDE000</p>

@@ -80,47 +80,47 @@
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">define</span> EXE_PATH "C:\\Users\\rkvir\\Desktop\\010Editorl.exe"</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    SECURITY_ATTRIBUTES psa <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    SECURITY_ATTRIBUTES tsa <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    STARTUPINFO si <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>si<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    SECURITY_ATTRIBUTES psa <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    SECURITY_ATTRIBUTES tsa <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    STARTUPINFO si <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>si<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     PROCESS_INFORMATION pi<span class="token punctuation">;</span>
     <span class="token function">CreateProcess</span><span class="token punctuation">(</span>EXE_PATH<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>psa<span class="token punctuation">,</span> <span class="token operator">&amp;</span>tsa<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>si<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pi<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>通过进程的PID和进程句柄关闭进程。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//6816是可执行程序的PID</span>
     <span class="token comment" spellcheck="true">//CreateProcessR(EXE_PATH);</span>
     HANDLE hProcess <span class="token operator">=</span> <span class="token function">OpenProcess</span><span class="token punctuation">(</span>PROCESS_TERMINATE<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> <span class="token number">6816</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打开一个进程，注意是打开，不是创建。</span>
     <span class="token function">TerminateProcess</span><span class="token punctuation">(</span>hProcess<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>进程遍历</p>
 <pre class=" language-c"><code class="language-c">bool <span class="token function">ProcessShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    PROCESSENTRY32 pe32 <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+    PROCESSENTRY32 pe32 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     pe32<span class="token punctuation">.</span>dwSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>PROCESSENTRY32<span class="token punctuation">)</span><span class="token punctuation">;</span>
     HANDLE hSnapshot <span class="token operator">=</span> <span class="token function">CreateToolhelp32Snapshot</span><span class="token punctuation">(</span>TH32CS_SNAPPROCESS<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//进程 线程 模块 堆 的快照API</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>hSnapshot <span class="token operator">==</span> INVALID_HANDLE_VALUE<span class="token punctuation">)</span> 
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"CreateToolhelp32Snapshot Error"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> false<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     BOOL bRet <span class="token operator">=</span> <span class="token function">Process32First</span><span class="token punctuation">(</span>hSnapshot<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pe32<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">do</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Process Name:%s\n"</span><span class="token punctuation">,</span> pe32<span class="token punctuation">.</span>szExeFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Process ID:%s\n"</span><span class="token punctuation">,</span> pe32<span class="token punctuation">.</span>th32ProcessID<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">Process32Next</span><span class="token punctuation">(</span>hSnapshot<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pe32<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">Process32Next</span><span class="token punctuation">(</span>hSnapshot<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pe32<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">CloseHandle</span><span class="token punctuation">(</span>hSnapshot<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2 id="R0的一些进程操作"><a href="#R0的一些进程操作" class="headerlink" title="R0的一些进程操作"></a>R0的一些进程操作</h2><p>KPROCESS结构简单说一下</p>
 <pre><code>
@@ -301,7 +301,7 @@ nt!_EPROCESS
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntifs.h></span></span>
 
 VOID <span class="token function">ShowProcess</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     DWORD_PTR pEprocess <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//兼容性更强</span>
     ULONG ulProcessid <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     ULONG ulProcessName <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -310,81 +310,81 @@ VOID <span class="token function">ShowProcess</span><span class="token punctuati
     PLIST_ENTRY ActiveProcessLinks <span class="token operator">=</span> <span class="token punctuation">(</span>PLIST_ENTRY<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>pEprocess <span class="token operator">+</span> <span class="token number">0xb8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     PLIST_ENTRY NextList <span class="token operator">=</span> ActiveProcessLinks<span class="token operator">-></span>Flink<span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>NextList<span class="token operator">-></span>Flink <span class="token operator">!=</span> ActiveProcessLinks<span class="token operator">-></span>Flink<span class="token punctuation">)</span> 
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         pEprocess <span class="token operator">=</span> <span class="token punctuation">(</span>DWORD_PTR<span class="token punctuation">)</span>NextList <span class="token operator">-</span> <span class="token number">0xb8</span><span class="token punctuation">;</span>
         ulProcessid <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token punctuation">(</span>ULONG<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>pEprocess <span class="token operator">+</span> <span class="token number">0xb4</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         ulProcessName <span class="token operator">=</span> <span class="token punctuation">(</span>ULONG<span class="token punctuation">)</span><span class="token punctuation">(</span>pEprocess <span class="token operator">+</span> <span class="token number">0x16C</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Processid = %d\r\nProcessName = %s"</span><span class="token punctuation">,</span> ulProcessid<span class="token punctuation">,</span> ulProcessName<span class="token punctuation">)</span><span class="token punctuation">;</span>
         NextList <span class="token operator">=</span> NextList<span class="token operator">-></span>Flink<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver0bject<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver0bject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     pDriver0bject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Hello\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">ShowProcess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>ed nt!kd_fusion_mask 0  windbg关闭日志，我一跑驱动咔咔刷屏真是醉了，谢谢马主任。</p>
 <p>断链隐藏进程&#x3D;&#x3D;没啥用，玩玩。</p>
 <pre class=" language-c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>ulProcessid <span class="token operator">==</span> ulPid<span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             NextList<span class="token operator">-></span>Blink<span class="token operator">-></span>Flink <span class="token operator">=</span> NextList<span class="token operator">-></span>Flink<span class="token punctuation">;</span>
             NextList<span class="token operator">-></span>Flink<span class="token operator">-></span>Blink <span class="token operator">=</span> NextList<span class="token operator">-></span>Blink<span class="token punctuation">;</span>
 
             <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>							就是双向链表断链操作。
+        <span class="token punctuation">}</span>							就是双向链表断链操作。
 </code></pre>
 <p>虚假的进程保护&#x3D;&#x3D;&#x3D;&#x3D;不保护了，直接杀死进程。</p>
 <p>杀死进程。</p>
 <pre class=" language-C"><code class="language-C">NTSTATUS KillProcess(ULONG ulPid)
-&#123;
+{
     NTSTATUS ntStatus = STATUS_UNSUCCESSFUL;
     PEPROCESS pEprocess = NULL;
     ntStatus = PsLookupProcessByProcessId(ulPid, &pEprocess);
     if (NT_SUCCESS(ntStatus))
-    &#123;
+    {
         KeAttachProcess(pEprocess);						//附加进程，例如调试器
         for (int i = 0; i <= 0x10000000; i += 0x1000)
-        &#123;
+        {
             if (MmIsAddressValid((PVOID)i))
-            &#123;
+            {
                 __try
-                &#123;
+                {
                     ProbeForWrite((PVOID)i, 0x1000, sizeof(ULONG));
                     memset(((PVOID)i),0xcc,0x1000);
-                &#125;
+                }
                 __except(1)
-                &#123;
+                {
                     continue; 
-                &#125;
+                }
                 //异常处理
-            &#125;
-        &#125;
+            }
+        }
         KeDetachProcess();						//解除附加
         return TRUE;
-    &#125;
+    }
     return ntStatus;
-&#125;
+}
 </code></pre>
 <h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
 
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//线程R3 TEB R0 ETHREAD</span>
     <span class="token comment" spellcheck="true">//FS：[0] = TEB</span>
     <span class="token comment" spellcheck="true">//TEB 0x30 = PEB</span>
     <span class="token comment" spellcheck="true">//FS:[30]</span>
     <span class="token keyword">return</span> <span class="token number">0</span>；
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h3 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h3><p>进程创建的时候，主线程随之创建，main函数就是主函数的回调函数，主进程销毁，主线程销毁。</p>
 <h3 id><a href="#" class="headerlink" title></a></h3>

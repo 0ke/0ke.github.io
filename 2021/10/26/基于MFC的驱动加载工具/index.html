@@ -79,16 +79,16 @@
 <h2 id="测试驱动代码"><a href="#测试驱动代码" class="headerlink" title="测试驱动代码"></a>测试驱动代码</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
 
 EXTERN_C VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver<span class="token punctuation">)</span>      <span class="token comment" spellcheck="true">//卸载函数</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload success\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 EXTERN_C NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"0ke yyds\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>就是个简单的输出测试，别问，问就是测别的怕蓝屏。</p>
 <h2 id="初识注册表和服务管理器"><a href="#初识注册表和服务管理器" class="headerlink" title="初识注册表和服务管理器"></a>初识注册表和服务管理器</h2><p>加载驱动和注册表有很大关系，注册表像是全局配置文件，打开某个文件打开到最后，会看到名称，类型，数据。这种关系和数据库很相似。操作系统上的关键信息，或者某些流氓软件自主弹开。也是需要在注册表中配置。服务也是在注册表中的。服务的概念百度即可。打开服务管理器。可以看到很多服务。-&gt;{我懒得截图，文字说明以下吧。}例如管理服务，IP配置转换服务等等，服务也有描述。不是所有服务都是操作系统服务，也有些第三方服务，比如腾讯服务。为什么要介绍服务呢？驱动加载的本质就是在注册表中注册成服务。安装和卸载是注册表的功能，启动和停止是服务的功能。例如InstDrv.exe的四个按键。安装和卸载是将驱动注册到注册表中和从注册表中删除，启动和停止是在服务管理器中的正在运行和停止。</p>
@@ -105,14 +105,14 @@ EXTERN_C NTSTATUS <span class="token function">DriverEntry</span><span class="to
 
 <span class="token comment" spellcheck="true">// CDriverloadDlg 对话框</span>
 class CDriverloadDlg <span class="token punctuation">:</span> public CDialogEx
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
 <span class="token comment" spellcheck="true">// 构造</span>
 public<span class="token punctuation">:</span>
     <span class="token function">CDriverloadDlg</span><span class="token punctuation">(</span>CWnd<span class="token operator">*</span> pParent <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">// 标准构造函数</span>
 
 <span class="token comment" spellcheck="true">// 对话框数据</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> AFX_DESIGN_TIME</span>
-    <span class="token keyword">enum</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> IDD <span class="token operator">=</span> IDD_DRIVERLOAD_DIALOG <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token keyword">enum</span> <span class="token punctuation">{</span> IDD <span class="token operator">=</span> IDD_DRIVERLOAD_DIALOG <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
 
     protected<span class="token punctuation">:</span>
@@ -148,7 +148,7 @@ public<span class="token punctuation">:</span>
     afx_msg <span class="token keyword">void</span> <span class="token function">OnBnClickedButton3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     afx_msg <span class="token keyword">void</span> <span class="token function">OnBnClickedButton4</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">void</span> <span class="token function">ReleaseDriver</span><span class="token punctuation">(</span>WCHAR<span class="token operator">*</span> lpFilePath<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 </code></pre>
 <pre class=" language-c"><code class="language-c"><span class="token comment" spellcheck="true">// DriverloadDlg.cpp : 实现文件</span>
 <span class="token comment" spellcheck="true">//</span>
@@ -166,13 +166,13 @@ public<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true">// 用于应用程序“关于”菜单项的 CAboutDlg 对话框</span>
 
 class CAboutDlg <span class="token punctuation">:</span> public CDialogEx
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
 public<span class="token punctuation">:</span>
     <span class="token function">CAboutDlg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// 对话框数据</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> AFX_DESIGN_TIME</span>
-    <span class="token keyword">enum</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> IDD <span class="token operator">=</span> IDD_ABOUTBOX <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token keyword">enum</span> <span class="token punctuation">{</span> IDD <span class="token operator">=</span> IDD_ABOUTBOX <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span></span>
 
     protected<span class="token punctuation">:</span>
@@ -181,16 +181,16 @@ public<span class="token punctuation">:</span>
 <span class="token comment" spellcheck="true">// 实现</span>
 protected<span class="token punctuation">:</span>
     <span class="token function">DECLARE_MESSAGE_MAP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
 CAboutDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">CAboutDlg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token function">CDialogEx</span><span class="token punctuation">(</span>IDD_ABOUTBOX<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CAboutDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>CDataExchange<span class="token operator">*</span> pDX<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     CDialogEx<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>pDX<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token function">BEGIN_MESSAGE_MAP</span><span class="token punctuation">(</span>CAboutDlg<span class="token punctuation">,</span> CDialogEx<span class="token punctuation">)</span>
 <span class="token function">END_MESSAGE_MAP</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -202,14 +202,14 @@ CAboutDlg<span class="token punctuation">:</span><span class="token punctuation"
 
 CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">CDriverloadDlg</span><span class="token punctuation">(</span>CWnd<span class="token operator">*</span> pParent <span class="token comment" spellcheck="true">/*=NULL*/</span><span class="token punctuation">)</span>
     <span class="token punctuation">:</span> <span class="token function">CDialogEx</span><span class="token punctuation">(</span>IDD_DRIVERLOAD_DIALOG<span class="token punctuation">,</span> pParent<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     m_hIcon <span class="token operator">=</span> <span class="token function">AfxGetApp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token function">LoadIcon</span><span class="token punctuation">(</span>IDR_MAINFRAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>CDataExchange<span class="token operator">*</span> pDX<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     CDialogEx<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">DoDataExchange</span><span class="token punctuation">(</span>pDX<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token function">BEGIN_MESSAGE_MAP</span><span class="token punctuation">(</span>CDriverloadDlg<span class="token punctuation">,</span> CDialogEx<span class="token punctuation">)</span>
     <span class="token function">ON_WM_SYSCOMMAND</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -225,7 +225,7 @@ CDriverloadDlg<span class="token punctuation">:</span><span class="token punctua
 <span class="token comment" spellcheck="true">// CDriverloadDlg 消息处理程序</span>
 
 BOOL CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnInitDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     CDialogEx<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnInitDialog</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">// 将“关于...”菜单项添加到系统菜单中。</span>
@@ -236,17 +236,17 @@ BOOL CDriverloadDlg<span class="token punctuation">:</span><span class="token pu
 
     CMenu<span class="token operator">*</span> pSysMenu <span class="token operator">=</span> <span class="token function">GetSystemMenu</span><span class="token punctuation">(</span>FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>pSysMenu <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         BOOL bNameValid<span class="token punctuation">;</span>
         CString strAboutMenu<span class="token punctuation">;</span>
         bNameValid <span class="token operator">=</span> strAboutMenu<span class="token punctuation">.</span><span class="token function">LoadString</span><span class="token punctuation">(</span>IDS_ABOUTBOX<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">ASSERT</span><span class="token punctuation">(</span>bNameValid<span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>strAboutMenu<span class="token punctuation">.</span><span class="token function">IsEmpty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             pSysMenu<span class="token operator">-></span><span class="token function">AppendMenu</span><span class="token punctuation">(</span>MF_SEPARATOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
             pSysMenu<span class="token operator">-></span><span class="token function">AppendMenu</span><span class="token punctuation">(</span>MF_STRING<span class="token punctuation">,</span> IDM_ABOUTBOX<span class="token punctuation">,</span> strAboutMenu<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
     <span class="token comment" spellcheck="true">// 设置此对话框的图标。  当应用程序主窗口不是对话框时，框架将自动</span>
     <span class="token comment" spellcheck="true">//  执行此操作</span>
@@ -256,28 +256,28 @@ BOOL CDriverloadDlg<span class="token punctuation">:</span><span class="token pu
     <span class="token comment" spellcheck="true">// TODO: 在此添加额外的初始化代码</span>
 
     <span class="token keyword">return</span> TRUE<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 除非将焦点设置到控件，否则返回 TRUE</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnSysCommand</span><span class="token punctuation">(</span>UINT nID<span class="token punctuation">,</span> LPARAM lParam<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>nID <span class="token operator">&amp;</span> <span class="token number">0xFFF0</span><span class="token punctuation">)</span> <span class="token operator">==</span> IDM_ABOUTBOX<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         CAboutDlg dlgAbout<span class="token punctuation">;</span>
         dlgAbout<span class="token punctuation">.</span><span class="token function">DoModal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         CDialogEx<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnSysCommand</span><span class="token punctuation">(</span>nID<span class="token punctuation">,</span> lParam<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment" spellcheck="true">// 如果向对话框添加最小化按钮，则需要下面的代码</span>
 <span class="token comment" spellcheck="true">//  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，</span>
 <span class="token comment" spellcheck="true">//  这将由框架自动完成。</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnPaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">IsIconic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         CPaintDC <span class="token function">dc</span><span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 用于绘制的设备上下文</span>
 
         <span class="token function">SendMessage</span><span class="token punctuation">(</span>WM_ICONERASEBKGND<span class="token punctuation">,</span> reinterpret_cast<span class="token operator">&lt;</span>WPARAM<span class="token operator">></span><span class="token punctuation">(</span>dc<span class="token punctuation">.</span><span class="token function">GetSafeHdc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -292,127 +292,127 @@ BOOL CDriverloadDlg<span class="token punctuation">:</span><span class="token pu
 
         <span class="token comment" spellcheck="true">// 绘制图标</span>
         dc<span class="token punctuation">.</span><span class="token function">DrawIcon</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> m_hIcon<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         CDialogEx<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnPaint</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment" spellcheck="true">//当用户拖动最小化窗口时系统调用此函数取得光标</span>
 <span class="token comment" spellcheck="true">//显示。</span>
 HCURSOR CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnQueryDragIcon</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token keyword">return</span> static_cast<span class="token operator">&lt;</span>HCURSOR<span class="token operator">></span><span class="token punctuation">(</span>m_hIcon<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">InstallDriver</span><span class="token punctuation">(</span>WCHAR<span class="token operator">*</span> lpServiceName<span class="token punctuation">,</span> WCHAR<span class="token operator">*</span> lpDisplayName<span class="token punctuation">,</span> WCHAR<span class="token operator">*</span> lpDriverPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     hScm <span class="token operator">=</span> <span class="token function">OpenSCManager</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> SC_MANAGER_CREATE_SERVICE<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//创建连接</span>
     hSer <span class="token operator">=</span> <span class="token function">CreateService</span><span class="token punctuation">(</span>hScm<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span>lpServiceName<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span>lpDisplayName<span class="token punctuation">,</span> SERVICE_ALL_ACCESS<span class="token punctuation">,</span> SERVICE_KERNEL_DRIVER<span class="token punctuation">,</span> SERVICE_DEMAND_START<span class="token punctuation">,</span> SERVICE_ERROR_IGNORE<span class="token punctuation">,</span> <span class="token punctuation">(</span>LPCWSTR<span class="token punctuation">)</span> lpDriverPath<span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>hSer <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动安装失败"</span><span class="token punctuation">,</span>L<span class="token string">"ERROR"</span><span class="token punctuation">,</span>MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动安装成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">UnInstallDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     BOOL bRet <span class="token operator">=</span> <span class="token function">DeleteService</span><span class="token punctuation">(</span>hSer<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动卸载失败"</span><span class="token punctuation">,</span> L<span class="token string">"ERROR"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动卸载成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token function">CloseServiceHandle</span><span class="token punctuation">(</span>hScm<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">CloseServiceHandle</span><span class="token punctuation">(</span>hSer<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">StartDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     BOOL bRet <span class="token operator">=</span> <span class="token function">StartService</span><span class="token punctuation">(</span>hSer<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动启动失败"</span><span class="token punctuation">,</span> L<span class="token string">"ERROR"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动启动成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">StopDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    SERVICE_STATUS Sertatus <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+    SERVICE_STATUS Sertatus <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     BOOL bRet <span class="token operator">=</span> <span class="token function">ControlService</span><span class="token punctuation">(</span>hSer<span class="token punctuation">,</span>SERVICE_CONTROL_STOP<span class="token punctuation">,</span><span class="token operator">&amp;</span>Sertatus<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动停止失败"</span><span class="token punctuation">,</span> L<span class="token string">"ERROR"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">else</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">MessageBox</span><span class="token punctuation">(</span>L<span class="token string">"驱动停止成功"</span><span class="token punctuation">,</span> L<span class="token string">"SUCCESS"</span><span class="token punctuation">,</span> MB_OK<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 WCHAR<span class="token operator">*</span>CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">RandomString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">srand</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    WCHAR str<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token string">' a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">,</span><span class="token string">'e'</span><span class="token punctuation">,</span><span class="token string">'f'</span><span class="token punctuation">,</span><span class="token string">'g'</span><span class="token punctuation">,</span><span class="token string">'h'</span><span class="token punctuation">,</span><span class="token string">'i'</span><span class="token punctuation">,</span><span class="token string">'j'</span><span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span><span class="token string">'l'</span><span class="token punctuation">,</span><span class="token string">'m'</span><span class="token punctuation">,</span><span class="token string">'n'</span><span class="token punctuation">,</span><span class="token string">'o'</span><span class="token punctuation">,</span><span class="token string">'p'</span><span class="token punctuation">,</span><span class="token string">'q'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">,</span><span class="token string">'s'</span><span class="token punctuation">,</span><span class="token string">'t'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">,</span><span class="token string">'v'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span><span class="token string">'x'</span><span class="token punctuation">,</span><span class="token string">'y'</span><span class="token punctuation">,</span><span class="token string">'z '</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    WCHAR Temp<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    WCHAR str<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">' a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">,</span><span class="token string">'d'</span><span class="token punctuation">,</span><span class="token string">'e'</span><span class="token punctuation">,</span><span class="token string">'f'</span><span class="token punctuation">,</span><span class="token string">'g'</span><span class="token punctuation">,</span><span class="token string">'h'</span><span class="token punctuation">,</span><span class="token string">'i'</span><span class="token punctuation">,</span><span class="token string">'j'</span><span class="token punctuation">,</span><span class="token string">'k'</span><span class="token punctuation">,</span><span class="token string">'l'</span><span class="token punctuation">,</span><span class="token string">'m'</span><span class="token punctuation">,</span><span class="token string">'n'</span><span class="token punctuation">,</span><span class="token string">'o'</span><span class="token punctuation">,</span><span class="token string">'p'</span><span class="token punctuation">,</span><span class="token string">'q'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">,</span><span class="token string">'s'</span><span class="token punctuation">,</span><span class="token string">'t'</span><span class="token punctuation">,</span><span class="token string">'u'</span><span class="token punctuation">,</span><span class="token string">'v'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span><span class="token string">'x'</span><span class="token punctuation">,</span><span class="token string">'y'</span><span class="token punctuation">,</span><span class="token string">'z '</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    WCHAR Temp<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">7</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token keyword">int</span> nIndex <span class="token operator">=</span> <span class="token function">Random</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         Temp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> str<span class="token punctuation">[</span>nIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> Temp<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnBnClickedButton1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//注册的驱动名称和路径</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">wcscpy</span><span class="token punctuation">(</span>DriverPath<span class="token punctuation">,</span> L<span class="token string">"C:\\"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     WCHAR End<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> L<span class="token string">".sys"</span><span class="token punctuation">;</span>
-    WCHAR DriverName<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    WCHAR DriverName<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token function">wcscpy</span><span class="token punctuation">(</span>DriverName<span class="token punctuation">,</span> <span class="token function">RandomString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">wcscat</span><span class="token punctuation">(</span>DriverPath<span class="token punctuation">,</span> DriverName<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">wcscat</span><span class="token punctuation">(</span>DriverPath<span class="token punctuation">,</span> End<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">ReleaseDriver</span><span class="token punctuation">(</span>DriverPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">InstallDriver</span><span class="token punctuation">(</span>DriverName<span class="token punctuation">,</span> DriverName<span class="token punctuation">,</span> DriverPath<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//释放驱动</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnBnClickedButton2</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">StartDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnBnClickedButton3</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">StopDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">OnBnClickedButton4</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UnInstallDriver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">void</span> CDriverloadDlg<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">ReleaseDriver</span><span class="token punctuation">(</span>WCHAR <span class="token operator">*</span> lpFilePath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     HRSRC hRsrc <span class="token operator">=</span> <span class="token function">FindResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> <span class="token function">MAKEINTRESOURCE</span><span class="token punctuation">(</span>IDR_X860KE1<span class="token punctuation">)</span><span class="token punctuation">,</span>L<span class="token string">"x860ke"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     DWORD dwSize <span class="token operator">=</span> <span class="token function">SizeofResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> hRsrc<span class="token punctuation">)</span><span class="token punctuation">;</span>
     HGLOBAL hGlobal <span class="token operator">=</span> <span class="token function">LoadResource</span><span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">,</span> hRsrc<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -422,7 +422,7 @@ WCHAR<span class="token operator">*</span>CDriverloadDlg<span class="token punct
     <span class="token function">WriteFile</span><span class="token punctuation">(</span>hFile<span class="token punctuation">,</span> lpRes<span class="token punctuation">,</span> dwSize<span class="token punctuation">,</span> <span class="token operator">&amp;</span>dwWriteLen<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">CloseHandle</span><span class="token punctuation">(</span>hRsrc<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">CloseHandle</span><span class="token punctuation">(</span>hFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p><img src="/images/76.png"></p>
 <p><img src="/images/77.png"></p>

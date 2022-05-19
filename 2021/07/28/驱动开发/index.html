@@ -82,12 +82,12 @@
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span>		</span><span class="token comment" spellcheck="true">//驱动头文件。</span>
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>​		第一个参数pDriverObject，表示一个驱动对象指针，目前我们将他视为一个驱动文件（sys）运行之后，操作系统在内存中为该驱动分配了一个类型为DRIVER_OBJECT的数据结构，用于记录该驱动的详细信息，DriverEntry的第一个参数，就表示当前驱动所对应的驱动对象指针。</p>
 <p>​		第二个参数pRegPath是一个类型为UNICODE_STRING的指针，表示当前驱动对应的<strong>注册表</strong>位置。UNICODE_STRING是内核中表示字符串的结构体。在VS中F12可以查询到该结构体的定义。</p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> _UNICODE_STRING <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> _UNICODE_STRING <span class="token punctuation">{</span>
     USHORT Length<span class="token punctuation">;</span>				<span class="token comment" spellcheck="true">//长度</span>
     USHORT MaximumLength<span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//最大长度</span>
 <span class="token macro property">#<span class="token directive keyword">ifdef</span> MIDL_PASS</span>
@@ -95,11 +95,11 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 <span class="token macro property">#<span class="token directive keyword">else</span> </span><span class="token comment" spellcheck="true">// MIDL_PASS</span>
     <span class="token function">_Field_size_bytes_part_opt_</span><span class="token punctuation">(</span>MaximumLength<span class="token punctuation">,</span> Length<span class="token punctuation">)</span> PWCH   Buffer<span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//缓冲区</span>
 <span class="token macro property">#<span class="token directive keyword">endif</span> </span><span class="token comment" spellcheck="true">// MIDL_PASS</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> UNICODE_STRING<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> UNICODE_STRING<span class="token punctuation">;</span>
 </code></pre>
 <p>​		第一个长度主要是字符串实际上的长度，第二个最大长度是字符串最大能存储的长度。在驱动中存在三种STRING相关的结构体，后期记录。</p>
 <p>​		PDRIVER_OBJECT也是一个结构体，相同的方法F12可以看到。</p>
-<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> _DRIVER_OBJECT <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class=" language-c"><code class="language-c"><span class="token keyword">typedef</span> <span class="token keyword">struct</span> _DRIVER_OBJECT <span class="token punctuation">{</span>
     CSHORT Type<span class="token punctuation">;</span>
     CSHORT Size<span class="token punctuation">;</span>
     
@@ -123,24 +123,24 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     PDRIVER_UNLOAD DriverUnload<span class="token punctuation">;</span>										<span class="token comment" spellcheck="true">//卸载函数位置</span>
     PDRIVER_DISPATCH MajorFunction<span class="token punctuation">[</span>IRP_MJ_MAXIMUM_FUNCTION <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//派遣函数的指定</span>
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> DRIVER_OBJECT<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> DRIVER_OBJECT<span class="token punctuation">;</span>
 </code></pre>
 <p>​		下面我们丰富主函数的内容：</p>
 <pre class=" language-C"><code class="language-C">#include <ntddk.h>		//驱动头文件。
 
 VOID DriverUnload(PDRIVER_OBJECT pDriver)		//卸载函数
-&#123;
+{
     UNREFERENCED_PARAMETER(pDriver);
     DbgPrint("Unload success\n");
-&#125;
+}
 
 NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegPath)
-&#123;
+{
     UNREFERENCED_PARAMETER(pRegPath);		//将没使用的形参放在这里，不然会报错
     pDriverObject->DriverUnload = DriverUnload;			//指向卸载函数
     DbgPrint("Hello 0ke!\n");
     return STATUS_SUCCESS;			//#define STATUS_SUCCESS                   ((NTSTATUS)0x00000000L)注意驱动返回该状态码表示成功
-&#125;
+}
 </code></pre>
 <p>​		重新生成程序，在所在文件夹中取出.sys文件。打开Windows7x86进行测试。这里我们启动调试模式，挂起Windbg进行。</p>
 <p><img src="/images/36.PNG"></p>
@@ -159,13 +159,13 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT pDriverObject, PUNICODE_STRING pRegPath)
 <h2 id="内存的申请与释放"><a href="#内存的申请与释放" class="headerlink" title="内存的申请与释放"></a>内存的申请与释放</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
 
 VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver<span class="token punctuation">)</span>      <span class="token comment" spellcheck="true">//卸载函数</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pDriver<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pRegPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
     pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
 
@@ -178,19 +178,19 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> pBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>					<span class="token comment" spellcheck="true">//打印。DbgPrint不能打印浮点数</span>
     <span class="token function">ExFreePoolWithTag</span><span class="token punctuation">(</span>pBuffer<span class="token punctuation">,</span> <span class="token string">'TUCC'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//内存释放</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2 id="UNICODE-STRING"><a href="#UNICODE-STRING" class="headerlink" title="UNICODE_STRING"></a>UNICODE_STRING</h2><p>​		以下代码涉及到字符串的初始化，以及字符串的拼接，拷贝，比对等功能。所调用的函数F12都可以查到原型。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
 
 VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver<span class="token punctuation">)</span>      <span class="token comment" spellcheck="true">//卸载函数</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pDriver<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload success\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pRegPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
     pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
 
@@ -199,11 +199,11 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token function">DECLARE_CONST_UNICODE_STRING</span><span class="token punctuation">(</span>usStr1<span class="token punctuation">,</span> L<span class="token string">"Hello 0ke"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ"</span><span class="token punctuation">,</span> usStr1<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//第二种方法</span>
-    UNICODE_STRING usStr2 <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    UNICODE_STRING usStr2 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usStr2<span class="token punctuation">,</span> L<span class="token string">"Hello 0ke1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ"</span><span class="token punctuation">,</span> usStr2<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//第三种方法</span>
-    UNICODE_STRING usStr3 <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    UNICODE_STRING usStr3 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     WCHAR wcStr<span class="token punctuation">[</span><span class="token number">512</span><span class="token punctuation">]</span> <span class="token operator">=</span> L<span class="token string">"Hello 0ke2"</span><span class="token punctuation">;</span>
     usStr3<span class="token punctuation">.</span>Buffer <span class="token operator">=</span> wcStr<span class="token punctuation">;</span>
     usStr3<span class="token punctuation">.</span>Length <span class="token operator">=</span> <span class="token function">wcslen</span><span class="token punctuation">(</span>wcStr<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>WCHAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -213,20 +213,20 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     UNICODE_STRING usStr4 <span class="token operator">=</span> <span class="token function">RTL_CONSTANT_STRING</span><span class="token punctuation">(</span>L<span class="token string">"Hello 0ke3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ"</span><span class="token punctuation">,</span> usStr4<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//第五种方法</span>
-    UNICODE_STRING usStr0 <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    UNICODE_STRING usStr0 <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     ULONG uLength <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">wcslen</span><span class="token punctuation">(</span>L<span class="token string">"Hello 0keya"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>WCHAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
     usStr0<span class="token punctuation">.</span>Buffer <span class="token operator">=</span> <span class="token function">ExAllocatePoolWithTag</span><span class="token punctuation">(</span>NonPagedPool<span class="token punctuation">,</span> uLength<span class="token punctuation">,</span> <span class="token string">'TUCC'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>usStr0<span class="token punctuation">.</span>Buffer <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token function">RtlZeroMemory</span><span class="token punctuation">(</span>usStr0<span class="token punctuation">.</span>Buffer<span class="token punctuation">,</span> uLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">RtlCopyMemory</span><span class="token punctuation">(</span>usStr0<span class="token punctuation">.</span>Buffer<span class="token punctuation">,</span> L<span class="token string">"Hello 0keya"</span><span class="token punctuation">,</span> uLength<span class="token punctuation">)</span><span class="token punctuation">;</span>
     usStr0<span class="token punctuation">.</span>Length <span class="token operator">=</span> uLength<span class="token punctuation">;</span>
     usStr0<span class="token punctuation">.</span>MaximumLength <span class="token operator">=</span> uLength<span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ"</span><span class="token punctuation">,</span> usStr0<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//拷贝</span>
-    UNICODE_STRING usStr5 <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token number">0</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    UNICODE_STRING usStr5 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
     WCHAR wcBuffer<span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
     <span class="token function">RtlInitEmptyUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usStr5<span class="token punctuation">,</span> <span class="token operator">&amp;</span>wcBuffer<span class="token punctuation">,</span> <span class="token number">256</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>WCHAR<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">RtlCopyUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usStr5<span class="token punctuation">,</span> <span class="token operator">&amp;</span>usStr0<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -236,49 +236,49 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ"</span><span class="token punctuation">,</span> usStr5<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//字符串比较</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token number">0</span> <span class="token operator">==</span> <span class="token function">RtlCompareString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usStr4<span class="token punctuation">,</span> <span class="token operator">&amp;</span>usStr5<span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"=="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"!=="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p><img src="/images/41.PNG"></p>
 <h2 id="驱动中的双向链表"><a href="#驱动中的双向链表" class="headerlink" title="驱动中的双向链表"></a>驱动中的双向链表</h2><p>​		我们直接使用LIST_ENTRY，其原型如下。</p>
-<pre class=" language-C"><code class="language-C">typedef struct _LIST_ENTRY &#123;
+<pre class=" language-C"><code class="language-C">typedef struct _LIST_ENTRY {
    struct _LIST_ENTRY *Flink;	//头节点
    struct _LIST_ENTRY *Blink;	//尾节点
-&#125; LIST_ENTRY, *PLIST_ENTRY, *RESTRICTED_POINTER PRLIST_ENTRY;
+} LIST_ENTRY, *PLIST_ENTRY, *RESTRICTED_POINTER PRLIST_ENTRY;
 </code></pre>
 <p>​		”上帝“提供的结构体中并没有数据属性，所以得自己定义结构体。</p>
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;ntddk.h></span></span>
 
 VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriver<span class="token punctuation">)</span> 
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pDriver<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload sucess!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>pRegPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
     pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//定义带有数据的结构</span>
-    <span class="token keyword">typedef</span> <span class="token keyword">struct</span> _TestListEntry <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">typedef</span> <span class="token keyword">struct</span> _TestListEntry <span class="token punctuation">{</span>
         <span class="token keyword">int</span> m_Data<span class="token punctuation">;</span>
         LIST_ENTRY m_ListEntry<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>TestListEntry<span class="token punctuation">,</span> <span class="token operator">*</span>PTestListEntry<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>TestListEntry<span class="token punctuation">,</span> <span class="token operator">*</span>PTestListEntry<span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//声明头节点</span>
-    LIST_ENTRY ListHeader <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    LIST_ENTRY ListHeader <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//初始化</span>
     <span class="token function">InitializeListHead</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ListHeader<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//声明带数据的结构</span>
-    TestListEntry EntryA <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    TestListEntry EntryB <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    TestListEntry EntryC <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    TestListEntry EntryD <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    TestListEntry EntryA <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    TestListEntry EntryB <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    TestListEntry EntryC <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    TestListEntry EntryD <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//给数据成员赋值</span>
     EntryA<span class="token punctuation">.</span>m_Data <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">;</span>
     EntryB<span class="token punctuation">.</span>m_Data <span class="token operator">=</span> <span class="token number">22</span><span class="token punctuation">;</span>
@@ -294,14 +294,14 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     pListEntry <span class="token operator">=</span> ListHeader<span class="token punctuation">.</span>Flink<span class="token punctuation">;</span>
 
     <span class="token keyword">while</span> <span class="token punctuation">(</span>pListEntry <span class="token operator">!=</span> <span class="token operator">&amp;</span>ListHeader<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         PTestListEntry pTestEntry <span class="token operator">=</span> <span class="token function">CONTAINING_RECORD</span><span class="token punctuation">(</span>pListEntry<span class="token punctuation">,</span> TestListEntry<span class="token punctuation">,</span> m_ListEntry<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//CONTAINING_RECORD宏的作用是通过 m_ListEntry找到TestListEntry的起始位置，作为返回值给第一个参数</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> pTestEntry<span class="token operator">-></span>m_Data<span class="token punctuation">)</span><span class="token punctuation">;</span>
         pListEntry <span class="token operator">=</span> pListEntry<span class="token operator">-></span>Flink<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>​		<img src="/images/49.PNG"></p>
 <p>​		下面是删除节点操作的一些API。</p>

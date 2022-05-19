@@ -82,7 +82,7 @@
 <pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">pragma</span> comment(lib, "ws2_32.lib")</span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;WinSock2.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     SOCKET mysock<span class="token punctuation">,</span> tsock<span class="token punctuation">;</span>       <span class="token comment" spellcheck="true">//定义套接字</span>
     <span class="token keyword">struct</span> sockaddr_in my_addr<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//本地地址信息</span>
     <span class="token keyword">struct</span> sockaddr_in their_addr<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//连接者地址信息 </span>
@@ -110,7 +110,7 @@
     <span class="token function">closesocket</span><span class="token punctuation">(</span>tsock<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>​		运行程序，服务端显示“listen……”。</p>
 <p><img src="/images/7.png"></p>
@@ -142,7 +142,7 @@
 #include <winsock2.h>
 #include <stdio.h>
 BOOL InitWinsock();
-void main() &#123;
+void main() {
     SOCKET socket1;
     InitWinsock();
     struct sockaddr_in server;
@@ -151,37 +151,37 @@ void main() &#123;
     server.sin_port = htons(1000);//Server的监听端口为1000
     server.sin_addr.s_addr = inet_addr("192.168.0.110");//server的地址
     socket1 = socket(AF_INET, SOCK_DGRAM, 0);
-    while (1) &#123;
+    while (1) {
         char buffer[1024] = "\0";
         printf("input message\n");
         scanf("%s", buffer);
         if (strcmp(buffer, "bye") == 0)
             break;
-        if (sendto(socket1, buffer, sizeof buffer, 0, (struct sockaddr*)&server, len) != SOCKET_ERROR) &#123;
+        if (sendto(socket1, buffer, sizeof buffer, 0, (struct sockaddr*)&server, len) != SOCKET_ERROR) {
             if (recvfrom(socket1, buffer, sizeof buffer, 0, (struct sockaddr*)&server, &len) != SOCKET_ERROR)
                 printf("rece from server:%s\n", buffer);
-        &#125;
-    &#125;
+        }
+    }
     closesocket(socket1);
 
-&#125;
-BOOL InitWinsock() &#123;
+}
+BOOL InitWinsock() {
     int Error;
     WORD VersionRequested;
     WSADATA WsaData;
     VersionRequested = MAKEWORD(2, 2);
     Error = WSAStartup(VersionRequested, &WsaData);  //启动Winsock2
-    if (Error != 0) &#123;
+    if (Error != 0) {
         return FALSE;
-    &#125;
-    else &#123;
-        if (LOBYTE(WsaData.wVersion) != 2 || HIBYTE(WsaData.wHighVersion) != 2) &#123;
+    }
+    else {
+        if (LOBYTE(WsaData.wVersion) != 2 || HIBYTE(WsaData.wHighVersion) != 2) {
             WSACleanup();
             return FALSE;
-        &#125;
-    &#125;
+        }
+    }
     return TRUE;
-&#125;
+}
 </code></pre>
 
       

@@ -95,18 +95,18 @@
 
 <span class="token comment" spellcheck="true">//IRP派遣函数--默认处理</span>
 NTSTATUS <span class="token function">DispatchCommon</span><span class="token punctuation">(</span>PDEVICE_OBJECT pDeviceObject<span class="token punctuation">,</span> PIRP pIrp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//DbgPrint("Common!");</span>
     pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//设置IRP处理成功</span>
     pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//设置返回的字节数，ReadFile能读多少个字节，设置成0，返回随机数，不想设置</span>
     <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//结束IRP处理流程</span>
     
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//返回成功</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 <span class="token comment" spellcheck="true">//ReadFile</span>
 NTSTATUS <span class="token function">DispatchRead</span><span class="token punctuation">(</span>PDEVICE_OBJECT pDeviceObject<span class="token punctuation">,</span> PIRP pIrp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     
     ULONG ulMin <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>					
     PVOID pReadBuffer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//缓冲区指针，初始化为NULL</span>
@@ -123,11 +123,11 @@ NTSTATUS <span class="token function">DispatchRead</span><span class="token punc
     <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束IRP处理流程</span>
     <span class="token comment" spellcheck="true">//DbgPrint("Driver Load sucess");</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 NTSTATUS <span class="token function">DispatchWrite</span><span class="token punctuation">(</span>PDEVICE_OBJECT pDeviceObject<span class="token punctuation">,</span> PIRP pIrp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//DbgBreakPoint();					//断点调试</span>
     PVOID pReadBuffer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//写入缓冲区指针	</span>
     ULONG ulReadLength <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>				<span class="token comment" spellcheck="true">//写入长度。初始化为0，这里需要注意，R3程序未必会按照R0设定好的长度发送</span>
@@ -136,17 +136,17 @@ NTSTATUS <span class="token function">DispatchWrite</span><span class="token pun
     pStack <span class="token operator">=</span> <span class="token function">IoGetCurrentIrpStackLocation</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取当前IRP栈结构</span>
     ulReadLength <span class="token operator">=</span> pStack<span class="token operator">-></span>Parameters<span class="token punctuation">.</span>Write<span class="token punctuation">.</span>Length<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取写入长度</span>
     <span class="token comment" spellcheck="true">//DbgPrint("%ws",pWriteBuffer);</span>
-    UNICODE_STRING usStr <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    UNICODE_STRING usStr <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usStr<span class="token punctuation">,</span> pReadBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%wZ\r\n"</span><span class="token punctuation">,</span> usStr<span class="token punctuation">)</span><span class="token punctuation">;</span>
     pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//设置IRP处理成功</span>
     pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> ulReadLength<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//设置返回字节数</span>
     <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束IRP处理流程</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回成功</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span class="token comment" spellcheck="true">//IRP_MJ_DEVICE_CONTROL</span>
 NTSTATUS <span class="token function">DispatchIoCtrl</span><span class="token punctuation">(</span>PDEVICE_OBJECT pDeviceObject<span class="token punctuation">,</span> PIRP pIrp<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//DbgBreakPoint();</span>
     ULONG ulIoctrlCode <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//定义控制码变量，初始化为0</span>
     PVOID pSystemBuffer <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//输入缓冲区，这里注意，可以设置两个缓冲区。</span>
@@ -157,9 +157,9 @@ NTSTATUS <span class="token function">DispatchIoCtrl</span><span class="token pu
     ulBufferLength <span class="token operator">=</span> pStack<span class="token operator">-></span>Parameters<span class="token punctuation">.</span>DeviceIoControl<span class="token punctuation">.</span>InputBufferLength<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取输入缓冲区长度，从R3过来的数据有多长。使用DeviceIoControl中的InputBufferLength</span>
     ulIoctrlCode <span class="token operator">=</span> pStack<span class="token operator">-></span>Parameters<span class="token punctuation">.</span>DeviceIoControl<span class="token punctuation">.</span>IoControlCode<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取控制码，也是使用DeviceIoControl结构中的内容。</span>
     <span class="token keyword">switch</span> <span class="token punctuation">(</span>ulIoctrlCode<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//按照控制码分发，switch处理消息很好用。</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
     <span class="token keyword">case</span> CTL_PRINT<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"%s\r\n"</span><span class="token punctuation">,</span> pSystemBuffer<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//打印R3来的数据。存储在pSystemBuffer，宽字符就是%ws,普通字符是%s</span>
         ULONG uRetLength <span class="token operator">=</span> <span class="token function">strlen</span><span class="token punctuation">(</span><span class="token string">"io success 0ke!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取字符串长度</span>
         <span class="token function">RtlZeroMemory</span><span class="token punctuation">(</span>pSystemBuffer<span class="token punctuation">,</span> <span class="token number">1024</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//初始化R3的内存.</span>
@@ -168,23 +168,23 @@ NTSTATUS <span class="token function">DispatchIoCtrl</span><span class="token pu
         pIrp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> uRetLength<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回多少个字节</span>
         <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>pIrp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//结束IRP处理流程</span>
         <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回成功</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     <span class="token keyword">default</span><span class="token punctuation">:</span>
         <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 VOID <span class="token function">DriverUnload</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"Unload\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
 
 NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>PDRIVER_OBJECT pDriverObject<span class="token punctuation">,</span> PUNICODE_STRING pRegPath<span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    UNICODE_STRING usDrviceName <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//设备对象</span>
-    UNICODE_STRING usLinkName <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//符号链接名称</span>
+<span class="token punctuation">{</span>
+    UNICODE_STRING usDrviceName <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//设备对象</span>
+    UNICODE_STRING usLinkName <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//符号链接名称</span>
     NTSTATUS ntStatus <span class="token operator">=</span> STATUS_UNSUCCESSFUL<span class="token punctuation">;</span>
     <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usDrviceName<span class="token punctuation">,</span> DEVICE_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//初始化设备对象</span>
     <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usLinkName<span class="token punctuation">,</span> LINK_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//初始化符号链接</span>
@@ -192,10 +192,10 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     PDEVICE_OBJECT pDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
     ntStatus <span class="token operator">=</span> <span class="token function">IoCreateDevice</span><span class="token punctuation">(</span>pDriverObject<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>usDrviceName<span class="token punctuation">,</span>FILE_DEVICE_UNKNOWN<span class="token comment" spellcheck="true">/*不知道啥类型的设备*/</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> TRUE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>pDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>ntStatus<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//判断设备对象是否创建成功</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"IoCreateDevice Failed!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> ntStatus<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     pDeviceObject<span class="token operator">-></span>Flags <span class="token operator">|</span><span class="token operator">=</span> DO_BUFFERED_IO<span class="token punctuation">;</span>		<span class="token comment" spellcheck="true">//基于缓存的IO方式</span>
     <span class="token comment" spellcheck="true">//IO方式有很多种</span>
     <span class="token comment" spellcheck="true">//基于缓存的IO方式</span>
@@ -203,22 +203,22 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token comment" spellcheck="true">//两者皆不的IO方式，具体使用哪种IO方式，改变pDeviceObject->Flags。</span>
     ntStatus <span class="token operator">=</span> <span class="token function">IoCreateSymbolicLink</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>usLinkName<span class="token punctuation">,</span> <span class="token operator">&amp;</span>usDrviceName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//创建符号链接</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>ntStatus<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//判断符号连接是否成功</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token comment" spellcheck="true">//IoDeleteDevice(pDeciceObject);   //删除设备对象</span>
         <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"IoCreateSymbolicLink Failed!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> ntStatus<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> IRP_MJ_MAXIMUM_FUNCTION<span class="token operator">+</span><span class="token number">1</span><span class="token comment" spellcheck="true">/*一个总数宏，加1是因为他从0开始计数*/</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//将所有</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         pDriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> DispatchCommon<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//驱动对象中的派遣函数，循环都指定成默认处理</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
     pDriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_READ<span class="token punctuation">]</span> <span class="token operator">=</span> DispatchRead<span class="token punctuation">;</span>	<span class="token comment" spellcheck="true">//指定处理Read</span>
     pDriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_WRITE<span class="token punctuation">]</span> <span class="token operator">=</span> DispatchWrite<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指定处理write</span>
     pDriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_DEVICE_CONTROL<span class="token punctuation">]</span> <span class="token operator">=</span> DispatchIoCtrl<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//指定处理Iocontrol</span>
     pDriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> DriverUnload<span class="token punctuation">;</span><span class="token comment" spellcheck="true">//注册卸载函数</span>
     <span class="token keyword">return</span> STATUS_SUCCESS<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h2 id="R3程序"><a href="#R3程序" class="headerlink" title="R3程序"></a>R3程序</h2><pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;Windows.h></span></span>
@@ -228,20 +228,20 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
 <span class="token macro property">#<span class="token directive keyword">define</span> IRP_IOCTRL_CODE(i) CTL_CODE(FILE_DEVICE_UNKNOWN,IRP_IOCTRL_BASE + i,METHOD_BUFFERED,FILE_ANY_ACCESS)</span>
 <span class="token macro property">#<span class="token directive keyword">define</span> CTL_PRINT IRP_IOCTRL_CODE(1)</span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//IRP_MJ_DEVICE_CONTROL</span>
     HANDLE hFile <span class="token operator">=</span> <span class="token function">CreateFile</span><span class="token punctuation">(</span>LINK_NAME<span class="token punctuation">,</span> GENERIC_ALL<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> OPEN_EXISTING<span class="token punctuation">,</span> FILE_ATTRIBUTE_NORMAL<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//获取设备句柄并接收</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>hFile <span class="token operator">==</span> INVALID_HANDLE_VALUE<span class="token punctuation">)</span><span class="token comment" spellcheck="true">//判断是否打开成功</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"CreateFile Failed\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
     <span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span>
-    <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        CHAR szBufferInput<span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-        CHAR szBuuferOutput<span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token number">0</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">{</span>
+        CHAR szBufferInput<span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        CHAR szBuuferOutput<span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token number">0</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
         <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入字符串:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%s"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>szBufferInput<span class="token punctuation">)</span><span class="token punctuation">;</span>
         DWORD dwRet <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -254,16 +254,16 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
             <span class="token operator">&amp;</span>dwRet<span class="token punctuation">,</span>
             <span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//获取创建句柄de</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>bRet<span class="token punctuation">)</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Output = %s\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回什么内容</span>
             <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"nRet = %d\r\n"</span><span class="token punctuation">,</span> dwRet<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//返回多少个字节</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
         <span class="token keyword">else</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"io failed\r\n"</span><span class="token punctuation">,</span> szBuuferOutput<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//判断返回失败</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
 
     UCHAR buffer<span class="token punctuation">[</span>MAX_PATH<span class="token punctuation">]</span><span class="token punctuation">;</span>			<span class="token comment" spellcheck="true">//MAX_PATH代表256字节。</span>
@@ -278,7 +278,7 @@ NTSTATUS <span class="token function">DriverEntry</span><span class="token punct
     <span class="token function">CloseHandle</span><span class="token punctuation">(</span>hFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <h1 id="终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。"><a href="#终于不蓝屏了，在win7-x86环境下也可以使用了。代码直接copy的。附上运行成功图。" class="headerlink" title="终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。"></a>终于不蓝屏了，在win7 x86环境下也可以使用了。代码直接copy的。附上运行成功图。</h1><p><img src="/images/75.png"></p>
 <h2 id="借壳通信"><a href="#借壳通信" class="headerlink" title="借壳通信"></a>借壳通信</h2><p>​		从上述通信框架上衍生出的一种通信手段。</p>
