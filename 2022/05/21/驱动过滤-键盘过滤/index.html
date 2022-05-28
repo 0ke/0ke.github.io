@@ -1,0 +1,1411 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="驱动过滤-键盘过滤, 0ke">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>驱动过滤-键盘过滤 | 0ke</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">0ke</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">0ke</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">驱动过滤-键盘过滤</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-05-21
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><span id="more"></span>
+
+<p>​	把过滤对象从串口转移到键盘，可能键盘的过滤会更实用一些，并且会涉及一些“恶意”的内容，（全是恶意）。企鹅公司在2005年购买了韩国人的技术，对QQ的登陆使用了驱动程序进行保护，但可能因为需要安装驱动，导致软、硬件不兼容的问题，2007年企鹅公司放弃了这种方法，另寻其他方案（博主2007年刚上小学）。但是这种驱动保护的技术确实有效。</p>
+<p>​	各种各样的密码防护技术发展到今天，已经非常牛X了。一次一密，零信任网络架构等等。博主相信总有一天还会有结合密码学的全新防御体系的出现。来有效抵御来自恶意软件编写者的威胁。（全是恶意~）。</p>
+<h2 id="技术原理"><a href="#技术原理" class="headerlink" title="技术原理"></a>技术原理</h2><h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p><strong>符号链接</strong>：符号链接其实就是一个“别名”，可以用一个不同的名字来代表一个设备对象。（实际上，符号链接可以指向任何有名字的对象）我在《安全编程》课程的结课答辩上，就符号链接有很明确的阐述，那个符号链接实质上指向的就是一个文件，而不是设备对象，详情请移步《竟态条件漏洞利用》一文。</p>
+<p><strong>ZwCreateFile</strong>是很重要的函数，同名的函数实际上有两个，一个在内核中，一个在应用层，所以在应用层程序中调用CreateFile，就可以引发对这个函数的调用。（这个问题，我在某内核公司的面试中，面试官问到了，但是我当时理解成了系统调用，回答的是CreateFile调用哪些内核模块，但是现在想想面试官应该是想让我答出来R3的CreateFile可以打开设备对象，并最终调用NtCreateFile。）。</p>
+<p><strong>PDO</strong>是设备栈最下面的那个设备对象。先这么理解，看后面怎么说。</p>
+<h3 id="Windows中从击键到内核"><a href="#Windows中从击键到内核" class="headerlink" title="Windows中从击键到内核"></a>Windows中从击键到内核</h3><p><img src="/../images/87.png"></p>
+<p>csrss.exe的进程，他有一个线程叫做win32k!RawInputThread,这个线程通过一个叫做GUID来获取键盘设备栈的PDO的符号连接名。</p>
+<p>应用程序是不能直接根据设备名来打开设备的，一般都通过符号链接名来打开。这个过程相当之冗余，所以捡取精华。</p>
+<p>说白了，就是标题，击键如何到内核，和应用层函数到内核层调用的概念相似。</p>
+<p>win32k!RawInputThread（解释一下，这里使用的是windbg的一种表示方式。）线程总是调用，nt!ZwReadFile函数要求读入数据，然后等待键盘上的键被按下。当键盘上的键被按下时，win32k!RawInputThread处理nt!ZwReadFile得到的数据，然后nt!ZwReadFile要求读入数据，再等待键盘上的键被按下。</p>
+<p>一般情况下，PS&#x2F;2键盘的设备栈情况：</p>
+<p>最顶层的设备对象是驱动KbdClass生成的设备对象。</p>
+<p>中间层的设备对象是驱动i8042prt生成的设备对象。</p>
+<p>最底层的设备对象是驱动ACPI生成的设备对象。</p>
+<p><strong>我们现在要绑定的那个设备对象是驱动KbdClass的设备对象。</strong></p>
+<h3 id="键盘的硬件原理"><a href="#键盘的硬件原理" class="headerlink" title="键盘的硬件原理"></a>键盘的硬件原理</h3><p>键盘上的每一个键都被规定了一个扫描码。键盘和CPU的交互方式是<strong>中断</strong>和<strong>读取端口</strong>。这个操作是串行的。发生一次中断，就等于键盘给CPU一次通知。这个通知只能通知一次事件。CPU只接收通知并读取端口的扫描码，不会去主动查看任何键。</p>
+<p>为此，一个键实际上需要两个扫描码：一个表示按下，一个表示弹起。如果一个键的扫描码是X，那么弹起的扫描码就是X+0x80。</p>
+<p>注意：“同时按下两个键”这种情况在这种机制下是不可能发生的，无论如何按键，信息的传递都是一次一个字节串进行的。</p>
+<h2 id="键盘过滤的框架"><a href="#键盘过滤的框架" class="headerlink" title="键盘过滤的框架"></a>键盘过滤的框架</h2><h3 id="找到所有的键盘设备"><a href="#找到所有的键盘设备" class="headerlink" title="找到所有的键盘设备"></a>找到所有的键盘设备</h3><p>如果绑定了驱动KbdClass的所有设备对象，那么代表键盘的设备一定在其中。DRIVER_OBJECT下有一个域叫做DeviceObject，看似是一个设备对象的指针，但是每一个DeviceObject中又有一个域叫做NextObject（在串口过滤中提到过）指向同一个驱动中的下一个设备，所以实际上是一个<strong>设备链</strong>。</p>
+<p>还有一种获得驱动下所有设备对象的方法就是调用函数IoEnumerateDeviceObjectList，这个函数可以枚举出一个驱动下的所有设备。</p>
+<pre class=" language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;wdm.h></span></span>
+
+<span class="token comment" spellcheck="true">// Kbdclass驱动的名字</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> KBD_DRIVER_NAME  L"\\Driver\\Kbdclass"</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> _C2P_DEV_EXT
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 这个结构的大小</span>
+    ULONG NodeSize<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 过滤设备对象</span>
+    PDEVICE_OBJECT pFilterDeviceObject<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 同时调用时的保护锁</span>
+    KSPIN_LOCK IoRequestsSpinLock<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 进程间同步处理  </span>
+    KEVENT IoInProgressEvent<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 绑定的设备对象</span>
+    PDEVICE_OBJECT TargetDeviceObject<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 绑定前底层设备对象</span>
+    PDEVICE_OBJECT LowerDeviceObject<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> C2P_DEV_EXT<span class="token punctuation">,</span> <span class="token operator">*</span>PC2P_DEV_EXT<span class="token punctuation">;</span>
+
+NTSTATUS
+<span class="token function">c2pDevExtInit</span><span class="token punctuation">(</span>
+    IN PC2P_DEV_EXT devExt<span class="token punctuation">,</span>
+    IN PDEVICE_OBJECT pFilterDeviceObject<span class="token punctuation">,</span>
+    IN PDEVICE_OBJECT pTargetDeviceObject<span class="token punctuation">,</span>
+    IN PDEVICE_OBJECT pLowerDeviceObject<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span>devExt<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>C2P_DEV_EXT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    devExt<span class="token operator">-></span>NodeSize <span class="token operator">=</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>C2P_DEV_EXT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    devExt<span class="token operator">-></span>pFilterDeviceObject <span class="token operator">=</span> pFilterDeviceObject<span class="token punctuation">;</span>
+    <span class="token function">KeInitializeSpinLock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>IoRequestsSpinLock<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">KeInitializeEvent</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>IoInProgressEvent<span class="token punctuation">)</span><span class="token punctuation">,</span> NotificationEvent<span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    devExt<span class="token operator">-></span>TargetDeviceObject <span class="token operator">=</span> pTargetDeviceObject<span class="token punctuation">;</span>
+    devExt<span class="token operator">-></span>LowerDeviceObject <span class="token operator">=</span> pLowerDeviceObject<span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>STATUS_SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 这个函数是事实存在的，只是文档中没有公开。声明一下</span>
+<span class="token comment" spellcheck="true">// 就可以直接使用了。</span>
+NTSTATUS <span class="token function">ObReferenceObjectByName</span><span class="token punctuation">(</span>
+    PUNICODE_STRING ObjectName<span class="token punctuation">,</span>
+    ULONG Attributes<span class="token punctuation">,</span>
+    PACCESS_STATE AccessState<span class="token punctuation">,</span>
+    ACCESS_MASK DesiredAccess<span class="token punctuation">,</span>
+    POBJECT_TYPE ObjectType<span class="token punctuation">,</span>
+    KPROCESSOR_MODE AccessMode<span class="token punctuation">,</span>
+    PVOID ParseContest<span class="token punctuation">,</span>
+    PVOID <span class="token operator">*</span>Object
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">extern</span> POBJECT_TYPE <span class="token operator">*</span>IoDriverObjectType<span class="token punctuation">;</span>
+ULONG gC2pKeyCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+PDRIVER_OBJECT gDriverObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">// 这个函数经过改造。能打开驱动对象Kbdclass，然后绑定</span>
+<span class="token comment" spellcheck="true">// 它下面的所有的设备：</span>
+NTSTATUS
+<span class="token function">c2pAttachDevices</span><span class="token punctuation">(</span>
+    IN PDRIVER_OBJECT DriverObject<span class="token punctuation">,</span>
+    IN PUNICODE_STRING RegistryPath
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    NTSTATUS status <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    UNICODE_STRING uniNtNameString<span class="token punctuation">;</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+    PDEVICE_OBJECT pFilterDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    PDEVICE_OBJECT pTargetDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    PDEVICE_OBJECT pLowerDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    PDRIVER_OBJECT KbdDriverObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"MyAttach\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 初始化一个字符串，就是Kdbclass驱动的名字。</span>
+    <span class="token function">RtlInitUnicodeString</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>uniNtNameString<span class="token punctuation">,</span> KBD_DRIVER_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 请参照前面打开设备对象的例子。只是这里打开的是驱动对象。</span>
+    status <span class="token operator">=</span> <span class="token function">ObReferenceObjectByName</span><span class="token punctuation">(</span>
+        <span class="token operator">&amp;</span>uniNtNameString<span class="token punctuation">,</span>
+        OBJ_CASE_INSENSITIVE<span class="token punctuation">,</span>
+        <span class="token constant">NULL</span><span class="token punctuation">,</span>
+        <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token operator">*</span>IoDriverObjectType<span class="token punctuation">,</span>
+        KernelMode<span class="token punctuation">,</span>
+        <span class="token constant">NULL</span><span class="token punctuation">,</span>
+        <span class="token operator">&amp;</span>KbdDriverObject
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 如果失败了就直接返回</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"MyAttach: Couldn't get the MyTest Device Object\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 这个打开需要解应用。早点解除了免得之后忘记。</span>
+        <span class="token function">ObDereferenceObject</span><span class="token punctuation">(</span>DriverObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 这是设备链中的第一个设备	</span>
+    pTargetDeviceObject <span class="token operator">=</span> KbdDriverObject<span class="token operator">-></span>DeviceObject<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 现在开始遍历这个设备链</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>pTargetDeviceObject<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 生成一个过滤设备，这是前面读者学习过的。这里的IN宏和OUT宏都是</span>
+        <span class="token comment" spellcheck="true">// 空宏，只有标志性意义，表明这个参数是一个输入或者输出参数。</span>
+        status <span class="token operator">=</span> <span class="token function">IoCreateDevice</span><span class="token punctuation">(</span>
+            IN DriverObject<span class="token punctuation">,</span>
+            IN <span class="token keyword">sizeof</span><span class="token punctuation">(</span>C2P_DEV_EXT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            IN <span class="token constant">NULL</span><span class="token punctuation">,</span>
+            IN pTargetDeviceObject<span class="token operator">-></span>DeviceType<span class="token punctuation">,</span>
+            IN pTargetDeviceObject<span class="token operator">-></span>Characteristics<span class="token punctuation">,</span>
+            IN FALSE<span class="token punctuation">,</span>
+            OUT <span class="token operator">&amp;</span>pFilterDeviceObject
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 如果失败了就直接退出。</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"MyAttach: Couldn't create the MyFilter Filter Device Object\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// 绑定。pLowerDeviceObject是绑定之后得到的下一个设备。也就是</span>
+        <span class="token comment" spellcheck="true">// 前面常常说的所谓真实设备。</span>
+        pLowerDeviceObject <span class="token operator">=</span>
+            <span class="token function">IoAttachDeviceToDeviceStack</span><span class="token punctuation">(</span>pFilterDeviceObject<span class="token punctuation">,</span> pTargetDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 如果绑定失败了，放弃之前的操作，退出。</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>pLowerDeviceObject<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"MyAttach: Couldn't attach to MyTest Device Object\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">IoDeleteDevice</span><span class="token punctuation">(</span>pFilterDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            pFilterDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment" spellcheck="true">// 设备扩展！下面要详细讲述设备扩展的应用。</span>
+        devExt <span class="token operator">=</span> <span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span><span class="token punctuation">(</span>pFilterDeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">c2pDevExtInit</span><span class="token punctuation">(</span>
+            devExt<span class="token punctuation">,</span>
+            pFilterDeviceObject<span class="token punctuation">,</span>
+            pTargetDeviceObject<span class="token punctuation">,</span>
+            pLowerDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 下面的操作和前面过滤串口的操作基本一致。这里不再解释了。</span>
+        pFilterDeviceObject<span class="token operator">-></span>DeviceType <span class="token operator">=</span> pLowerDeviceObject<span class="token operator">-></span>DeviceType<span class="token punctuation">;</span>
+        pFilterDeviceObject<span class="token operator">-></span>Characteristics <span class="token operator">=</span> pLowerDeviceObject<span class="token operator">-></span>Characteristics<span class="token punctuation">;</span>
+        pFilterDeviceObject<span class="token operator">-></span>StackSize <span class="token operator">=</span> pLowerDeviceObject<span class="token operator">-></span>StackSize <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        pFilterDeviceObject<span class="token operator">-></span>Flags <span class="token operator">|</span><span class="token operator">=</span> pLowerDeviceObject<span class="token operator">-></span>Flags <span class="token operator">&amp;</span> <span class="token punctuation">(</span>DO_BUFFERED_IO <span class="token operator">|</span> DO_DIRECT_IO <span class="token operator">|</span> DO_POWER_PAGABLE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//next device </span>
+        pTargetDeviceObject <span class="token operator">=</span> pTargetDeviceObject<span class="token operator">-></span>NextDevice<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+VOID
+<span class="token function">c2pDetach</span><span class="token punctuation">(</span>IN PDEVICE_OBJECT pDeviceObject<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+    BOOLEAN NoRequestsOutstanding <span class="token operator">=</span> FALSE<span class="token punctuation">;</span>
+    devExt <span class="token operator">=</span> <span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span>pDeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">;</span>
+    __try
+    <span class="token punctuation">{</span>
+        __try
+        <span class="token punctuation">{</span>
+            <span class="token function">IoDetachDevice</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>TargetDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            devExt<span class="token operator">-></span>TargetDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token function">IoDeleteDevice</span><span class="token punctuation">(</span>pDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            devExt<span class="token operator">-></span>pFilterDeviceObject <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"Detach Finished\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token function">__except</span> <span class="token punctuation">(</span>EXCEPTION_EXECUTE_HANDLER<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    __finally <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span>  DELAY_ONE_MICROSECOND  (-10)</span>
+<span class="token macro property">#<span class="token directive keyword">define</span>  DELAY_ONE_MILLISECOND (DELAY_ONE_MICROSECOND*1000)</span>
+<span class="token macro property">#<span class="token directive keyword">define</span>  DELAY_ONE_SECOND (DELAY_ONE_MILLISECOND*1000)</span>
+
+VOID
+<span class="token function">c2pUnload</span><span class="token punctuation">(</span>IN PDRIVER_OBJECT DriverObject<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    PDEVICE_OBJECT DeviceObject<span class="token punctuation">;</span>
+    PDEVICE_OBJECT OldDeviceObject<span class="token punctuation">;</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+
+    LARGE_INTEGER	lDelay<span class="token punctuation">;</span>
+    PRKTHREAD CurrentThread<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//delay some time </span>
+    lDelay <span class="token operator">=</span> <span class="token function">RtlConvertLongToLargeInteger</span><span class="token punctuation">(</span><span class="token number">100</span> <span class="token operator">*</span> DELAY_ONE_MILLISECOND<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    CurrentThread <span class="token operator">=</span> <span class="token function">KeGetCurrentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 把当前线程设置为低实时模式，以便让它的运行尽量少影响其他程序。</span>
+    <span class="token function">KeSetPriorityThread</span><span class="token punctuation">(</span>CurrentThread<span class="token punctuation">,</span> LOW_REALTIME_PRIORITY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">UNREFERENCED_PARAMETER</span><span class="token punctuation">(</span>DriverObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"DriverEntry unLoading...\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 遍历所有设备并一律解除绑定</span>
+    DeviceObject <span class="token operator">=</span> DriverObject<span class="token operator">-></span>DeviceObject<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>DeviceObject<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 解除绑定并删除所有的设备</span>
+        <span class="token function">c2pDetach</span><span class="token punctuation">(</span>DeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        DeviceObject <span class="token operator">=</span> DeviceObject<span class="token operator">-></span>NextDevice<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">ASSERT</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> DriverObject<span class="token operator">-></span>DeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>gC2pKeyCount<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">KeDelayExecutionThread</span><span class="token punctuation">(</span>KernelMode<span class="token punctuation">,</span> FALSE<span class="token punctuation">,</span> <span class="token operator">&amp;</span>lDelay<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"DriverEntry unLoad OK!\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+NTSTATUS <span class="token function">c2pDispatchGeneral</span><span class="token punctuation">(</span>
+    IN PDEVICE_OBJECT DeviceObject<span class="token punctuation">,</span>
+    IN PIRP Irp
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 其他的分发函数，直接skip然后用IoCallDriver把IRP发送到真实设备</span>
+    <span class="token comment" spellcheck="true">// 的设备对象。 </span>
+    <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"Other Diapatch!"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">IoSkipCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">IoCallDriver</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span>
+        DeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">)</span><span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">,</span> Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+NTSTATUS <span class="token function">c2pPower</span><span class="token punctuation">(</span>
+    IN PDEVICE_OBJECT DeviceObject<span class="token punctuation">,</span>
+    IN PIRP Irp
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+    devExt <span class="token operator">=</span>
+        <span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span>DeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">;</span>
+
+    <span class="token function">PoStartNextPowerIrp</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">IoSkipCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">PoCallDriver</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">,</span> Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+NTSTATUS <span class="token function">c2pPnP</span><span class="token punctuation">(</span>
+    IN PDEVICE_OBJECT DeviceObject<span class="token punctuation">,</span>
+    IN PIRP Irp
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+    PIO_STACK_LOCATION irpStack<span class="token punctuation">;</span>
+    NTSTATUS status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>
+    KIRQL oldIrql<span class="token punctuation">;</span>
+    KEVENT event<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 获得真实设备。</span>
+    devExt <span class="token operator">=</span> <span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span><span class="token punctuation">(</span>DeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    irpStack <span class="token operator">=</span> <span class="token function">IoGetCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>irpStack<span class="token operator">-></span>MinorFunction<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> IRP_MN_REMOVE_DEVICE<span class="token punctuation">:</span>
+        <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"IRP_MN_REMOVE_DEVICE\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// 首先把请求发下去</span>
+        <span class="token function">IoSkipCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">IoCallDriver</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">,</span> Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 然后解除绑定。</span>
+        <span class="token function">IoDetachDevice</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 删除我们自己生成的虚拟设备。</span>
+        <span class="token function">IoDeleteDevice</span><span class="token punctuation">(</span>DeviceObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">default</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true">// 对于其他类型的IRP，全部都直接下发即可。 </span>
+        <span class="token function">IoSkipCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        status <span class="token operator">=</span> <span class="token function">IoCallDriver</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">,</span> Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 这是一个IRP完成回调函数的原型</span>
+NTSTATUS <span class="token function">c2pReadComplete</span><span class="token punctuation">(</span>
+    IN PDEVICE_OBJECT DeviceObject<span class="token punctuation">,</span>
+    IN PIRP Irp<span class="token punctuation">,</span>
+    IN PVOID Context
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    PIO_STACK_LOCATION IrpSp<span class="token punctuation">;</span>
+    ULONG buf_len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    PUCHAR buf <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    size_t i<span class="token punctuation">;</span>
+
+    IrpSp <span class="token operator">=</span> <span class="token function">IoGetCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//  如果这个请求是成功的。很显然，如果请求失败了，这么获取</span>
+    <span class="token comment" spellcheck="true">//   进一步的信息是没意义的。</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">NT_SUCCESS</span><span class="token punctuation">(</span>Irp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// 获得读请求完成后输出的缓冲区</span>
+        buf <span class="token operator">=</span> Irp<span class="token operator">-></span>AssociatedIrp<span class="token punctuation">.</span>SystemBuffer<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 获得这个缓冲区的长度。一般的说返回值有多长都保存在</span>
+        <span class="token comment" spellcheck="true">// Information中。</span>
+        buf_len <span class="token operator">=</span> Irp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information<span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">//… 这里可以做进一步的处理。我这里很简单的打印出所有的扫</span>
+        <span class="token comment" spellcheck="true">// 描码。</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> buf_len<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">DbgPrint</span><span class="token punctuation">(</span><span class="token string">"ctrl2cap: %2x\r\n"</span><span class="token punctuation">,</span> buf<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    gC2pKeyCount<span class="token operator">--</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Irp<span class="token operator">-></span>PendingReturned<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">IoMarkIrpPending</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> Irp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+NTSTATUS <span class="token function">c2pDispatchRead</span><span class="token punctuation">(</span>
+    IN PDEVICE_OBJECT DeviceObject<span class="token punctuation">,</span>
+    IN PIRP Irp<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    NTSTATUS status <span class="token operator">=</span> STATUS_SUCCESS<span class="token punctuation">;</span>
+    PC2P_DEV_EXT devExt<span class="token punctuation">;</span>
+    PIO_STACK_LOCATION currentIrpStack<span class="token punctuation">;</span>
+    KEVENT waitEvent<span class="token punctuation">;</span>
+    <span class="token function">KeInitializeEvent</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>waitEvent<span class="token punctuation">,</span> NotificationEvent<span class="token punctuation">,</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Irp<span class="token operator">-></span>CurrentLocation <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ULONG ReturnedInformation <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"Dispatch encountered bogus current location\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        status <span class="token operator">=</span> STATUS_INVALID_DEVICE_REQUEST<span class="token punctuation">;</span>
+        Irp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Status <span class="token operator">=</span> status<span class="token punctuation">;</span>
+        Irp<span class="token operator">-></span>IoStatus<span class="token punctuation">.</span>Information <span class="token operator">=</span> ReturnedInformation<span class="token punctuation">;</span>
+        <span class="token function">IoCompleteRequest</span><span class="token punctuation">(</span>Irp<span class="token punctuation">,</span> IO_NO_INCREMENT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 全局变量键计数器加1</span>
+    gC2pKeyCount<span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 得到设备扩展。目的是之后为了获得下一个设备的指针。</span>
+    devExt <span class="token operator">=</span>
+        <span class="token punctuation">(</span>PC2P_DEV_EXT<span class="token punctuation">)</span>DeviceObject<span class="token operator">-></span>DeviceExtension<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 设置回调函数并把IRP传递下去。 之后读的处理也就结束了。</span>
+    <span class="token comment" spellcheck="true">// 剩下的任务是要等待读请求完成。</span>
+    currentIrpStack <span class="token operator">=</span> <span class="token function">IoGetCurrentIrpStackLocation</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">IoCopyCurrentIrpStackLocationToNext</span><span class="token punctuation">(</span>Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">IoSetCompletionRoutine</span><span class="token punctuation">(</span>Irp<span class="token punctuation">,</span> c2pReadComplete<span class="token punctuation">,</span>
+        DeviceObject<span class="token punctuation">,</span> TRUE<span class="token punctuation">,</span> TRUE<span class="token punctuation">,</span> TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span>  <span class="token function">IoCallDriver</span><span class="token punctuation">(</span>devExt<span class="token operator">-></span>LowerDeviceObject<span class="token punctuation">,</span> Irp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+NTSTATUS <span class="token function">DriverEntry</span><span class="token punctuation">(</span>
+    IN PDRIVER_OBJECT DriverObject<span class="token punctuation">,</span>
+    IN PUNICODE_STRING RegistryPath
+<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ULONG i<span class="token punctuation">;</span>
+    NTSTATUS status<span class="token punctuation">;</span>
+    <span class="token function">KdPrint</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"c2p.SYS: entering DriverEntry\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 填写所有的分发函数的指针</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> IRP_MJ_MAXIMUM_FUNCTION<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        DriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> c2pDispatchGeneral<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">// 单独的填写一个Read分发函数。因为要的过滤就是读取来的按键信息</span>
+    <span class="token comment" spellcheck="true">// 其他的都不重要。这个分发函数单独写。</span>
+    DriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_READ<span class="token punctuation">]</span> <span class="token operator">=</span> c2pDispatchRead<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 单独的填写一个IRP_MJ_POWER函数。这是因为这类请求中间要调用</span>
+    <span class="token comment" spellcheck="true">// 一个PoCallDriver和一个PoStartNextPowerIrp，比较特殊。</span>
+    DriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_POWER<span class="token punctuation">]</span> <span class="token operator">=</span> c2pPower<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 我们想知道什么时候一个我们绑定过的设备被卸载了（比如从机器上</span>
+    <span class="token comment" spellcheck="true">// 被拔掉了？）所以专门写一个PNP（即插即用）分发函数</span>
+    DriverObject<span class="token operator">-></span>MajorFunction<span class="token punctuation">[</span>IRP_MJ_PNP<span class="token punctuation">]</span> <span class="token operator">=</span> c2pPnP<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">// 卸载函数。</span>
+    DriverObject<span class="token operator">-></span>DriverUnload <span class="token operator">=</span> c2pUnload<span class="token punctuation">;</span>
+    gDriverObject <span class="token operator">=</span> DriverObject<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 绑定所有键盘设备</span>
+    status <span class="token operator">=</span> <span class="token function">c2pAttachDevices</span><span class="token punctuation">(</span>DriverObject<span class="token punctuation">,</span> RegistryPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> status<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">lijianbo</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://0ke.github.io/2022/05/21/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E9%94%AE%E7%9B%98%E8%BF%87%E6%BB%A4/">http://0ke.github.io/2022/05/21/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E9%94%AE%E7%9B%98%E8%BF%87%E6%BB%A4/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">lijianbo</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/05/25/%E4%BB%8E%E5%8F%8D%E6%B1%87%E7%BC%96%E7%9A%84%E8%A7%92%E5%BA%A6%E5%AD%A6%E4%B9%A0C/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="从反汇编的角度学习C++">
+                        
+                        <span class="card-title">从反汇编的角度学习C++</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            lijianbo
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/20/%E9%A9%B1%E5%8A%A8%E8%BF%87%E6%BB%A4-%E4%B8%B2%E5%8F%A3%E8%BF%87%E6%BB%A4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="驱动过滤--串口过滤">
+                        
+                        <span class="card-title">驱动过滤--串口过滤</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            过滤的概念
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            lijianbo
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">lijianbo</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+    <a href="mailto:2869864088@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2869864088" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2869864088" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
